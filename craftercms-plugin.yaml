@@ -1,0 +1,70 @@
+# This file describes a plugin for use in Crafter CMS
+
+# The version of the format for this file
+descriptorVersion: 1
+
+# Describe the plugin
+plugin:
+  type: sidebar
+  id: org.pn.plugin.bulkedit
+  name: Studio Bulk Edit
+  tags:
+    - bulk
+    - edit
+    - sidebar
+    - content
+  version:
+    major: 1
+    minor: 0
+    patch: 0
+  description: A plugin to provide bulk edit ability to Studio content
+  documentation: "https://raw.githubusercontent.com/phuongnq/plugin-studio-bulkeedit/master/README.md"
+  website:
+    name: Studio Bulk Edit
+    url: https://github.com/phuongnq/plugin-studio-bulkeedit
+  media:
+    screenshots:
+      - title: Crafter CMS
+        description: Crafter CMS Plugin for Bulk Edit
+        url: "https://raw.githubusercontent.com/phuongnq/plugin-studio-bulkeedit/master/.crafter/logo.png"
+  developer:
+    company:
+      name: Phil Nguyen
+      email: phil.nguyen@craftersoftware.com
+      url: https://github.com/phuongnq
+  build:
+    id: cafebabe4e6a24b5e0481d6ba87901d0b02716c9
+    date: 2022-01-20T00:00:00Z
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  crafterCmsVersions:
+    - major: 4
+      minor: 0
+      patch: 0
+  crafterCmsEditions:
+    - community
+    - enterprise
+  parameters:
+  installation:
+    - type: preview-app
+      elementXpath: //widget[@id='org.pn.plugin.bulkedit.components.reactComponent']
+      parentXpath: //widget[@id='craftercms.components.ToolsPanel']/configuration/widgets
+      element:
+        name: widget
+        attributes:
+          - name: id
+            value: org.pn.plugin.bulkedit.components.reactComponent
+        children:
+          - name: plugin
+            attributes:
+              - name: id
+                value: org.pn.plugin.bulkedit
+              - name: site
+                value: "{site}"
+              - name: type
+                value: sidebar
+              - name: name
+                value: bulkedit
+              - name: file
+                value: index.js
