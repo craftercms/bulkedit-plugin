@@ -1,7 +1,7 @@
 # This file describes a plugin for use in Crafter CMS
 
 # The version of the format for this file
-descriptorVersion: 1
+descriptorVersion: 2
 
 # Describe the plugin
 plugin:
@@ -30,7 +30,7 @@ plugin:
   developer:
     company:
       name: Phil Nguyen
-      email: phil.nguyen@craftersoftware.com
+      email: nquangphuong@gmail.com
       url: https://github.com/phuongnq
   build:
     id: cafebabe4e6a24b5e0481d6ba87901d0b02716c9
