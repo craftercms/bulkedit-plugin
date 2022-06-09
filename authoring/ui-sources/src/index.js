@@ -17,7 +17,7 @@
 import BulkEditApp from './BulkEditApp';
 
 const plugin = {
-  id: 'org.pn.plugin.bulkedit',
+  id: 'org.pnguyen.plugin.bulkedit',
   name: 'Bulk Edit Plugin',
   description: 'A plugin to do bulk edit',
   author: 'Phil Nguyen',
@@ -25,7 +25,7 @@ const plugin = {
   locales: {},
   apps: [],
   widgets: {
-    'org.pn.plugin.bulkedit.components.reactComponent': BulkEditApp,
+    'org.pnguyen.plugin.bulkedit.components.reactComponent': BulkEditApp,
   },
   scripts: [],
   stylesheets: [],

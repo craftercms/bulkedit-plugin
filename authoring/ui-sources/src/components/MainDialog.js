@@ -80,7 +80,7 @@ export default function MainDialog() {
   return (
     <div>
       <List
-        sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', borderBottom: '1px solid rgba(0, 0, 0, 0.12)' }}
+        sx={{ width: '100%', bgcolor: 'background.paper', borderBottom: '1px solid rgba(0, 0, 0, 0.12)' }}
         component="nav"
         aria-labelledby="nested-list-subheader"
       >

@@ -6,7 +6,7 @@ descriptorVersion: 2
 # Describe the plugin
 plugin:
   type: sidebar
-  id: org.pn.plugin.bulkedit
+  id: org.pnguyen.plugin.bulkedit
   name: Studio Bulk Edit
   tags:
     - bulk
@@ -16,7 +16,7 @@ plugin:
   version:
     major: 1
     minor: 0
-    patch: 2
+    patch: 4
   description: A plugin to provide bulk edit ability to Studio content
   documentation: "https://raw.githubusercontent.com/phuongnq/plugin-studio-bulkeedit/master/README.md"
   website:
@@ -48,18 +48,18 @@ plugin:
   parameters:
   installation:
     - type: preview-app
-      elementXpath: //widget[@id='org.pn.plugin.bulkedit.components.reactComponent']
+      elementXpath: //widget[@id='org.pnguyen.plugin.bulkedit.components.reactComponent']
       parentXpath: //widget[@id='craftercms.components.ToolsPanel']/configuration/widgets
       element:
         name: widget
         attributes:
           - name: id
-            value: org.pn.plugin.bulkedit.components.reactComponent
+            value: org.pnguyen.plugin.bulkedit.components.reactComponent
         children:
           - name: plugin
             attributes:
               - name: id
-                value: org.pn.plugin.bulkedit
+                value: org.pnguyen.plugin.bulkedit
               - name: site
                 value: "{site}"
               - name: type
