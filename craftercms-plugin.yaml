@@ -28,8 +28,8 @@ plugin:
         description: CrafterCMS Plugin for Bulk Edit
         url: "https://raw.githubusercontent.com/craftercms/bulkedit-plugin/master/.crafter/logo.png"
   developer:
-    company: CrafterCMS
-      name: Phil Nguyen
+    company:
+      name: CrafterCMS
       email: info@craftercms.com
       url: https://craftercms.com
   build:
