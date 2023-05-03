@@ -5,7 +5,7 @@ descriptorVersion: 2
 
 # Describe the plugin
 plugin:
-  type: sidebar
+  type: site
   id: org.craftercms.plugin.bulkedit
   name: Studio Bulk Edit
   tags:
@@ -16,7 +16,7 @@ plugin:
   version:
     major: 1
     minor: 0
-    patch: 6
+    patch: 7
   description: Provide bulk editing capability to Crafter Studio
   documentation: "https://raw.githubusercontent.com/craftercms/bulkedit-plugin/master/README.md"
   website:
