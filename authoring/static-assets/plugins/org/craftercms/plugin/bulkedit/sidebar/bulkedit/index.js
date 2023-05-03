@@ -26860,7 +26860,7 @@ function BulkEditApp() {
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 var plugin = {
-  id: 'org.pnguyen.plugin.bulkedit',
+  id: 'org.craftercms.plugin.bulkedit',
   name: 'Bulk Edit Plugin',
   description: 'A plugin to do bulk edit',
   author: 'Phil Nguyen',
@@ -26868,7 +26868,7 @@ var plugin = {
   locales: {},
   apps: [],
   widgets: {
-    'org.pnguyen.plugin.bulkedit.components.reactComponent': BulkEditApp
+    'org.craftercms.plugin.bulkedit.components.reactComponent': BulkEditApp
   },
   scripts: [],
   stylesheets: [],

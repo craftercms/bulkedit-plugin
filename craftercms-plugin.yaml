@@ -6,7 +6,7 @@ descriptorVersion: 2
 # Describe the plugin
 plugin:
   type: sidebar
-  id: org.pnguyen.plugin.bulkedit
+  id: org.craftercms.plugin.bulkedit
   name: Studio Bulk Edit
   tags:
     - bulk
@@ -16,22 +16,22 @@ plugin:
   version:
     major: 1
     minor: 0
-    patch: 4
-  description: A plugin to provide bulk edit ability to Studio content
-  documentation: "https://raw.githubusercontent.com/phuongnq/plugin-studio-bulkeedit/master/README.md"
+    patch: 5
+  description: Provide bulk editing capability to Crafter Studio
+  documentation: "https://raw.githubusercontent.com/craftercms/bulkedit-plugin/master/README.md"
   website:
     name: Studio Bulk Edit
-    url: https://github.com/phuongnq/plugin-studio-bulkeedit
+    url: https://github.com/craftercms/bulkedit-plugin
   media:
     screenshots:
-      - title: Crafter CMS
-        description: Crafter CMS Plugin for Bulk Edit
-        url: "https://raw.githubusercontent.com/phuongnq/plugin-studio-bulkeedit/master/.crafter/logo.png"
+      - title: CrafterCMS
+        description: CrafterCMS Plugin for Bulk Edit
+        url: "https://raw.githubusercontent.com/craftercms/bulkedit-plugin/master/.crafter/logo.png"
   developer:
-    company:
+    company: CrafterCMS
       name: Phil Nguyen
-      email: nquangphuong@gmail.com
-      url: https://github.com/phuongnq
+      email: info@craftercms.com
+      url: https://craftercms.com
   build:
     id: cafebabe4e6a24b5e0481d6ba87901d0b02716c9
     date: 2022-01-20T00:00:00Z
@@ -42,24 +42,36 @@ plugin:
     - major: 4
       minor: 0
       patch: 0
+    - major: 4
+      minor: 0
+      patch: 1
+    - major: 4
+      minor: 0
+      patch: 2
+    - major: 4
+      minor: 0
+      patch: 3
+    - major: 4
+      minor: 1
+      patch: 0
   crafterCmsEditions:
     - community
     - enterprise
   parameters:
   installation:
     - type: preview-app
-      elementXpath: //widget[@id='org.pnguyen.plugin.bulkedit.components.reactComponent']
+      elementXpath: //widget[@id='org.craftercms.plugin.bulkedit.components.reactComponent']
       parentXpath: //widget[@id='craftercms.components.ToolsPanel']/configuration/widgets
       element:
         name: widget
         attributes:
           - name: id
-            value: org.pnguyen.plugin.bulkedit.components.reactComponent
+            value: org.craftercms.plugin.bulkedit.components.reactComponent
         children:
           - name: plugin
             attributes:
               - name: id
-                value: org.pnguyen.plugin.bulkedit
+                value: org.craftercms.plugin.bulkedit
               - name: site
                 value: "{site}"
               - name: type
