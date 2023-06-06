@@ -86,7 +86,6 @@ const StudioAPI = {
       keywords: keywords || '',
       offset: offset || 0,
       limit: limit || 100,
-      sortBy: '',
       sortBy: '_score',
       sortOrder: 'desc',
       filters

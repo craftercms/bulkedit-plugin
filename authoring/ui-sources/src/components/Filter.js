@@ -125,8 +125,7 @@ const LastEditDateComponent = () => {
 
   const keys = Object.keys(lastEditDateOptions);
   const options = [];
-  for (let i = 0; i < keys.length; i += 1) {
-    const key = keys[i];
+  for (const key of keys) {
     const value = lastEditDateOptions[key];
     options.push((
       <FormControlLabel value={key} control={<Radio />} label={value} />
@@ -212,7 +211,7 @@ export default function FilterDialog({ isOpen, handleClose }) {
             onChange={(e) => setKeyword(e.target.value)}
           />
         </Box>
-        <Box>
+        <Box sx={{ padding: '16px' }}>
           <LastEditDateComponent />
         </Box>
         </DialogContent>

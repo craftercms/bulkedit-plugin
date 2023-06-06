@@ -1,7 +1,7 @@
 var e$3 = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
 var { forwardRef, useContext, createContext, useRef, useLayoutEffect, createElement, Children, isValidElement, cloneElement } = craftercms.libs.React;
 var e__default = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
-var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$2, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box: Box$2, DialogActions, Paper: Paper$1, Accordion, AccordionSummary, Typography: Typography$2, AccordionDetails, FormLabel: FormLabel$2, RadioGroup, FormControlLabel: FormControlLabel$1, Radio, IconButton: IconButton$1, Drawer, List: List$2, ListItem, Divider, ListItemIcon: ListItemIcon$2, ListItemText: ListItemText$2, CssBaseline, Toolbar: Toolbar$2, Tooltip: Tooltip$1, ListItemButton, Stack } = craftercms.libs.MaterialUI;
+var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$2, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box: Box$2, DialogActions, Paper: Paper$1, Accordion, AccordionSummary, Typography: Typography$2, AccordionDetails, FormLabel: FormLabel$2, RadioGroup, FormControlLabel: FormControlLabel$1, Radio, IconButton: IconButton$1, Drawer, List: List$2, ListItem, Divider, ListItemButton, ListItemIcon: ListItemIcon$2, ListItemText: ListItemText$2, CssBaseline, Toolbar: Toolbar$2, Tooltip: Tooltip$1, Stack } = craftercms.libs.MaterialUI;
 var { useEventCallback: useEventCallback$1, ownerWindow: ownerWindow$1, useForkRef: useForkRef$1, createSvgIcon: createSvgIcon$2, capitalize: capitalize$1, ownerDocument: ownerDocument$1, unstable_useId, debounce: debounce$2 } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
 var { Subject } = CrafterCMSNext.rxjs;
@@ -1043,8 +1043,6 @@ var StudioAPI = {
   },
   searchByContentType: function searchByContentType(ct, keywords, filterDate, offset, limit) {
     return _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee3() {
-      var _body;
-
       var url, filters, body, res;
       return regenerator.wrap(function _callee3$(_context3) {
         while (1) {
@@ -1064,13 +1062,15 @@ var StudioAPI = {
                 };
               }
 
-              body = (_body = {
+              body = {
                 query: '',
                 keywords: keywords || '',
                 offset: offset || 0,
                 limit: limit || 100,
-                sortBy: ''
-              }, _defineProperty(_body, "sortBy", '_score'), _defineProperty(_body, "sortOrder", 'desc'), _defineProperty(_body, "filters", filters), _body);
+                sortBy: '_score',
+                sortOrder: 'desc',
+                filters: filters
+              };
               _context3.next = 6;
               return HttpHelper.post(url, body);
 
@@ -1314,27 +1314,14 @@ function ContentTypeSelect() {
       }, _callee);
     }))();
   }, []);
-  e__default.useEffect(function () {
-    _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee2() {
-      return regenerator.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              if (contentType) {
-                contentTypeSub.next(contentType);
-              }
-
-            case 1:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2);
-    }))();
-  }, [contentType]);
 
   var handleChange = function handleChange(event) {
-    setContentType(event.target.value);
+    var newContentType = event.target.value;
+
+    if (newContentType) {
+      setContentType(newContentType);
+      contentTypeSub.next(newContentType);
+    }
   };
 
   return /*#__PURE__*/e__default.createElement(FormControl$1, {
@@ -27365,7 +27352,8 @@ function Editor() {
       style: {
         position: "absolute",
         width: DRAWER_WIDTH,
-        top: "130px",
+        top: "155px",
+        left: "13px",
         height: "auto"
       }
     },
@@ -27385,35 +27373,30 @@ function Editor() {
     },
     SlideProps: {
       onExiting: function onExiting(node) {
-        node.style.webkitTransform = "scaleX(0)";
         node.style.transform = "scaleX(0)";
-        node.style.transformOrigin = "top left ";
+        node.style.transformOrigin = "top left";
       }
     }
-  }, /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, null, /*#__PURE__*/e__default.createElement(ContentTypeSelect, null))), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, {
-    button: true,
+  }, /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, null, /*#__PURE__*/e__default.createElement(ContentTypeSelect, null))), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItemButton, {
     key: TEXT_FIND_REPLACE,
     onClick: function onClick() {
       return setFindReplaceDialogOpen(true);
     }
   }, /*#__PURE__*/e__default.createElement(ListItemIcon$2, null, /*#__PURE__*/e__default.createElement(FindReplaceIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText$2, {
     primary: TEXT_FIND_REPLACE
-  })), /*#__PURE__*/e__default.createElement(ListItem, {
-    button: true,
+  })), /*#__PURE__*/e__default.createElement(ListItemButton, {
     key: TEXT_FILTER,
     onClick: function onClick() {
       return setFilterDialogOpen(true);
     }
   }, /*#__PURE__*/e__default.createElement(ListItemIcon$2, null, /*#__PURE__*/e__default.createElement(FilterListIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText$2, {
     primary: TEXT_FILTER
-  }))), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, {
-    button: true,
+  }))), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItemButton, {
     key: TEXT_SAVE,
     onClick: handleSaveChangeClick
   }, /*#__PURE__*/e__default.createElement(ListItemIcon$2, null, /*#__PURE__*/e__default.createElement(SaveIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText$2, {
     primary: TEXT_SAVE
-  })), /*#__PURE__*/e__default.createElement(ListItem, {
-    button: true,
+  })), /*#__PURE__*/e__default.createElement(ListItemButton, {
     key: TEXT_CANCEL,
     onClick: handleCancelAllChangeClick
   }, /*#__PURE__*/e__default.createElement(ListItemIcon$2, null, /*#__PURE__*/e__default.createElement(ClearAllIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText$2, {

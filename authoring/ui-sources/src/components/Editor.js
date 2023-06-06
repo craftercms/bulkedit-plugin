@@ -21,6 +21,7 @@ import {
   Divider,
   List,
   ListItem,
+  ListItemButton,
   ListItemIcon,
   ListItemText,
   Toolbar,
@@ -89,7 +90,7 @@ export default function Editor() {
     setFilterDialogOpen(false);
   };
 
-  const handleSaveChangeClick = async () => {
+  const handleSaveChangeClick = () => {
     dataSheetRef.current.saveAllChanges();
   };
 
@@ -180,7 +181,8 @@ export default function Editor() {
         style: {
           position: "absolute",
           width: DRAWER_WIDTH,
-          top: "130px",
+          top: "155px",
+          left: "13px",
           height: "auto"
         }
       }}
@@ -194,9 +196,8 @@ export default function Editor() {
       }}
       SlideProps={{
         onExiting: (node) => {
-          node.style.webkitTransform = "scaleX(0)";
           node.style.transform = "scaleX(0)";
-          node.style.transformOrigin = "top left ";
+          node.style.transformOrigin = "top left";
         },
       }}
     >
@@ -207,33 +208,33 @@ export default function Editor() {
       </List>
       <Divider />
       <List>
-        <ListItem button key={TEXT_FIND_REPLACE} onClick={() => setFindReplaceDialogOpen(true)}>
+        <ListItemButton key={TEXT_FIND_REPLACE} onClick={() => setFindReplaceDialogOpen(true)}>
               <ListItemIcon>
                 <FindReplaceIcon />
               </ListItemIcon>
               <ListItemText primary={TEXT_FIND_REPLACE} />
-        </ListItem>
-        <ListItem button key={TEXT_FILTER} onClick={() => setFilterDialogOpen(true)}>
+        </ListItemButton>
+        <ListItemButton key={TEXT_FILTER} onClick={() => setFilterDialogOpen(true)}>
           <ListItemIcon>
             <FilterListIcon />
           </ListItemIcon>
           <ListItemText primary={TEXT_FILTER} />
-        </ListItem>
+        </ListItemButton>
       </List>
       <Divider />
       <List>
-        <ListItem button key={TEXT_SAVE} onClick={handleSaveChangeClick}>
+        <ListItemButton key={TEXT_SAVE} onClick={handleSaveChangeClick}>
           <ListItemIcon>
             <SaveIcon />
           </ListItemIcon>
           <ListItemText primary={TEXT_SAVE} />
-        </ListItem>
-        <ListItem button key={TEXT_CANCEL} onClick={handleCancelAllChangeClick}>
+        </ListItemButton>
+        <ListItemButton key={TEXT_CANCEL} onClick={handleCancelAllChangeClick}>
           <ListItemIcon>
             <ClearAllIcon />
           </ListItemIcon>
           <ListItemText primary={TEXT_CANCEL} />
-        </ListItem>
+        </ListItemButton>
       </List>
       <Divider />
     </Drawer>
