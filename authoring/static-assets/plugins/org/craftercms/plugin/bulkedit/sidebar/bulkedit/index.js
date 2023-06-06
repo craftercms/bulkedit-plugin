@@ -7,224 +7,6 @@ var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(
 var { Subject } = CrafterCMSNext.rxjs;
 var ReactDOM = craftercms.libs.ReactDOM && Object.prototype.hasOwnProperty.call(craftercms.libs.ReactDOM, 'default') ? craftercms.libs.ReactDOM['default'] : craftercms.libs.ReactDOM;
 
-function ownKeys(object, enumerableOnly) {
-  var keys = Object.keys(object);
-
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-
-    if (enumerableOnly) {
-      symbols = symbols.filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-      });
-    }
-
-    keys.push.apply(keys, symbols);
-  }
-
-  return keys;
-}
-
-function _objectSpread2(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-
-    if (i % 2) {
-      ownKeys(Object(source), true).forEach(function (key) {
-        _defineProperty(target, key, source[key]);
-      });
-    } else if (Object.getOwnPropertyDescriptors) {
-      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-    } else {
-      ownKeys(Object(source)).forEach(function (key) {
-        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-      });
-    }
-  }
-
-  return target;
-}
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-
-function _extends$1() {
-  _extends$1 = Object.assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-
-    return target;
-  };
-
-  return _extends$1.apply(this, arguments);
-}
-
-function _objectWithoutPropertiesLoose$1(source, excluded) {
-  if (source == null) return {};
-  var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i;
-
-  for (i = 0; i < sourceKeys.length; i++) {
-    key = sourceKeys[i];
-    if (excluded.indexOf(key) >= 0) continue;
-    target[key] = source[key];
-  }
-
-  return target;
-}
-
-function _objectWithoutProperties(source, excluded) {
-  if (source == null) return {};
-
-  var target = _objectWithoutPropertiesLoose$1(source, excluded);
-
-  var key, i;
-
-  if (Object.getOwnPropertySymbols) {
-    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-
-    for (i = 0; i < sourceSymbolKeys.length; i++) {
-      key = sourceSymbolKeys[i];
-      if (excluded.indexOf(key) >= 0) continue;
-      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-      target[key] = source[key];
-    }
-  }
-
-  return target;
-}
-
-function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray$1(arr, i) || _nonIterableRest();
-}
-
-function _toConsumableArray$1(arr) {
-  return _arrayWithoutHoles$1(arr) || _iterableToArray$1(arr) || _unsupportedIterableToArray$1(arr) || _nonIterableSpread$1();
-}
-
-function _arrayWithoutHoles$1(arr) {
-  if (Array.isArray(arr)) return _arrayLikeToArray$1(arr);
-}
-
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
-}
-
-function _iterableToArray$1(iter) {
-  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
-}
-
-function _iterableToArrayLimit(arr, i) {
-  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
-
-  if (_i == null) return;
-  var _arr = [];
-  var _n = true;
-  var _d = false;
-
-  var _s, _e;
-
-  try {
-    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
-      _arr.push(_s.value);
-
-      if (i && _arr.length === i) break;
-    }
-  } catch (err) {
-    _d = true;
-    _e = err;
-  } finally {
-    try {
-      if (!_n && _i["return"] != null) _i["return"]();
-    } finally {
-      if (_d) throw _e;
-    }
-  }
-
-  return _arr;
-}
-
-function _unsupportedIterableToArray$1(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray$1(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$1(o, minLen);
-}
-
-function _arrayLikeToArray$1(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-
-  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-
-  return arr2;
-}
-
-function _nonIterableSpread$1() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-
 function getDefaultExportFromCjs (x) {
 	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
 }
@@ -257,6 +39,138 @@ function getAugmentedNamespace(n) {
 function commonjsRequire () {
 	throw new Error('Dynamic requires are not currently supported by @rollup/plugin-commonjs');
 }
+
+var arrayWithHoles = createCommonjsModule(function (module) {
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+module.exports = _arrayWithHoles, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+var iterableToArrayLimit = createCommonjsModule(function (module) {
+function _iterableToArrayLimit(arr, i) {
+  var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
+  if (null != _i) {
+    var _s,
+      _e,
+      _x,
+      _r,
+      _arr = [],
+      _n = !0,
+      _d = !1;
+    try {
+      if (_x = (_i = _i.call(arr)).next, 0 === i) {
+        if (Object(_i) !== _i) return;
+        _n = !1;
+      } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0);
+    } catch (err) {
+      _d = !0, _e = err;
+    } finally {
+      try {
+        if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return;
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+    return _arr;
+  }
+}
+module.exports = _iterableToArrayLimit, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+var arrayLikeToArray = createCommonjsModule(function (module) {
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+  return arr2;
+}
+module.exports = _arrayLikeToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+var unsupportedIterableToArray = createCommonjsModule(function (module) {
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
+}
+module.exports = _unsupportedIterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+var nonIterableRest = createCommonjsModule(function (module) {
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+module.exports = _nonIterableRest, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+var slicedToArray = createCommonjsModule(function (module) {
+function _slicedToArray(arr, i) {
+  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
+}
+module.exports = _slicedToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+var _slicedToArray = /*@__PURE__*/getDefaultExportFromCjs(slicedToArray);
+
+var _extends_1 = createCommonjsModule(function (module) {
+function _extends() {
+  module.exports = _extends = Object.assign ? Object.assign.bind() : function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports;
+  return _extends.apply(this, arguments);
+}
+module.exports = _extends, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+var _extends$a = /*@__PURE__*/getDefaultExportFromCjs(_extends_1);
+
+var objectWithoutPropertiesLoose = createCommonjsModule(function (module) {
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+  return target;
+}
+module.exports = _objectWithoutPropertiesLoose, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+var objectWithoutProperties = createCommonjsModule(function (module) {
+function _objectWithoutProperties(source, excluded) {
+  if (source == null) return {};
+  var target = objectWithoutPropertiesLoose(source, excluded);
+  var key, i;
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+  return target;
+}
+module.exports = _objectWithoutProperties, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+var _objectWithoutProperties = /*@__PURE__*/getDefaultExportFromCjs(objectWithoutProperties);
 
 var interopRequireDefault = createCommonjsModule(function (module) {
 function _interopRequireDefault(obj) {
@@ -451,6 +365,422 @@ exports.default = _default;
 
 var KeyboardArrowRightIcon = /*@__PURE__*/getDefaultExportFromCjs(KeyboardArrowRight$1);
 
+var asyncToGenerator = createCommonjsModule(function (module) {
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+      args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+      function _next(value) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      }
+      function _throw(err) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+      _next(undefined);
+    });
+  };
+}
+module.exports = _asyncToGenerator, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+var _asyncToGenerator = /*@__PURE__*/getDefaultExportFromCjs(asyncToGenerator);
+
+var _typeof_1 = createCommonjsModule(function (module) {
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  return (module.exports = _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports), _typeof(obj);
+}
+module.exports = _typeof, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+var toPrimitive = createCommonjsModule(function (module) {
+var _typeof = _typeof_1["default"];
+function _toPrimitive(input, hint) {
+  if (_typeof(input) !== "object" || input === null) return input;
+  var prim = input[Symbol.toPrimitive];
+  if (prim !== undefined) {
+    var res = prim.call(input, hint || "default");
+    if (_typeof(res) !== "object") return res;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return (hint === "string" ? String : Number)(input);
+}
+module.exports = _toPrimitive, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+var toPropertyKey = createCommonjsModule(function (module) {
+var _typeof = _typeof_1["default"];
+
+function _toPropertyKey(arg) {
+  var key = toPrimitive(arg, "string");
+  return _typeof(key) === "symbol" ? key : String(key);
+}
+module.exports = _toPropertyKey, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+var defineProperty = createCommonjsModule(function (module) {
+function _defineProperty(obj, key, value) {
+  key = toPropertyKey(key);
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+module.exports = _defineProperty, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+var _defineProperty = /*@__PURE__*/getDefaultExportFromCjs(defineProperty);
+
+var regeneratorRuntime$1 = createCommonjsModule(function (module) {
+var _typeof = _typeof_1["default"];
+function _regeneratorRuntime() {
+  module.exports = _regeneratorRuntime = function _regeneratorRuntime() {
+    return exports;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports;
+  var exports = {},
+    Op = Object.prototype,
+    hasOwn = Op.hasOwnProperty,
+    defineProperty = Object.defineProperty || function (obj, key, desc) {
+      obj[key] = desc.value;
+    },
+    $Symbol = "function" == typeof Symbol ? Symbol : {},
+    iteratorSymbol = $Symbol.iterator || "@@iterator",
+    asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator",
+    toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+  function define(obj, key, value) {
+    return Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: !0,
+      configurable: !0,
+      writable: !0
+    }), obj[key];
+  }
+  try {
+    define({}, "");
+  } catch (err) {
+    define = function define(obj, key, value) {
+      return obj[key] = value;
+    };
+  }
+  function wrap(innerFn, outerFn, self, tryLocsList) {
+    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator,
+      generator = Object.create(protoGenerator.prototype),
+      context = new Context(tryLocsList || []);
+    return defineProperty(generator, "_invoke", {
+      value: makeInvokeMethod(innerFn, self, context)
+    }), generator;
+  }
+  function tryCatch(fn, obj, arg) {
+    try {
+      return {
+        type: "normal",
+        arg: fn.call(obj, arg)
+      };
+    } catch (err) {
+      return {
+        type: "throw",
+        arg: err
+      };
+    }
+  }
+  exports.wrap = wrap;
+  var ContinueSentinel = {};
+  function Generator() {}
+  function GeneratorFunction() {}
+  function GeneratorFunctionPrototype() {}
+  var IteratorPrototype = {};
+  define(IteratorPrototype, iteratorSymbol, function () {
+    return this;
+  });
+  var getProto = Object.getPrototypeOf,
+    NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+  NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype);
+  var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype);
+  function defineIteratorMethods(prototype) {
+    ["next", "throw", "return"].forEach(function (method) {
+      define(prototype, method, function (arg) {
+        return this._invoke(method, arg);
+      });
+    });
+  }
+  function AsyncIterator(generator, PromiseImpl) {
+    function invoke(method, arg, resolve, reject) {
+      var record = tryCatch(generator[method], generator, arg);
+      if ("throw" !== record.type) {
+        var result = record.arg,
+          value = result.value;
+        return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) {
+          invoke("next", value, resolve, reject);
+        }, function (err) {
+          invoke("throw", err, resolve, reject);
+        }) : PromiseImpl.resolve(value).then(function (unwrapped) {
+          result.value = unwrapped, resolve(result);
+        }, function (error) {
+          return invoke("throw", error, resolve, reject);
+        });
+      }
+      reject(record.arg);
+    }
+    var previousPromise;
+    defineProperty(this, "_invoke", {
+      value: function value(method, arg) {
+        function callInvokeWithMethodAndArg() {
+          return new PromiseImpl(function (resolve, reject) {
+            invoke(method, arg, resolve, reject);
+          });
+        }
+        return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg();
+      }
+    });
+  }
+  function makeInvokeMethod(innerFn, self, context) {
+    var state = "suspendedStart";
+    return function (method, arg) {
+      if ("executing" === state) throw new Error("Generator is already running");
+      if ("completed" === state) {
+        if ("throw" === method) throw arg;
+        return doneResult();
+      }
+      for (context.method = method, context.arg = arg;;) {
+        var delegate = context.delegate;
+        if (delegate) {
+          var delegateResult = maybeInvokeDelegate(delegate, context);
+          if (delegateResult) {
+            if (delegateResult === ContinueSentinel) continue;
+            return delegateResult;
+          }
+        }
+        if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) {
+          if ("suspendedStart" === state) throw state = "completed", context.arg;
+          context.dispatchException(context.arg);
+        } else "return" === context.method && context.abrupt("return", context.arg);
+        state = "executing";
+        var record = tryCatch(innerFn, self, context);
+        if ("normal" === record.type) {
+          if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue;
+          return {
+            value: record.arg,
+            done: context.done
+          };
+        }
+        "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg);
+      }
+    };
+  }
+  function maybeInvokeDelegate(delegate, context) {
+    var methodName = context.method,
+      method = delegate.iterator[methodName];
+    if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel;
+    var record = tryCatch(method, delegate.iterator, context.arg);
+    if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel;
+    var info = record.arg;
+    return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel);
+  }
+  function pushTryEntry(locs) {
+    var entry = {
+      tryLoc: locs[0]
+    };
+    1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry);
+  }
+  function resetTryEntry(entry) {
+    var record = entry.completion || {};
+    record.type = "normal", delete record.arg, entry.completion = record;
+  }
+  function Context(tryLocsList) {
+    this.tryEntries = [{
+      tryLoc: "root"
+    }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0);
+  }
+  function values(iterable) {
+    if (iterable) {
+      var iteratorMethod = iterable[iteratorSymbol];
+      if (iteratorMethod) return iteratorMethod.call(iterable);
+      if ("function" == typeof iterable.next) return iterable;
+      if (!isNaN(iterable.length)) {
+        var i = -1,
+          next = function next() {
+            for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next;
+            return next.value = undefined, next.done = !0, next;
+          };
+        return next.next = next;
+      }
+    }
+    return {
+      next: doneResult
+    };
+  }
+  function doneResult() {
+    return {
+      value: undefined,
+      done: !0
+    };
+  }
+  return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", {
+    value: GeneratorFunctionPrototype,
+    configurable: !0
+  }), defineProperty(GeneratorFunctionPrototype, "constructor", {
+    value: GeneratorFunction,
+    configurable: !0
+  }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) {
+    var ctor = "function" == typeof genFun && genFun.constructor;
+    return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name));
+  }, exports.mark = function (genFun) {
+    return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun;
+  }, exports.awrap = function (arg) {
+    return {
+      __await: arg
+    };
+  }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () {
+    return this;
+  }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) {
+    void 0 === PromiseImpl && (PromiseImpl = Promise);
+    var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl);
+    return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) {
+      return result.done ? result.value : iter.next();
+    });
+  }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () {
+    return this;
+  }), define(Gp, "toString", function () {
+    return "[object Generator]";
+  }), exports.keys = function (val) {
+    var object = Object(val),
+      keys = [];
+    for (var key in object) keys.push(key);
+    return keys.reverse(), function next() {
+      for (; keys.length;) {
+        var key = keys.pop();
+        if (key in object) return next.value = key, next.done = !1, next;
+      }
+      return next.done = !0, next;
+    };
+  }, exports.values = values, Context.prototype = {
+    constructor: Context,
+    reset: function reset(skipTempReset) {
+      if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined);
+    },
+    stop: function stop() {
+      this.done = !0;
+      var rootRecord = this.tryEntries[0].completion;
+      if ("throw" === rootRecord.type) throw rootRecord.arg;
+      return this.rval;
+    },
+    dispatchException: function dispatchException(exception) {
+      if (this.done) throw exception;
+      var context = this;
+      function handle(loc, caught) {
+        return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught;
+      }
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i],
+          record = entry.completion;
+        if ("root" === entry.tryLoc) return handle("end");
+        if (entry.tryLoc <= this.prev) {
+          var hasCatch = hasOwn.call(entry, "catchLoc"),
+            hasFinally = hasOwn.call(entry, "finallyLoc");
+          if (hasCatch && hasFinally) {
+            if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0);
+            if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc);
+          } else if (hasCatch) {
+            if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0);
+          } else {
+            if (!hasFinally) throw new Error("try statement without catch or finally");
+            if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc);
+          }
+        }
+      }
+    },
+    abrupt: function abrupt(type, arg) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) {
+          var finallyEntry = entry;
+          break;
+        }
+      }
+      finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null);
+      var record = finallyEntry ? finallyEntry.completion : {};
+      return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record);
+    },
+    complete: function complete(record, afterLoc) {
+      if ("throw" === record.type) throw record.arg;
+      return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel;
+    },
+    finish: function finish(finallyLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel;
+      }
+    },
+    "catch": function _catch(tryLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc === tryLoc) {
+          var record = entry.completion;
+          if ("throw" === record.type) {
+            var thrown = record.arg;
+            resetTryEntry(entry);
+          }
+          return thrown;
+        }
+      }
+      throw new Error("illegal catch attempt");
+    },
+    delegateYield: function delegateYield(iterable, resultName, nextLoc) {
+      return this.delegate = {
+        iterator: values(iterable),
+        resultName: resultName,
+        nextLoc: nextLoc
+      }, "next" === this.method && (this.arg = undefined), ContinueSentinel;
+    }
+  }, exports;
+}
+module.exports = _regeneratorRuntime, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+// TODO(Babel 8): Remove this file.
+
+var runtime = regeneratorRuntime$1();
+var regenerator = runtime;
+
+// Copied from https://github.com/facebook/regenerator/blob/main/packages/runtime/runtime.js#L736=
+try {
+  regeneratorRuntime = runtime;
+} catch (accidentalStrictMode) {
+  if (typeof globalThis === "object") {
+    globalThis.regeneratorRuntime = runtime;
+  } else {
+    Function("r", "regeneratorRuntime = r")(runtime);
+  }
+}
+
 var FindReplace = createCommonjsModule(function (module, exports) {
 
 
@@ -641,9 +971,9 @@ var StudioAPI = {
     return CookieHelper.get('crafterSite');
   },
   getContentTypes: function getContentTypes() {
-    return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    return _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee() {
       var url, res, data;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
+      return regenerator.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
@@ -679,9 +1009,9 @@ var StudioAPI = {
     }))();
   },
   getContentTypeConfig: function getContentTypeConfig(contentType) {
-    return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+    return _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee2() {
       var path, url, res;
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      return regenerator.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
@@ -712,11 +1042,11 @@ var StudioAPI = {
     }))();
   },
   searchByContentType: function searchByContentType(ct, keywords, filterDate, offset, limit) {
-    return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+    return _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee3() {
       var _body;
 
       var url, filters, body, res;
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      return regenerator.wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
@@ -769,9 +1099,9 @@ var StudioAPI = {
     }))();
   },
   getContent: function getContent(path) {
-    return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+    return _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee4() {
       var url, res;
-      return regeneratorRuntime.wrap(function _callee4$(_context4) {
+      return regenerator.wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
@@ -801,9 +1131,9 @@ var StudioAPI = {
     }))();
   },
   writeContent: function writeContent(path, content, contentType) {
-    return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+    return _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee5() {
       var fileName, url, res;
-      return regeneratorRuntime.wrap(function _callee5$(_context5) {
+      return regenerator.wrap(function _callee5$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
@@ -834,9 +1164,9 @@ var StudioAPI = {
     }))();
   },
   getMe: function getMe() {
-    return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+    return _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee6() {
       var url, res;
-      return regeneratorRuntime.wrap(function _callee6$(_context6) {
+      return regenerator.wrap(function _callee6$(_context6) {
         while (1) {
           switch (_context6.prev = _context6.next) {
             case 0:
@@ -866,9 +1196,9 @@ var StudioAPI = {
     }))();
   },
   unlockContent: function unlockContent(path) {
-    return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
+    return _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee7() {
       var url, res;
-      return regeneratorRuntime.wrap(function _callee7$(_context7) {
+      return regenerator.wrap(function _callee7$(_context7) {
         while (1) {
           switch (_context7.prev = _context7.next) {
             case 0:
@@ -889,9 +1219,9 @@ var StudioAPI = {
     }))();
   },
   getSandboxItemByPath: function getSandboxItemByPath(path) {
-    return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
+    return _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee8() {
       var url, body, res;
-      return regeneratorRuntime.wrap(function _callee8$(_context8) {
+      return regenerator.wrap(function _callee8$(_context8) {
         while (1) {
           switch (_context8.prev = _context8.next) {
             case 0:
@@ -963,9 +1293,9 @@ function ContentTypeSelect() {
       setContentTypes = _React$useState4[1];
 
   e__default.useEffect(function () {
-    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee() {
       var data;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
+      return regenerator.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
@@ -985,8 +1315,8 @@ function ContentTypeSelect() {
     }))();
   }, []);
   e__default.useEffect(function () {
-    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+    _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee2() {
+      return regenerator.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
@@ -1147,8 +1477,8 @@ function clsx () {
 }
 
 var clsx_m = /*#__PURE__*/Object.freeze({
-  __proto__: null,
-  'default': clsx
+	__proto__: null,
+	'default': clsx
 });
 
 var shims = createCommonjsModule(function (module, exports) {
@@ -3309,6 +3639,36 @@ function FilterDialog(_ref3) {
   }, "Apply Filters")))));
 }
 
+var arrayWithoutHoles = createCommonjsModule(function (module) {
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return arrayLikeToArray(arr);
+}
+module.exports = _arrayWithoutHoles, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+var iterableToArray = createCommonjsModule(function (module) {
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
+}
+module.exports = _iterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+var nonIterableSpread = createCommonjsModule(function (module) {
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+module.exports = _nonIterableSpread, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+var toConsumableArray = createCommonjsModule(function (module) {
+function _toConsumableArray(arr) {
+  return arrayWithoutHoles(arr) || iterableToArray(arr) || unsupportedIterableToArray(arr) || nonIterableSpread();
+}
+module.exports = _toConsumableArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+var _toConsumableArray$1 = /*@__PURE__*/getDefaultExportFromCjs(toConsumableArray);
+
 function defaultEqualityCheck(a, b) {
   return a === b;
 }
@@ -3415,8 +3775,8 @@ function chainPropTypes(propType1, propType2) {
   }
 }
 
-function _extends() {
-  _extends = Object.assign || function (target) {
+function _extends$9() {
+  _extends$9 = Object.assign || function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
 
@@ -3430,7 +3790,7 @@ function _extends() {
     return target;
   };
 
-  return _extends.apply(this, arguments);
+  return _extends$9.apply(this, arguments);
 }
 
 function isPlainObject(item) {
@@ -3441,7 +3801,7 @@ function isPlainObject(item) {
 function deepmerge(target, source, options = {
   clone: true
 }) {
-  const output = options.clone ? _extends({}, target) : target;
+  const output = options.clone ? _extends$9({}, target) : target;
 
   if (isPlainObject(target) && isPlainObject(source)) {
     Object.keys(source).forEach(key => {
@@ -3949,6 +4309,24 @@ function createGenerateClassName(options = {}) {
   };
 }
 
+function _extends$8() {
+  _extends$8 = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends$8.apply(this, arguments);
+}
+
 /* eslint-disable no-restricted-syntax */
 function getThemeProps$1(params) {
   const {
@@ -3961,7 +4339,7 @@ function getThemeProps$1(params) {
     return props;
   }
 
-  const output = _extends({}, props); // Resolve default props, code borrow from React source.
+  const output = _extends$8({}, props); // Resolve default props, code borrow from React source.
   // https://github.com/facebook/react/blob/15a8f031838a553e41c0b66eb1bcf1da8448104d/packages/react/src/ReactElement.js#L221
 
 
@@ -3975,6 +4353,24 @@ function getThemeProps$1(params) {
   }
 
   return output;
+}
+
+function _extends$7() {
+  _extends$7 = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends$7.apply(this, arguments);
 }
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -3997,22 +4393,22 @@ function _createClass(Constructor, protoProps, staticProps) {
   return Constructor;
 }
 
-function _setPrototypeOf(o, p) {
-  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+function _setPrototypeOf$1(o, p) {
+  _setPrototypeOf$1 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
     o.__proto__ = p;
     return o;
   };
 
-  return _setPrototypeOf(o, p);
+  return _setPrototypeOf$1(o, p);
 }
 
-function _inheritsLoose(subClass, superClass) {
+function _inheritsLoose$1(subClass, superClass) {
   subClass.prototype = Object.create(superClass.prototype);
   subClass.prototype.constructor = subClass;
-  _setPrototypeOf(subClass, superClass);
+  _setPrototypeOf$1(subClass, superClass);
 }
 
-function _assertThisInitialized(self) {
+function _assertThisInitialized$1(self) {
   if (self === void 0) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
   }
@@ -4020,7 +4416,7 @@ function _assertThisInitialized(self) {
   return self;
 }
 
-function _objectWithoutPropertiesLoose(source, excluded) {
+function _objectWithoutPropertiesLoose$5(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
@@ -4278,7 +4674,7 @@ function () {
 var StyleRule =
 /*#__PURE__*/
 function (_BaseStyleRule) {
-  _inheritsLoose(StyleRule, _BaseStyleRule);
+  _inheritsLoose$1(StyleRule, _BaseStyleRule);
 
   function StyleRule(key, style, options) {
     var _this;
@@ -4292,7 +4688,7 @@ function (_BaseStyleRule) {
     if (selector) {
       _this.selectorText = selector;
     } else if (scoped !== false) {
-      _this.id = generateId(_assertThisInitialized(_assertThisInitialized(_this)), sheet);
+      _this.id = generateId(_assertThisInitialized$1(_assertThisInitialized$1(_this)), sheet);
       _this.selectorText = "." + escape(_this.id);
     }
 
@@ -4348,7 +4744,7 @@ function (_BaseStyleRule) {
   _proto2.toString = function toString(options) {
     var sheet = this.options.sheet;
     var link = sheet ? sheet.options.link : false;
-    var opts = link ? _extends({}, options, {
+    var opts = link ? _extends$7({}, options, {
       allowEmpty: true
     }) : options;
     return toCss(this.selectorText, this.style, opts);
@@ -4410,7 +4806,7 @@ function () {
 
     this.query = options.name || "@" + this.at;
     this.options = options;
-    this.rules = new RuleList(_extends({}, options, {
+    this.rules = new RuleList(_extends$7({}, options, {
       parent: this
     }));
 
@@ -4522,12 +4918,12 @@ function () {
         sheet = options.sheet,
         generateId = options.generateId;
     this.id = scoped === false ? this.name : escape(generateId(this, sheet));
-    this.rules = new RuleList(_extends({}, options, {
+    this.rules = new RuleList(_extends$7({}, options, {
       parent: this
     }));
 
     for (var name in frames) {
-      this.rules.add(name, frames[name], _extends({}, options, {
+      this.rules.add(name, frames[name], _extends$7({}, options, {
         parent: this
       }));
     }
@@ -4626,7 +5022,7 @@ var pluginKeyframesRule = {
 var KeyframeRule =
 /*#__PURE__*/
 function (_BaseStyleRule) {
-  _inheritsLoose(KeyframeRule, _BaseStyleRule);
+  _inheritsLoose$1(KeyframeRule, _BaseStyleRule);
 
   function KeyframeRule() {
     return _BaseStyleRule.apply(this, arguments) || this;
@@ -4640,7 +5036,7 @@ function (_BaseStyleRule) {
   _proto.toString = function toString(options) {
     var sheet = this.options.sheet;
     var link = sheet ? sheet.options.link : false;
-    var opts = link ? _extends({}, options, {
+    var opts = link ? _extends$7({}, options, {
       allowEmpty: true
     }) : options;
     return toCss(this.key, this.style, opts);
@@ -4828,7 +5224,7 @@ function () {
         generateId = _this$options.generateId,
         scoped = _this$options.scoped;
 
-    var options = _extends({
+    var options = _extends$7({
       classes: this.classes,
       parent: parent,
       sheet: sheet,
@@ -4882,7 +5278,7 @@ function () {
     }
 
     var options = ruleOptions;
-    if (oldIndex !== -1) options = _extends({}, ruleOptions, {
+    if (oldIndex !== -1) options = _extends$7({}, ruleOptions, {
       index: oldIndex
     });
     return this.add(name, decl, options);
@@ -5066,7 +5462,7 @@ function () {
     this.deployed = false;
     this.classes = {};
     this.keyframes = {};
-    this.options = _extends({}, options, {
+    this.options = _extends$7({}, options, {
       sheet: this,
       parent: this,
       classes: this.classes,
@@ -5472,7 +5868,7 @@ function () {
   _proto.toString = function toString(_temp) {
     var _ref = _temp === void 0 ? {} : _temp,
         attached = _ref.attached,
-        options = _objectWithoutPropertiesLoose(_ref, ["attached"]);
+        options = _objectWithoutPropertiesLoose$5(_ref, ["attached"]);
 
     var _getWhitespaceSymbols = getWhitespaceSymbols(options),
         linebreak = _getWhitespaceSymbols.linebreak;
@@ -6076,7 +6472,7 @@ function () {
     }
 
     if (options.id) {
-      this.options.id = _extends({}, this.options.id, options.id);
+      this.options.id = _extends$7({}, this.options.id, options.id);
     }
 
     if (options.createGenerateId || options.id) {
@@ -6110,7 +6506,7 @@ function () {
       index = sheets.index === 0 ? 0 : sheets.index + 1;
     }
 
-    var sheet = new StyleSheet$1(styles, _extends({}, options, {
+    var sheet = new StyleSheet$1(styles, _extends$7({}, options, {
       jss: this,
       generateId: options.generateId || this.generateId,
       insertionPoint: this.options.insertionPoint,
@@ -6150,7 +6546,7 @@ function () {
       return this.createRule(undefined, name, style);
     }
 
-    var ruleOptions = _extends({}, options, {
+    var ruleOptions = _extends$7({}, options, {
       name: name,
       jss: this,
       Renderer: this.options.Renderer
@@ -6285,6 +6681,24 @@ var functionPlugin = function functionPlugin() {
 
 var functions = functionPlugin;
 
+function _extends$6() {
+  _extends$6 = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends$6.apply(this, arguments);
+}
+
 var at$1 = '@global';
 var atPrefix = '@global ';
 
@@ -6297,7 +6711,7 @@ function () {
     this.isProcessed = false;
     this.key = key;
     this.options = options;
-    this.rules = new RuleList(_extends({}, options, {
+    this.rules = new RuleList(_extends$6({}, options, {
       parent: this
     }));
 
@@ -6367,7 +6781,7 @@ function () {
     this.key = key;
     this.options = options;
     var selector = key.substr(atPrefix.length);
-    this.rule = options.jss.createRule(selector, style, _extends({}, options, {
+    this.rule = options.jss.createRule(selector, style, _extends$6({}, options, {
       parent: this
     }));
   }
@@ -6402,7 +6816,7 @@ function handleNestedGlobalContainerRule(rule, sheet) {
   if (!rules) return;
 
   for (var name in rules) {
-    sheet.addRule(name, rules[name], _extends({}, options, {
+    sheet.addRule(name, rules[name], _extends$6({}, options, {
       selector: addScope(name, rule.selector)
     }));
   }
@@ -6417,7 +6831,7 @@ function handlePrefixedGlobalRule(rule, sheet) {
   for (var prop in style) {
     if (prop[0] !== '@' || prop.substr(0, at$1.length) !== at$1) continue;
     var selector = addScope(prop.substr(at$1.length), rule.selector);
-    sheet.addRule(selector, style[prop], _extends({}, options, {
+    sheet.addRule(selector, style[prop], _extends$6({}, options, {
       selector: selector
     }));
     delete style[prop];
@@ -6467,6 +6881,24 @@ function jssGlobal() {
   };
 }
 
+function _extends$5() {
+  _extends$5 = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends$5.apply(this, arguments);
+}
+
 var separatorRegExp = /\s*,\s*/g;
 var parentRegExp = /&/g;
 var refRegExp = /\$([\w-]+)/g;
@@ -6508,13 +6940,13 @@ function jssNested() {
 
   function getOptions(rule, container, prevOptions) {
     // Options has been already created, now we only increase index.
-    if (prevOptions) return _extends({}, prevOptions, {
+    if (prevOptions) return _extends$5({}, prevOptions, {
       index: prevOptions.index + 1
     });
     var nestingLevel = rule.options.nestingLevel;
     nestingLevel = nestingLevel === undefined ? 1 : nestingLevel + 1;
 
-    var options = _extends({}, rule.options, {
+    var options = _extends$5({}, rule.options, {
       nestingLevel: nestingLevel,
       index: container.indexOf(rule) + 1 // We don't need the parent name to be set options for chlid.
 
@@ -6545,7 +6977,7 @@ function jssNested() {
 
         selector = selector.replace(refRegExp, replaceRef);
         var name = styleRule.key + "-" + prop;
-        container.replaceRule(name, style[prop], _extends({}, options, {
+        container.replaceRule(name, style[prop], _extends$5({}, options, {
           selector: selector
         }));
       } else if (isNestedConditional) {
@@ -6888,7 +7320,7 @@ function defaultUnit(options) {
   };
 }
 
-function _arrayLikeToArray(arr, len) {
+function _arrayLikeToArray$1(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
 
   for (var i = 0, arr2 = new Array(len); i < len; i++) {
@@ -6899,20 +7331,20 @@ function _arrayLikeToArray(arr, len) {
 }
 
 function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+  if (Array.isArray(arr)) return _arrayLikeToArray$1(arr);
 }
 
 function _iterableToArray(iter) {
   if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
 
-function _unsupportedIterableToArray(o, minLen) {
+function _unsupportedIterableToArray$1(o, minLen) {
   if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  if (typeof o === "string") return _arrayLikeToArray$1(o, minLen);
   var n = Object.prototype.toString.call(o).slice(8, -1);
   if (n === "Object" && o.constructor) n = o.constructor.name;
   if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$1(o, minLen);
 }
 
 function _nonIterableSpread() {
@@ -6920,7 +7352,7 @@ function _nonIterableSpread() {
 }
 
 function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray$1(arr) || _nonIterableSpread();
 }
 
 // Export javascript style and css style vendor prefixes.
@@ -7581,6 +8013,21 @@ function jssPreset() {
   };
 }
 
+function _objectWithoutPropertiesLoose$4(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
 function mergeClasses(options = {}) {
   const {
     baseClasses,
@@ -7592,7 +8039,7 @@ function mergeClasses(options = {}) {
     return baseClasses;
   }
 
-  const nextClasses = _extends({}, baseClasses);
+  const nextClasses = _extends$8({}, baseClasses);
 
   Object.keys(newClasses).forEach(key => {
 
@@ -7676,7 +8123,7 @@ function propsToClassKey$1(props) {
   const {
     variant
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$Y);
+        other = _objectWithoutPropertiesLoose$4(props, _excluded$Y);
 
   let classKey = variant || '';
   Object.keys(other).sort().forEach(key => {
@@ -7714,7 +8161,7 @@ function getStylesCreator(stylesOrCreator) {
       const overrides = theme.components[name].styleOverrides || {};
       const variants = theme.components[name].variants || [];
 
-      const stylesWithOverrides = _extends({}, styles);
+      const stylesWithOverrides = _extends$8({}, styles);
 
       Object.keys(overrides).forEach(key => {
 
@@ -7798,7 +8245,7 @@ function attach({
     multiKeyStore$1.set(stylesOptions.sheetsManager, stylesCreator, theme, sheetManager);
   }
 
-  const options = _extends({}, stylesCreator.options, stylesOptions, {
+  const options = _extends$8({}, stylesCreator.options, stylesOptions, {
     theme,
     flip: typeof stylesOptions.flip === 'boolean' ? stylesOptions.flip : theme.direction === 'rtl'
   });
@@ -7816,7 +8263,7 @@ function attach({
     const styles = stylesCreator.create(theme, name);
 
     if (!staticSheet) {
-      staticSheet = stylesOptions.jss.createStyleSheet(styles, _extends({
+      staticSheet = stylesOptions.jss.createStyleSheet(styles, _extends$8({
         link: false
       }, options));
       staticSheet.attach();
@@ -7835,7 +8282,7 @@ function attach({
   }
 
   if (sheetManager.dynamicStyles) {
-    const dynamicSheet = stylesOptions.jss.createStyleSheet(sheetManager.dynamicStyles, _extends({
+    const dynamicSheet = stylesOptions.jss.createStyleSheet(sheetManager.dynamicStyles, _extends$8({
       link: true
     }, options));
     dynamicSheet.update(props);
@@ -7925,7 +8372,7 @@ function makeStyles(stylesOrCreator, options = {}) {
     Component,
     defaultTheme = noopTheme$1
   } = options,
-        stylesOptions2 = _objectWithoutPropertiesLoose(options, _excluded$X);
+        stylesOptions2 = _objectWithoutPropertiesLoose$4(options, _excluded$X);
 
   const stylesCreator = getStylesCreator(stylesOrCreator);
   const classNamePrefix = name || classNamePrefixOption || 'makeStyles';
@@ -7939,7 +8386,7 @@ function makeStyles(stylesOrCreator, options = {}) {
   const useStyles = (props = {}) => {
     const theme = useTheme$3() || defaultTheme;
 
-    const stylesOptions = _extends({}, e__default.useContext(StylesContext), stylesOptions2);
+    const stylesOptions = _extends$8({}, e__default.useContext(StylesContext), stylesOptions2);
 
     const instance = e__default.useRef();
     const shouldUpdate = e__default.useRef();
@@ -8045,6 +8492,39 @@ var TYPE_STATICS = {};
 TYPE_STATICS[reactIs.ForwardRef] = FORWARD_REF_STATICS;
 TYPE_STATICS[reactIs.Memo] = MEMO_STATICS;
 
+function _extends$4() {
+  _extends$4 = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends$4.apply(this, arguments);
+}
+
+function _objectWithoutPropertiesLoose$3(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
 createCommonjsModule(function (module) {
 function _extends() {
   module.exports = _extends = Object.assign || function (target) {
@@ -8088,6 +8568,24 @@ var isPropValid = /* #__PURE__ */memoize$1(function (prop) {
 }
 /* Z+1 */
 );
+
+function _extends$3() {
+  _extends$3 = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends$3.apply(this, arguments);
+}
 
 /*
 
@@ -8818,6 +9316,30 @@ var withEmotionCache = function withEmotionCache(func) {
 
 var ThemeContext = /* #__PURE__ */createContext({});
 
+createCommonjsModule(function (module) {
+function _extends() {
+  module.exports = _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  module.exports["default"] = module.exports, module.exports.__esModule = true;
+  return _extends.apply(this, arguments);
+}
+
+module.exports = _extends;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+});
+
 // initial render from browser, insertBefore context.sheet.tags[0] or if a style hasn't been inserted there yet, appendChild
 // initial client-side render from SSR, use place of hydrating tag
 
@@ -9041,7 +9563,7 @@ var createStyled$1 = function createStyled(tag, options) {
     });
 
     Styled.withComponent = function (nextTag, nextOptions) {
-      return createStyled(nextTag, _extends({}, options, nextOptions, {
+      return createStyled(nextTag, _extends$3({}, options, nextOptions, {
         shouldForwardProp: composeShouldForwardProps(Styled, nextOptions, true)
       })).apply(void 0, styles);
     };
@@ -9085,6 +9607,24 @@ function styled$2(tag, options) {
   const stylesFactory = emStyled(tag, options);
 
   return stylesFactory;
+}
+
+function _extends$2() {
+  _extends$2 = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends$2.apply(this, arguments);
 }
 
 function merge(acc, item) {
@@ -9847,6 +10387,21 @@ function styleFunctionSx(props) {
 
 styleFunctionSx.filterProps = ['sx'];
 
+function _objectWithoutPropertiesLoose$2(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
 const _excluded$W = ["sx"];
 
 const splitProps = props => {
@@ -9868,14 +10423,14 @@ function extendSxProp(props) {
   const {
     sx: inSx
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$W);
+        other = _objectWithoutPropertiesLoose$2(props, _excluded$W);
 
   const {
     systemProps,
     otherProps
   } = splitProps(other);
-  return _extends({}, otherProps, {
-    sx: _extends({}, systemProps, inSx)
+  return _extends$2({}, otherProps, {
+    sx: _extends$2({}, systemProps, inSx)
   });
 }
 
@@ -9900,7 +10455,7 @@ function createBreakpoints(breakpoints) {
     unit = 'px',
     step = 5
   } = breakpoints,
-        other = _objectWithoutPropertiesLoose(breakpoints, _excluded$V);
+        other = _objectWithoutPropertiesLoose$2(breakpoints, _excluded$V);
 
   const keys = Object.keys(values);
 
@@ -9927,7 +10482,7 @@ function createBreakpoints(breakpoints) {
     return up(key);
   }
 
-  return _extends({
+  return _extends$2({
     keys,
     values,
     up,
@@ -9979,7 +10534,7 @@ function createTheme$1(options = {}, ...args) {
     spacing: spacingInput,
     shape: shapeInput = {}
   } = options,
-        other = _objectWithoutPropertiesLoose(options, _excluded$U);
+        other = _objectWithoutPropertiesLoose$2(options, _excluded$U);
 
   const breakpoints = createBreakpoints(breakpointsInput);
   const spacing = createSpacing(spacingInput);
@@ -9988,11 +10543,11 @@ function createTheme$1(options = {}, ...args) {
     direction: 'ltr',
     components: {},
     // Inject component definitions.
-    palette: _extends({
+    palette: _extends$2({
       mode: 'light'
     }, paletteInput),
     spacing,
-    shape: _extends({}, shape$1, shapeInput)
+    shape: _extends$2({}, shape$1, shapeInput)
   }, other);
   muiTheme = args.reduce((acc, argument) => deepmerge(acc, argument), muiTheme);
   return muiTheme;
@@ -10027,9 +10582,9 @@ function createBox(options = {}) {
       className,
       component = 'div'
     } = _extendSxProp,
-          other = _objectWithoutPropertiesLoose(_extendSxProp, _excluded$T);
+          other = _objectWithoutPropertiesLoose$2(_extendSxProp, _excluded$T);
 
-    return /*#__PURE__*/jsxRuntime.jsx(BoxRoot, _extends({
+    return /*#__PURE__*/jsxRuntime.jsx(BoxRoot, _extends$2({
       as: component,
       ref: ref,
       className: clsx(className, 'MuiBox-root'),
@@ -10055,7 +10610,7 @@ function propsToClassKey(props) {
   const {
     variant
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$S);
+        other = _objectWithoutPropertiesLoose$2(props, _excluded$S);
 
   let classKey = variant || '';
   Object.keys(other).sort().forEach(key => {
@@ -10145,7 +10700,7 @@ function createStyled(input = {}) {
       skipSx: inputSkipSx,
       overridesResolver
     } = inputOptions,
-          options = _objectWithoutPropertiesLoose(inputOptions, _excluded$R); // if skipVariantsResolver option is defined, take the value, otherwise, true for root and false for other slots.
+          options = _objectWithoutPropertiesLoose$2(inputOptions, _excluded$R); // if skipVariantsResolver option is defined, take the value, otherwise, true for root and false for other slots.
 
 
     const skipVariantsResolver = inputSkipVariantsResolver !== undefined ? inputSkipVariantsResolver : componentSlot && componentSlot !== 'Root' || false;
@@ -10161,7 +10716,7 @@ function createStyled(input = {}) {
       shouldForwardPropOption = slotShouldForwardProp;
     }
 
-    const defaultStyledResolver = styled$2(tag, _extends({
+    const defaultStyledResolver = styled$2(tag, _extends$2({
       shouldForwardProp: shouldForwardPropOption,
       label
     }, options));
@@ -10172,9 +10727,9 @@ function createStyled(input = {}) {
           let {
             theme: themeInput
           } = _ref,
-              other = _objectWithoutPropertiesLoose(_ref, _excluded2$4);
+              other = _objectWithoutPropertiesLoose$2(_ref, _excluded2$4);
 
-          return stylesArg(_extends({
+          return stylesArg(_extends$2({
             theme: isEmpty$1(themeInput) ? defaultTheme : themeInput
           }, other));
         } : stylesArg;
@@ -10204,7 +10759,7 @@ function createStyled(input = {}) {
       if (!skipSx) {
         expressionsWithDefaultTheme.push(props => {
           const theme = isEmpty$1(props.theme) ? defaultTheme : props.theme;
-          return styleFunctionSx(_extends({}, props, {
+          return styleFunctionSx(_extends$2({}, props, {
             theme
           }));
         });
@@ -10223,9 +10778,9 @@ function createStyled(input = {}) {
           let {
             theme: themeInput
           } = _ref2,
-              other = _objectWithoutPropertiesLoose(_ref2, _excluded3);
+              other = _objectWithoutPropertiesLoose$2(_ref2, _excluded3);
 
-          return styleArg(_extends({
+          return styleArg(_extends$2({
             theme: isEmpty$1(themeInput) ? defaultTheme : themeInput
           }, other));
         };
@@ -10252,7 +10807,7 @@ function getThemeProps(params) {
     return props;
   }
 
-  const output = _extends({}, props); // Resolve default props, code borrow from React source.
+  const output = _extends$2({}, props); // Resolve default props, code borrow from React source.
   // https://github.com/facebook/react/blob/15a8f031838a553e41c0b66eb1bcf1da8448104d/packages/react/src/ReactElement.js#L221
 
 
@@ -10535,6 +11090,39 @@ function lighten(color, coefficient) {
   return recomposeColor(color);
 }
 
+function _extends$1() {
+  _extends$1 = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends$1.apply(this, arguments);
+}
+
+function _objectWithoutPropertiesLoose$1(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
 function composeClasses(slots, getUtilityClass, classes) {
   const output = {};
   Object.keys(slots).forEach( // `Objet.keys(slots)` can't be wider than `T` because we infer `T` from `slots`.
@@ -10617,9 +11205,9 @@ const BackdropUnstyled = /*#__PURE__*/e__default.forwardRef(function BackdropUns
     /* eslint-disable react/prop-types */
     theme
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$Q);
+        other = _objectWithoutPropertiesLoose$1(props, _excluded$Q);
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$1({}, props, {
     classes: classesProp,
     invisible
   });
@@ -10627,11 +11215,11 @@ const BackdropUnstyled = /*#__PURE__*/e__default.forwardRef(function BackdropUns
   const classes = useUtilityClasses$A(ownerState);
   const Root = components.Root || component;
   const rootProps = componentsProps.root || {};
-  return /*#__PURE__*/jsxRuntime.jsx(Root, _extends({
+  return /*#__PURE__*/jsxRuntime.jsx(Root, _extends$1({
     "aria-hidden": true
   }, rootProps, !isHostComponent(Root) && {
     as: component,
-    ownerState: _extends({}, ownerState, rootProps.ownerState),
+    ownerState: _extends$1({}, ownerState, rootProps.ownerState),
     theme
   }, {
     ref: ref
@@ -10686,7 +11274,7 @@ const BadgeUnstyled = /*#__PURE__*/e__default.forwardRef(function BadgeUnstyled(
     /* eslint-disable react/prop-types */
     theme
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$P);
+        other = _objectWithoutPropertiesLoose$1(props, _excluded$P);
 
   const prevProps = usePreviousProps$1({
     anchorOrigin: anchorOriginProp,
@@ -10709,7 +11297,7 @@ const BadgeUnstyled = /*#__PURE__*/e__default.forwardRef(function BadgeUnstyled(
     variant = variantProp
   } = invisible ? prevProps : props;
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$1({}, props, {
     anchorOrigin,
     badgeContent,
     classes: classesProp,
@@ -10730,16 +11318,16 @@ const BadgeUnstyled = /*#__PURE__*/e__default.forwardRef(function BadgeUnstyled(
   const rootProps = componentsProps.root || {};
   const Badge = components.Badge || 'span';
   const badgeProps = componentsProps.badge || {};
-  return /*#__PURE__*/jsxRuntime.jsxs(Root, _extends({}, rootProps, !isHostComponent(Root) && {
+  return /*#__PURE__*/jsxRuntime.jsxs(Root, _extends$1({}, rootProps, !isHostComponent(Root) && {
     as: component,
-    ownerState: _extends({}, ownerState, rootProps.ownerState),
+    ownerState: _extends$1({}, ownerState, rootProps.ownerState),
     theme
   }, {
     ref: ref
   }, other, {
     className: clsx(classes.root, rootProps.className, className),
-    children: [children, /*#__PURE__*/jsxRuntime.jsx(Badge, _extends({}, badgeProps, !isHostComponent(Badge) && {
-      ownerState: _extends({}, ownerState, badgeProps.ownerState),
+    children: [children, /*#__PURE__*/jsxRuntime.jsx(Badge, _extends$1({}, badgeProps, !isHostComponent(Badge) && {
+      ownerState: _extends$1({}, ownerState, badgeProps.ownerState),
       theme
     }, {
       className: clsx(classes.badge, badgeProps.className),
@@ -10762,8 +11350,8 @@ function appendOwnerState(elementType, existingProps, ownerState) {
     return existingProps;
   }
 
-  return _extends({}, existingProps, {
-    ownerState: _extends({}, existingProps.ownerState, ownerState)
+  return _extends$1({}, existingProps, {
+    ownerState: _extends$1({}, existingProps.ownerState, ownerState)
   });
 }
 
@@ -11402,7 +11990,7 @@ const ModalUnstyled = /*#__PURE__*/e__default.forwardRef(function ModalUnstyled(
     onTransitionEnter,
     onTransitionExited
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$O);
+        other = _objectWithoutPropertiesLoose$1(props, _excluded$O);
 
   const [exited, setExited] = e__default.useState(true);
   const modal = e__default.useRef({});
@@ -11465,7 +12053,7 @@ const ModalUnstyled = /*#__PURE__*/e__default.forwardRef(function ModalUnstyled(
     }
   }, [open, handleClose, hasTransition, closeAfterTransition, handleOpen]);
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$1({}, props, {
     classes: classesProp,
     closeAfterTransition,
     disableAutoFocus,
@@ -11562,17 +12150,17 @@ const ModalUnstyled = /*#__PURE__*/e__default.forwardRef(function ModalUnstyled(
     ref: handlePortalRef,
     container: container,
     disablePortal: disablePortal,
-    children: /*#__PURE__*/jsxRuntime.jsxs(Root, _extends({
+    children: /*#__PURE__*/jsxRuntime.jsxs(Root, _extends$1({
       role: "presentation"
     }, rootProps, !isHostComponent(Root) && {
       as: component,
-      ownerState: _extends({}, ownerState, rootProps.ownerState),
+      ownerState: _extends$1({}, ownerState, rootProps.ownerState),
       theme
     }, other, {
       ref: handleRef,
       onKeyDown: handleKeyDown,
       className: clsx(classes.root, rootProps.className, className),
-      children: [!hideBackdrop && BackdropComponent ? /*#__PURE__*/jsxRuntime.jsx(BackdropComponent, _extends({
+      children: [!hideBackdrop && BackdropComponent ? /*#__PURE__*/jsxRuntime.jsx(BackdropComponent, _extends$1({
         open: open,
         onClick: handleBackdropClick
       }, BackdropProps)) : null, /*#__PURE__*/jsxRuntime.jsx(Unstable_TrapFocus, {
@@ -11612,7 +12200,7 @@ function NoSsr(props) {
 }
 
 function createMixins(breakpoints, spacing, mixins) {
-  return _extends({
+  return _extends$4({
     toolbar: {
       minHeight: 56,
       [`${breakpoints.up('xs')} and (orientation: landscape)`]: {
@@ -11941,7 +12529,7 @@ function createPalette(palette) {
     contrastThreshold = 3,
     tonalOffset = 0.2
   } = palette,
-        other = _objectWithoutPropertiesLoose(palette, _excluded$N);
+        other = _objectWithoutPropertiesLoose$3(palette, _excluded$N);
 
   const primary = palette.primary || getDefaultPrimary(mode);
   const secondary = palette.secondary || getDefaultSecondary(mode);
@@ -11965,7 +12553,7 @@ function createPalette(palette) {
     lightShade = 300,
     darkShade = 700
   }) => {
-    color = _extends({}, color);
+    color = _extends$4({}, color);
 
     if (!color.main && color[mainShade]) {
       color.main = color[mainShade];
@@ -11994,7 +12582,7 @@ function createPalette(palette) {
     light
   };
 
-  const paletteOutput = deepmerge(_extends({
+  const paletteOutput = deepmerge(_extends$4({
     // A collection of common colors.
     common: common$1,
     // The palette mode, can be light or dark.
@@ -12082,13 +12670,13 @@ function createTypography(palette, typography) {
     allVariants,
     pxToRem: pxToRem2
   } = _ref,
-        other = _objectWithoutPropertiesLoose(_ref, _excluded$M);
+        other = _objectWithoutPropertiesLoose$3(_ref, _excluded$M);
 
   const coef = fontSize / 14;
 
   const pxToRem = pxToRem2 || (size => `${size / htmlFontSize * coef}rem`);
 
-  const buildVariant = (fontWeight, size, lineHeight, letterSpacing, casing) => _extends({
+  const buildVariant = (fontWeight, size, lineHeight, letterSpacing, casing) => _extends$4({
     fontFamily,
     fontWeight,
     fontSize: pxToRem(size),
@@ -12113,7 +12701,7 @@ function createTypography(palette, typography) {
     caption: buildVariant(fontWeightRegular, 12, 1.66, 0.4),
     overline: buildVariant(fontWeightRegular, 12, 2.66, 1, caseAllCaps)
   };
-  return deepmerge(_extends({
+  return deepmerge(_extends$4({
     htmlFontSize,
     pxToRem,
     fontFamily,
@@ -12185,9 +12773,9 @@ function getAutoHeightDuration(height) {
 }
 
 function createTransitions(inputTransitions) {
-  const mergedEasing = _extends({}, easing, inputTransitions.easing);
+  const mergedEasing = _extends$4({}, easing, inputTransitions.easing);
 
-  const mergedDuration = _extends({}, duration, inputTransitions.duration);
+  const mergedDuration = _extends$4({}, duration, inputTransitions.duration);
 
   const create = (props = ['all'], options = {}) => {
     const {
@@ -12195,12 +12783,12 @@ function createTransitions(inputTransitions) {
       easing: easingOption = mergedEasing.easeInOut,
       delay = 0
     } = options;
-          _objectWithoutPropertiesLoose(options, _excluded$L);
+          _objectWithoutPropertiesLoose$3(options, _excluded$L);
 
     return (Array.isArray(props) ? props : [props]).map(animatedProp => `${animatedProp} ${typeof durationOption === 'string' ? durationOption : formatMs(durationOption)} ${easingOption} ${typeof delay === 'string' ? delay : formatMs(delay)}`).join(',');
   };
 
-  return _extends({
+  return _extends$4({
     getAutoHeightDuration,
     create
   }, inputTransitions, {
@@ -12231,7 +12819,7 @@ function createTheme(options = {}, ...args) {
     transitions: transitionsInput = {},
     typography: typographyInput = {}
   } = options,
-        other = _objectWithoutPropertiesLoose(options, _excluded$K);
+        other = _objectWithoutPropertiesLoose$3(options, _excluded$K);
 
   const palette = createPalette(paletteInput);
   const systemTheme = createTheme$1(options);
@@ -12242,7 +12830,7 @@ function createTheme(options = {}, ...args) {
     shadows: shadows$1.slice(),
     typography: createTypography(palette, typographyInput),
     transitions: createTransitions(transitionsInput),
-    zIndex: _extends({}, zIndex$1)
+    zIndex: _extends$4({}, zIndex$1)
   });
   muiTheme = deepmerge(muiTheme, other);
   muiTheme = args.reduce((acc, argument) => deepmerge(acc, argument), muiTheme);
@@ -12279,7 +12867,7 @@ const styled = createStyled({
 var styled$1 = styled;
 
 const _excluded$J = ["components", "componentsProps", "color", "invisible", "badgeContent", "showZero", "variant"];
-const badgeClasses = _extends({}, badgeUnstyledClasses$1, generateUtilityClasses('MuiBadge', ['colorError', 'colorInfo', 'colorPrimary', 'colorSecondary', 'colorSuccess', 'colorWarning']));
+const badgeClasses = _extends$4({}, badgeUnstyledClasses$1, generateUtilityClasses('MuiBadge', ['colorError', 'colorInfo', 'colorPrimary', 'colorSecondary', 'colorSuccess', 'colorWarning']));
 const RADIUS_STANDARD = 10;
 const RADIUS_DOT = 4;
 
@@ -12288,7 +12876,7 @@ const extendUtilityClasses$2 = ownerState => {
     color,
     classes = {}
   } = ownerState;
-  return _extends({}, classes, {
+  return _extends$4({}, classes, {
     badge: clsx(classes.badge, color !== 'default' && [getBadgeUtilityClass(`color${capitalize(color)}`), classes[`color${capitalize(color)}`]])
   });
 };
@@ -12316,7 +12904,7 @@ const BadgeBadge = styled$1('span', {
 })(({
   theme,
   ownerState
-}) => _extends({
+}) => _extends$4({
   display: 'flex',
   flexDirection: 'row',
   flexWrap: 'wrap',
@@ -12434,7 +13022,7 @@ const Badge = /*#__PURE__*/e__default.forwardRef(function Badge(inProps, ref) {
     showZero = false,
     variant: variantProp = 'standard'
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$J);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$J);
 
   const prevProps = usePreviousProps$1({
     color: colorProp
@@ -12449,30 +13037,30 @@ const Badge = /*#__PURE__*/e__default.forwardRef(function Badge(inProps, ref) {
     color = colorProp
   } = invisible ? prevProps : props;
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     invisible,
     color
   });
 
   const classes = extendUtilityClasses$2(ownerState);
-  return /*#__PURE__*/jsxRuntime.jsx(BadgeUnstyled$1, _extends({
+  return /*#__PURE__*/jsxRuntime.jsx(BadgeUnstyled$1, _extends$4({
     invisible: invisibleProp,
     badgeContent: badgeContentProp,
     showZero: showZero,
     variant: variantProp
   }, other, {
-    components: _extends({
+    components: _extends$4({
       Root: BadgeRoot,
       Badge: BadgeBadge
     }, components),
     componentsProps: {
-      root: _extends({}, componentsProps.root, (!components.Root || !isHostComponent(components.Root)) && {
-        ownerState: _extends({}, (_componentsProps$root = componentsProps.root) == null ? void 0 : _componentsProps$root.ownerState, {
+      root: _extends$4({}, componentsProps.root, (!components.Root || !isHostComponent(components.Root)) && {
+        ownerState: _extends$4({}, (_componentsProps$root = componentsProps.root) == null ? void 0 : _componentsProps$root.ownerState, {
           color
         })
       }),
-      badge: _extends({}, componentsProps.badge, (!components.Thumb || !isHostComponent(components.Thumb)) && {
-        ownerState: _extends({}, (_componentsProps$badg = componentsProps.badge) == null ? void 0 : _componentsProps$badg.ownerState, {
+      badge: _extends$4({}, componentsProps.badge, (!components.Thumb || !isHostComponent(components.Thumb)) && {
+        ownerState: _extends$4({}, (_componentsProps$badg = componentsProps.badge) == null ? void 0 : _componentsProps$badg.ownerState, {
           color
         })
       })
@@ -12482,6 +13070,54 @@ const Badge = /*#__PURE__*/e__default.forwardRef(function Badge(inProps, ref) {
   }));
 });
 var w = Badge;
+
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _setPrototypeOf(o, p) {
+  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf(o, p);
+}
+
+function _inheritsLoose(subClass, superClass) {
+  subClass.prototype = Object.create(superClass.prototype);
+  subClass.prototype.constructor = subClass;
+  _setPrototypeOf(subClass, superClass);
+}
 
 var config = {
   disabled: false
@@ -12911,6 +13547,14 @@ Transition.ENTERING = ENTERING;
 Transition.ENTERED = ENTERED;
 Transition.EXITING = EXITING;
 var Transition$1 = Transition;
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
 
 /**
  * Given `this.props.children`, return an object mapping key to child.
@@ -13356,7 +14000,7 @@ const TouchRipple = /*#__PURE__*/e__default.forwardRef(function TouchRipple(inPr
     classes = {},
     className
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$I);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$I);
 
   const [ripples, setRipples] = e__default.useState([]);
   const nextKey = e__default.useRef(0);
@@ -13527,7 +14171,7 @@ const TouchRipple = /*#__PURE__*/e__default.forwardRef(function TouchRipple(inPr
     start,
     stop
   }), [pulsate, start, stop]);
-  return /*#__PURE__*/jsxRuntime.jsx(TouchRippleRoot, _extends({
+  return /*#__PURE__*/jsxRuntime.jsx(TouchRippleRoot, _extends$4({
     className: clsx(classes.root, touchRippleClasses$1.root, className),
     ref: container
   }, other, {
@@ -13652,7 +14296,7 @@ const ButtonBase = /*#__PURE__*/e__default.forwardRef(function ButtonBase(inProp
     TouchRippleProps,
     type
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$H);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$H);
 
   const buttonRef = e__default.useRef(null);
   const rippleRef = e__default.useRef(null);
@@ -13828,7 +14472,7 @@ const ButtonBase = /*#__PURE__*/e__default.forwardRef(function ButtonBase(inProp
   }, []);
   const enableTouchRipple = mountedState && !disableRipple && !disabled;
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     centerRipple,
     component,
     disabled,
@@ -13840,7 +14484,7 @@ const ButtonBase = /*#__PURE__*/e__default.forwardRef(function ButtonBase(inProp
   });
 
   const classes = useUtilityClasses$x(ownerState);
-  return /*#__PURE__*/jsxRuntime.jsxs(ButtonBaseRoot, _extends({
+  return /*#__PURE__*/jsxRuntime.jsxs(ButtonBaseRoot, _extends$4({
     as: ComponentProp,
     className: clsx(classes.root, className),
     ownerState: ownerState,
@@ -13865,7 +14509,7 @@ const ButtonBase = /*#__PURE__*/e__default.forwardRef(function ButtonBase(inProp
     /*#__PURE__*/
 
     /* TouchRipple is only needed client-side, x2 boost on the server. */
-    jsxRuntime.jsx(TouchRipple$1, _extends({
+    jsxRuntime.jsx(TouchRipple$1, _extends$4({
       ref: rippleRef,
       center: centerRipple
     }, TouchRippleProps)) : null]
@@ -13907,7 +14551,7 @@ const IconButtonRoot = styled$1(ButtonBase$1, {
 })(({
   theme,
   ownerState
-}) => _extends({
+}) => _extends$4({
   textAlign: 'center',
   flex: '0 0 auto',
   fontSize: theme.typography.pxToRem(24),
@@ -13933,7 +14577,7 @@ const IconButtonRoot = styled$1(ButtonBase$1, {
 }), ({
   theme,
   ownerState
-}) => _extends({}, ownerState.color === 'inherit' && {
+}) => _extends$4({}, ownerState.color === 'inherit' && {
   color: 'inherit'
 }, ownerState.color !== 'inherit' && ownerState.color !== 'default' && {
   color: theme.palette[ownerState.color].main,
@@ -13976,9 +14620,9 @@ const IconButton = /*#__PURE__*/e__default.forwardRef(function IconButton(inProp
     disableFocusRipple = false,
     size = 'medium'
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$G);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$G);
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     edge,
     color,
     disabled,
@@ -13987,7 +14631,7 @@ const IconButton = /*#__PURE__*/e__default.forwardRef(function IconButton(inProp
   });
 
   const classes = useUtilityClasses$w(ownerState);
-  return /*#__PURE__*/jsxRuntime.jsx(IconButtonRoot, _extends({
+  return /*#__PURE__*/jsxRuntime.jsx(IconButtonRoot, _extends$4({
     className: clsx(classes.root, className),
     centerRipple: true,
     focusRipple: !disableFocusRipple,
@@ -14056,7 +14700,7 @@ const Grow = /*#__PURE__*/e__default.forwardRef(function Grow(props, ref) {
     // eslint-disable-next-line react/prop-types
     TransitionComponent = Transition$1
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$F);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$F);
 
   const timer = e__default.useRef();
   const autoTimeout = e__default.useRef();
@@ -14170,7 +14814,7 @@ const Grow = /*#__PURE__*/e__default.forwardRef(function Grow(props, ref) {
       clearTimeout(timer.current);
     };
   }, []);
-  return /*#__PURE__*/jsxRuntime.jsx(TransitionComponent, _extends({
+  return /*#__PURE__*/jsxRuntime.jsx(TransitionComponent, _extends$4({
     appear: appear,
     in: inProp,
     nodeRef: nodeRef,
@@ -14184,8 +14828,8 @@ const Grow = /*#__PURE__*/e__default.forwardRef(function Grow(props, ref) {
     timeout: timeout === 'auto' ? null : timeout
   }, other, {
     children: (state, childProps) => {
-      return /*#__PURE__*/e__default.cloneElement(children, _extends({
-        style: _extends({
+      return /*#__PURE__*/e__default.cloneElement(children, _extends$4({
+        style: _extends$4({
           opacity: 0,
           transform: getScale(0.75),
           visibility: state === 'exited' && !inProp ? 'hidden' : undefined
@@ -15983,7 +16627,7 @@ const PopperTooltip = /*#__PURE__*/e__default.forwardRef(function PopperTooltip(
     popperRef: popperRefProp,
     TransitionProps
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$E);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$E);
 
   const tooltipRef = e__default.useRef(null);
   const ownRef = useForkRef(tooltipRef, ref);
@@ -16047,7 +16691,7 @@ const PopperTooltip = /*#__PURE__*/e__default.forwardRef(function PopperTooltip(
       popperModifiers = popperModifiers.concat(popperOptions.modifiers);
     }
 
-    const popper = createPopper(resolveAnchorEl$1(anchorEl), tooltipRef.current, _extends({
+    const popper = createPopper(resolveAnchorEl$1(anchorEl), tooltipRef.current, _extends$4({
       placement: rtlPlacement
     }, popperOptions, {
       modifiers: popperModifiers
@@ -16066,7 +16710,7 @@ const PopperTooltip = /*#__PURE__*/e__default.forwardRef(function PopperTooltip(
     childProps.TransitionProps = TransitionProps;
   }
 
-  return /*#__PURE__*/jsxRuntime.jsx("div", _extends({
+  return /*#__PURE__*/jsxRuntime.jsx("div", _extends$4({
     ref: ownRef,
     role: "tooltip"
   }, other, {
@@ -16094,7 +16738,7 @@ const Popper = /*#__PURE__*/e__default.forwardRef(function Popper(props, ref) {
     style,
     transition = false
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded2$3);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded2$3);
 
   const [exited, setExited] = e__default.useState(true);
 
@@ -16117,7 +16761,7 @@ const Popper = /*#__PURE__*/e__default.forwardRef(function Popper(props, ref) {
   return /*#__PURE__*/jsxRuntime.jsx(Portal$1, {
     disablePortal: disablePortal,
     container: container,
-    children: /*#__PURE__*/jsxRuntime.jsx(PopperTooltip, _extends({
+    children: /*#__PURE__*/jsxRuntime.jsx(PopperTooltip, _extends$4({
       anchorEl: anchorEl,
       disablePortal: disablePortal,
       modifiers: modifiers,
@@ -16127,7 +16771,7 @@ const Popper = /*#__PURE__*/e__default.forwardRef(function Popper(props, ref) {
       popperOptions: popperOptions,
       popperRef: popperRef
     }, other, {
-      style: _extends({
+      style: _extends$4({
         // Prevents scroll issue, waiting for Popper.js to add this style once initiated.
         position: 'fixed',
         // Fix Popper.js display issue
@@ -16187,7 +16831,7 @@ const TooltipPopper = styled$1(M, {
   theme,
   ownerState,
   open
-}) => _extends({
+}) => _extends$4({
   zIndex: theme.zIndex.tooltip,
   pointerEvents: 'none'
 }, !ownerState.disableInteractive && {
@@ -16209,7 +16853,7 @@ const TooltipPopper = styled$1(M, {
       transformOrigin: '100% 0'
     }
   },
-  [`&[data-popper-placement*="right"] .${tooltipClasses$1.arrow}`]: _extends({}, !ownerState.isRtl ? {
+  [`&[data-popper-placement*="right"] .${tooltipClasses$1.arrow}`]: _extends$4({}, !ownerState.isRtl ? {
     left: 0,
     marginLeft: '-0.71em'
   } : {
@@ -16222,7 +16866,7 @@ const TooltipPopper = styled$1(M, {
       transformOrigin: '100% 100%'
     }
   }),
-  [`&[data-popper-placement*="left"] .${tooltipClasses$1.arrow}`]: _extends({}, !ownerState.isRtl ? {
+  [`&[data-popper-placement*="left"] .${tooltipClasses$1.arrow}`]: _extends$4({}, !ownerState.isRtl ? {
     right: 0,
     marginRight: '-0.71em'
   } : {
@@ -16248,7 +16892,7 @@ const TooltipTooltip = styled$1('div', {
 })(({
   theme,
   ownerState
-}) => _extends({
+}) => _extends$4({
   backgroundColor: alpha(theme.palette.grey[700], 0.92),
   borderRadius: theme.shape.borderRadius,
   color: theme.palette.common.white,
@@ -16268,35 +16912,35 @@ const TooltipTooltip = styled$1('div', {
   lineHeight: `${round(16 / 14)}em`,
   fontWeight: theme.typography.fontWeightRegular
 }, {
-  [`.${tooltipClasses$1.popper}[data-popper-placement*="left"] &`]: _extends({
+  [`.${tooltipClasses$1.popper}[data-popper-placement*="left"] &`]: _extends$4({
     transformOrigin: 'right center'
-  }, !ownerState.isRtl ? _extends({
+  }, !ownerState.isRtl ? _extends$4({
     marginRight: '14px'
   }, ownerState.touch && {
     marginRight: '24px'
-  }) : _extends({
+  }) : _extends$4({
     marginLeft: '14px'
   }, ownerState.touch && {
     marginLeft: '24px'
   })),
-  [`.${tooltipClasses$1.popper}[data-popper-placement*="right"] &`]: _extends({
+  [`.${tooltipClasses$1.popper}[data-popper-placement*="right"] &`]: _extends$4({
     transformOrigin: 'left center'
-  }, !ownerState.isRtl ? _extends({
+  }, !ownerState.isRtl ? _extends$4({
     marginLeft: '14px'
   }, ownerState.touch && {
     marginLeft: '24px'
-  }) : _extends({
+  }) : _extends$4({
     marginRight: '14px'
   }, ownerState.touch && {
     marginRight: '24px'
   })),
-  [`.${tooltipClasses$1.popper}[data-popper-placement*="top"] &`]: _extends({
+  [`.${tooltipClasses$1.popper}[data-popper-placement*="top"] &`]: _extends$4({
     transformOrigin: 'center bottom',
     marginBottom: '14px'
   }, ownerState.touch && {
     marginBottom: '24px'
   }),
-  [`.${tooltipClasses$1.popper}[data-popper-placement*="bottom"] &`]: _extends({
+  [`.${tooltipClasses$1.popper}[data-popper-placement*="bottom"] &`]: _extends$4({
     transformOrigin: 'center top',
     marginTop: '14px'
   }, ownerState.touch && {
@@ -16377,7 +17021,7 @@ const Tooltip = /*#__PURE__*/e__default.forwardRef(function Tooltip(inProps, ref
     TransitionComponent: TransitionComponentProp = x,
     TransitionProps
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$D);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$D);
 
   const theme = useTheme();
   const isRtl = theme.direction === 'rtl';
@@ -16618,7 +17262,7 @@ const Tooltip = /*#__PURE__*/e__default.forwardRef(function Tooltip(inProps, ref
     nameOrDescProps['aria-labelledby'] = open && !titleIsString ? id : null;
   }
 
-  const childrenProps = _extends({}, nameOrDescProps, other, children.props, {
+  const childrenProps = _extends$4({}, nameOrDescProps, other, children.props, {
     className: clsx(other.className, children.props.className),
     onTouchStart: detectTouchStart,
     ref: handleRef
@@ -16669,12 +17313,12 @@ const Tooltip = /*#__PURE__*/e__default.forwardRef(function Tooltip(inProps, ref
       tooltipModifiers = tooltipModifiers.concat(PopperProps.popperOptions.modifiers);
     }
 
-    return _extends({}, PopperProps.popperOptions, {
+    return _extends$4({}, PopperProps.popperOptions, {
       modifiers: tooltipModifiers
     });
   }, [arrowRef, PopperProps]);
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     isRtl,
     arrow,
     disableInteractive,
@@ -16688,12 +17332,12 @@ const Tooltip = /*#__PURE__*/e__default.forwardRef(function Tooltip(inProps, ref
   const TransitionComponent = (_ref = TransitionComponentProp != null ? TransitionComponentProp : components.Transition) != null ? _ref : x;
   const TooltipComponent = (_components$Tooltip = components.Tooltip) != null ? _components$Tooltip : TooltipTooltip;
   const ArrowComponent = (_components$Arrow = components.Arrow) != null ? _components$Arrow : TooltipArrow;
-  const popperProps = appendOwnerState(PopperComponent, _extends({}, PopperProps, componentsProps.popper), ownerState);
-  const transitionProps = appendOwnerState(TransitionComponent, _extends({}, TransitionProps, componentsProps.transition), ownerState);
-  const tooltipProps = appendOwnerState(TooltipComponent, _extends({}, componentsProps.tooltip), ownerState);
-  const tooltipArrowProps = appendOwnerState(ArrowComponent, _extends({}, componentsProps.arrow), ownerState);
+  const popperProps = appendOwnerState(PopperComponent, _extends$4({}, PopperProps, componentsProps.popper), ownerState);
+  const transitionProps = appendOwnerState(TransitionComponent, _extends$4({}, TransitionProps, componentsProps.transition), ownerState);
+  const tooltipProps = appendOwnerState(TooltipComponent, _extends$4({}, componentsProps.tooltip), ownerState);
+  const tooltipArrowProps = appendOwnerState(ArrowComponent, _extends$4({}, componentsProps.arrow), ownerState);
   return /*#__PURE__*/jsxRuntime.jsxs(e__default.Fragment, {
-    children: [/*#__PURE__*/e__default.cloneElement(children, childrenProps), /*#__PURE__*/jsxRuntime.jsx(PopperComponent, _extends({
+    children: [/*#__PURE__*/e__default.cloneElement(children, childrenProps), /*#__PURE__*/jsxRuntime.jsx(PopperComponent, _extends$4({
       as: PopperComponentProp != null ? PopperComponentProp : M,
       placement: placement,
       anchorEl: followCursor ? {
@@ -16718,12 +17362,12 @@ const Tooltip = /*#__PURE__*/e__default.forwardRef(function Tooltip(inProps, ref
       }) => {
         var _componentsProps$tool, _componentsProps$arro;
 
-        return /*#__PURE__*/jsxRuntime.jsx(TransitionComponent, _extends({
+        return /*#__PURE__*/jsxRuntime.jsx(TransitionComponent, _extends$4({
           timeout: theme.transitions.duration.shorter
         }, TransitionPropsInner, transitionProps, {
-          children: /*#__PURE__*/jsxRuntime.jsxs(TooltipComponent, _extends({}, tooltipProps, {
+          children: /*#__PURE__*/jsxRuntime.jsxs(TooltipComponent, _extends$4({}, tooltipProps, {
             className: clsx(classes.tooltip, (_componentsProps$tool = componentsProps.tooltip) == null ? void 0 : _componentsProps$tool.className),
-            children: [title, arrow ? /*#__PURE__*/jsxRuntime.jsx(ArrowComponent, _extends({}, tooltipArrowProps, {
+            children: [title, arrow ? /*#__PURE__*/jsxRuntime.jsx(ArrowComponent, _extends$4({}, tooltipArrowProps, {
               className: clsx(classes.arrow, (_componentsProps$arro = componentsProps.arrow) == null ? void 0 : _componentsProps$arro.className),
               ref: setArrowRef
             })) : null]
@@ -16922,7 +17566,7 @@ const PaperRoot = styled$1('div', {
 })(({
   theme,
   ownerState
-}) => _extends({
+}) => _extends$4({
   backgroundColor: theme.palette.background.paper,
   color: theme.palette.text.primary,
   transition: theme.transitions.create('box-shadow')
@@ -16930,7 +17574,7 @@ const PaperRoot = styled$1('div', {
   borderRadius: theme.shape.borderRadius
 }, ownerState.variant === 'outlined' && {
   border: `1px solid ${theme.palette.divider}`
-}, ownerState.variant === 'elevation' && _extends({
+}, ownerState.variant === 'elevation' && _extends$4({
   boxShadow: theme.shadows[ownerState.elevation]
 }, theme.palette.mode === 'dark' && {
   backgroundImage: `linear-gradient(${alpha('#fff', getOverlayAlpha(ownerState.elevation))}, ${alpha('#fff', getOverlayAlpha(ownerState.elevation))})`
@@ -16948,9 +17592,9 @@ const Paper = /*#__PURE__*/e__default.forwardRef(function Paper(inProps, ref) {
     square = false,
     variant = 'elevation'
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$C);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$C);
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     component,
     elevation,
     square,
@@ -16959,7 +17603,7 @@ const Paper = /*#__PURE__*/e__default.forwardRef(function Paper(inProps, ref) {
 
   const classes = useUtilityClasses$u(ownerState);
 
-  return /*#__PURE__*/jsxRuntime.jsx(PaperRoot, _extends({
+  return /*#__PURE__*/jsxRuntime.jsx(PaperRoot, _extends$4({
     as: component,
     ownerState: ownerState,
     className: clsx(classes.root, className),
@@ -17027,7 +17671,7 @@ const TextareaAutosize = /*#__PURE__*/e__default.forwardRef(function TextareaAut
     style,
     value
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$B);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$B);
 
   const {
     current: isControlled
@@ -17137,13 +17781,13 @@ const TextareaAutosize = /*#__PURE__*/e__default.forwardRef(function TextareaAut
   };
 
   return /*#__PURE__*/jsxRuntime.jsxs(e__default.Fragment, {
-    children: [/*#__PURE__*/jsxRuntime.jsx("textarea", _extends({
+    children: [/*#__PURE__*/jsxRuntime.jsx("textarea", _extends$4({
       value: value,
       onChange: handleChange,
       ref: handleRef // Apply the rows prop to get a "correct" first SSR paint
       ,
       rows: minRows,
-      style: _extends({
+      style: _extends$4({
         height: state.outerHeightStyle,
         // Need a large enough difference to allow scrolling.
         // This prevents infinite rendering loop.
@@ -17155,7 +17799,7 @@ const TextareaAutosize = /*#__PURE__*/e__default.forwardRef(function TextareaAut
       readOnly: true,
       ref: shadowRef,
       tabIndex: -1,
-      style: _extends({}, styles$1.shadow, style, {
+      style: _extends$4({}, styles$1.shadow, style, {
         padding: 0
       })
     })]
@@ -17164,7 +17808,7 @@ const TextareaAutosize = /*#__PURE__*/e__default.forwardRef(function TextareaAut
 var TextareaAutosize$1 = TextareaAutosize;
 
 function GlobalStyles(props) {
-  return /*#__PURE__*/jsxRuntime.jsx(GlobalStyles$1, _extends({}, props, {
+  return /*#__PURE__*/jsxRuntime.jsx(GlobalStyles$1, _extends$4({}, props, {
     defaultTheme: defaultTheme$2
   }));
 }
@@ -17248,7 +17892,7 @@ const InputBaseRoot = styled$1('div', {
 })(({
   theme,
   ownerState
-}) => _extends({}, theme.typography.body1, {
+}) => _extends$4({}, theme.typography.body1, {
   color: theme.palette.text.primary,
   lineHeight: '1.4375em',
   // 23px
@@ -17262,7 +17906,7 @@ const InputBaseRoot = styled$1('div', {
     color: theme.palette.text.disabled,
     cursor: 'default'
   }
-}, ownerState.multiline && _extends({
+}, ownerState.multiline && _extends$4({
   padding: '4px 0 5px'
 }, ownerState.size === 'small' && {
   paddingTop: 1
@@ -17291,7 +17935,7 @@ const InputBaseComponent = styled$1('input', {
   const placeholderVisible = {
     opacity: light ? 0.42 : 0.5
   };
-  return _extends({
+  return _extends$4({
     font: 'inherit',
     letterSpacing: 'inherit',
     color: 'currentColor',
@@ -17430,7 +18074,7 @@ const InputBase = /*#__PURE__*/e__default.forwardRef(function InputBase(inProps,
     type = 'text',
     value: valueProp
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$A);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$A);
 
   const theme = useTheme();
   const value = inputPropsProp.value != null ? inputPropsProp.value : valueProp;
@@ -17566,13 +18210,13 @@ const InputBase = /*#__PURE__*/e__default.forwardRef(function InputBase(inProps,
   if (multiline && InputComponent === 'input') {
     if (rows) {
 
-      inputProps = _extends({
+      inputProps = _extends$4({
         type: undefined,
         minRows: rows,
         maxRows: rows
       }, inputProps);
     } else {
-      inputProps = _extends({
+      inputProps = _extends$4({
         type: undefined,
         maxRows,
         minRows
@@ -17595,7 +18239,7 @@ const InputBase = /*#__PURE__*/e__default.forwardRef(function InputBase(inProps,
     }
   }, [muiFormControl, startAdornment]);
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     color: fcs.color || 'primary',
     disabled: fcs.disabled,
     endAdornment,
@@ -17614,10 +18258,10 @@ const InputBase = /*#__PURE__*/e__default.forwardRef(function InputBase(inProps,
   const Root = components.Root || InputBaseRoot;
   const rootProps = componentsProps.root || {};
   const Input = components.Input || InputBaseComponent;
-  inputProps = _extends({}, inputProps, componentsProps.input);
+  inputProps = _extends$4({}, inputProps, componentsProps.input);
   return /*#__PURE__*/jsxRuntime.jsxs(e__default.Fragment, {
-    children: [inputGlobalStyles, /*#__PURE__*/jsxRuntime.jsxs(Root, _extends({}, rootProps, !isHostComponent(Root) && {
-      ownerState: _extends({}, ownerState, rootProps.ownerState),
+    children: [inputGlobalStyles, /*#__PURE__*/jsxRuntime.jsxs(Root, _extends$4({}, rootProps, !isHostComponent(Root) && {
+      ownerState: _extends$4({}, ownerState, rootProps.ownerState),
       theme
     }, {
       ref: ref,
@@ -17626,7 +18270,7 @@ const InputBase = /*#__PURE__*/e__default.forwardRef(function InputBase(inProps,
       className: clsx(classes.root, rootProps.className, className),
       children: [startAdornment, /*#__PURE__*/jsxRuntime.jsx(FormControlContext$1.Provider, {
         value: null,
-        children: /*#__PURE__*/jsxRuntime.jsx(Input, _extends({
+        children: /*#__PURE__*/jsxRuntime.jsx(Input, _extends$4({
           ownerState: ownerState,
           "aria-invalid": fcs.error,
           "aria-describedby": ariaDescribedby,
@@ -17647,7 +18291,7 @@ const InputBase = /*#__PURE__*/e__default.forwardRef(function InputBase(inProps,
           type: type
         }, inputProps, !isHostComponent(Input) && {
           as: InputComponent,
-          ownerState: _extends({}, ownerState, inputProps.ownerState),
+          ownerState: _extends$4({}, ownerState, inputProps.ownerState),
           theme
         }, {
           ref: handleInputRef,
@@ -17656,7 +18300,7 @@ const InputBase = /*#__PURE__*/e__default.forwardRef(function InputBase(inProps,
           onChange: handleChange,
           onFocus: handleFocus
         }))
-      }), endAdornment, renderSuffix ? renderSuffix(_extends({}, fcs, {
+      }), endAdornment, renderSuffix ? renderSuffix(_extends$4({}, fcs, {
         startAdornment
       })) : null]
     }))]
@@ -17682,7 +18326,7 @@ const useUtilityClasses$s = ownerState => {
     input: ['input']
   };
   const composedClasses = composeClasses(slots, getInputUtilityClass, classes);
-  return _extends({}, classes, composedClasses);
+  return _extends$4({}, classes, composedClasses);
 };
 
 const InputRoot = styled$1(InputBaseRoot, {
@@ -17701,7 +18345,7 @@ const InputRoot = styled$1(InputBaseRoot, {
 }) => {
   const light = theme.palette.mode === 'light';
   const bottomLineColor = light ? 'rgba(0, 0, 0, 0.42)' : 'rgba(255, 255, 255, 0.7)';
-  return _extends({
+  return _extends$4({
     position: 'relative'
   }, ownerState.formControl && {
     'label + &': {
@@ -17778,7 +18422,7 @@ const Input = /*#__PURE__*/e__default.forwardRef(function Input(inProps, ref) {
     multiline = false,
     type = 'text'
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$z);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$z);
 
   const classes = useUtilityClasses$s(props);
   const ownerState = {
@@ -17790,8 +18434,8 @@ const Input = /*#__PURE__*/e__default.forwardRef(function Input(inProps, ref) {
     }
   };
   const componentsProps = componentsPropsProp ? deepmerge(componentsPropsProp, inputComponentsProps) : inputComponentsProps;
-  return /*#__PURE__*/jsxRuntime.jsx(R, _extends({
-    components: _extends({
+  return /*#__PURE__*/jsxRuntime.jsx(R, _extends$4({
+    components: _extends$4({
       Root: InputRoot,
       Input: InputInput
     }, components),
@@ -17826,7 +18470,7 @@ const useUtilityClasses$r = ownerState => {
     input: ['input']
   };
   const composedClasses = composeClasses(slots, getFilledInputUtilityClass, classes);
-  return _extends({}, classes, composedClasses);
+  return _extends$4({}, classes, composedClasses);
 };
 
 const FilledInputRoot = styled$1(InputBaseRoot, {
@@ -17846,7 +18490,7 @@ const FilledInputRoot = styled$1(InputBaseRoot, {
   const light = theme.palette.mode === 'light';
   const bottomLineColor = light ? 'rgba(0, 0, 0, 0.42)' : 'rgba(255, 255, 255, 0.7)';
   const backgroundColor = light ? 'rgba(0, 0, 0, 0.06)' : 'rgba(255, 255, 255, 0.09)';
-  return _extends({
+  return _extends$4({
     position: 'relative',
     backgroundColor,
     borderTopLeftRadius: theme.shape.borderRadius,
@@ -17917,7 +18561,7 @@ const FilledInputRoot = styled$1(InputBaseRoot, {
     paddingLeft: 12
   }, ownerState.endAdornment && {
     paddingRight: 12
-  }, ownerState.multiline && _extends({
+  }, ownerState.multiline && _extends$4({
     padding: '25px 12px 8px'
   }, ownerState.size === 'small' && {
     paddingTop: 21,
@@ -17934,7 +18578,7 @@ const FilledInputInput = styled$1(InputBaseComponent, {
 })(({
   theme,
   ownerState
-}) => _extends({
+}) => _extends$4({
   paddingTop: 25,
   paddingRight: 12,
   paddingBottom: 8,
@@ -17980,9 +18624,9 @@ const FilledInput = /*#__PURE__*/e__default.forwardRef(function FilledInput(inPr
     multiline = false,
     type = 'text'
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$y);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$y);
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     fullWidth,
     inputComponent,
     multiline,
@@ -17999,8 +18643,8 @@ const FilledInput = /*#__PURE__*/e__default.forwardRef(function FilledInput(inPr
     }
   };
   const componentsProps = componentsPropsProp ? deepmerge(componentsPropsProp, filledInputComponentsProps) : filledInputComponentsProps;
-  return /*#__PURE__*/jsxRuntime.jsx(R, _extends({
-    components: _extends({
+  return /*#__PURE__*/jsxRuntime.jsx(R, _extends$4({
+    components: _extends$4({
       Root: FilledInputRoot,
       Input: FilledInputInput
     }, components),
@@ -18039,7 +18683,7 @@ const NotchedOutlineLegend = styled$1('legend', {
 })(({
   ownerState,
   theme
-}) => _extends({}, ownerState.label === undefined && {
+}) => _extends$4({}, ownerState.label === undefined && {
   padding: 0,
   lineHeight: '11px',
   // sync with `height` in `legend` styles
@@ -18047,7 +18691,7 @@ const NotchedOutlineLegend = styled$1('legend', {
     duration: 150,
     easing: theme.transitions.easing.easeOut
   })
-}, ownerState.label !== undefined && _extends({
+}, ownerState.label !== undefined && _extends$4({
   display: 'block',
   width: 'auto',
   padding: 0,
@@ -18083,14 +18727,14 @@ function NotchedOutline(props) {
     label,
     notched
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$x);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$x);
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     notched,
     label
   });
 
-  return /*#__PURE__*/jsxRuntime.jsx(NotchedOutlineRoot$1, _extends({
+  return /*#__PURE__*/jsxRuntime.jsx(NotchedOutlineRoot$1, _extends$4({
     "aria-hidden": true,
     className: className,
     ownerState: ownerState
@@ -18131,7 +18775,7 @@ const useUtilityClasses$q = ownerState => {
     input: ['input']
   };
   const composedClasses = composeClasses(slots, getOutlinedInputUtilityClass, classes);
-  return _extends({}, classes, composedClasses);
+  return _extends$4({}, classes, composedClasses);
 };
 
 const OutlinedInputRoot = styled$1(InputBaseRoot, {
@@ -18144,7 +18788,7 @@ const OutlinedInputRoot = styled$1(InputBaseRoot, {
   ownerState
 }) => {
   const borderColor = theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.23)' : 'rgba(255, 255, 255, 0.23)';
-  return _extends({
+  return _extends$4({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
     [`&:hover .${outlinedInputClasses$1.notchedOutline}`]: {
@@ -18170,7 +18814,7 @@ const OutlinedInputRoot = styled$1(InputBaseRoot, {
     paddingLeft: 14
   }, ownerState.endAdornment && {
     paddingRight: 14
-  }, ownerState.multiline && _extends({
+  }, ownerState.multiline && _extends$4({
     padding: '16.5px 14px'
   }, ownerState.size === 'small' && {
     padding: '8.5px 14px'
@@ -18192,7 +18836,7 @@ const OutlinedInputInput = styled$1(InputBaseComponent, {
 })(({
   theme,
   ownerState
-}) => _extends({
+}) => _extends$4({
   padding: '16.5px 14px',
   '&:-webkit-autofill': {
     WebkitBoxShadow: theme.palette.mode === 'light' ? null : '0 0 0 100px #266798 inset',
@@ -18224,11 +18868,11 @@ const OutlinedInput = /*#__PURE__*/e__default.forwardRef(function OutlinedInput(
     notched,
     type = 'text'
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$w);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$w);
 
   const classes = useUtilityClasses$q(props);
-  return /*#__PURE__*/jsxRuntime.jsx(R, _extends({
-    components: _extends({
+  return /*#__PURE__*/jsxRuntime.jsx(R, _extends$4({
+    components: _extends$4({
       Root: OutlinedInputRoot,
       Input: OutlinedInputInput
     }, components),
@@ -18243,7 +18887,7 @@ const OutlinedInput = /*#__PURE__*/e__default.forwardRef(function OutlinedInput(
     ref: ref,
     type: type
   }, other, {
-    classes: _extends({}, classes, {
+    classes: _extends$4({}, classes, {
       notchedOutline: null
     })
   }));
@@ -18282,12 +18926,12 @@ const FormLabelRoot = styled$1('label', {
   overridesResolver: ({
     ownerState
   }, styles) => {
-    return _extends({}, styles.root, ownerState.color === 'secondary' && styles.colorSecondary, ownerState.filled && styles.filled);
+    return _extends$4({}, styles.root, ownerState.color === 'secondary' && styles.colorSecondary, ownerState.filled && styles.filled);
   }
 })(({
   theme,
   ownerState
-}) => _extends({
+}) => _extends$4({
   color: theme.palette.text.secondary
 }, theme.typography.body1, {
   lineHeight: '1.4375em',
@@ -18325,7 +18969,7 @@ const FormLabel = /*#__PURE__*/e__default.forwardRef(function FormLabel(inProps,
     className,
     component = 'label'
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$v);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$v);
 
   const muiFormControl = useFormControl();
   const fcs = formControlState({
@@ -18334,7 +18978,7 @@ const FormLabel = /*#__PURE__*/e__default.forwardRef(function FormLabel(inProps,
     states: ['color', 'required', 'focused', 'disabled', 'error', 'filled']
   });
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     color: fcs.color || 'primary',
     component,
     disabled: fcs.disabled,
@@ -18345,7 +18989,7 @@ const FormLabel = /*#__PURE__*/e__default.forwardRef(function FormLabel(inProps,
   });
 
   const classes = useUtilityClasses$p(ownerState);
-  return /*#__PURE__*/jsxRuntime.jsxs(FormLabelRoot, _extends({
+  return /*#__PURE__*/jsxRuntime.jsxs(FormLabelRoot, _extends$4({
     as: component,
     ownerState: ownerState,
     className: clsx(classes.root, className),
@@ -18383,7 +19027,7 @@ const useUtilityClasses$o = ownerState => {
     asterisk: [required && 'asterisk']
   };
   const composedClasses = composeClasses(slots, getInputLabelUtilityClasses, classes);
-  return _extends({}, classes, composedClasses);
+  return _extends$4({}, classes, composedClasses);
 };
 
 const InputLabelRoot = styled$1(FormLabel$1, {
@@ -18401,7 +19045,7 @@ const InputLabelRoot = styled$1(FormLabel$1, {
 })(({
   theme,
   ownerState
-}) => _extends({
+}) => _extends$4({
   display: 'block',
   transformOrigin: 'top left',
   whiteSpace: 'nowrap',
@@ -18426,7 +19070,7 @@ const InputLabelRoot = styled$1(FormLabel$1, {
     duration: theme.transitions.duration.shorter,
     easing: theme.transitions.easing.easeOut
   })
-}, ownerState.variant === 'filled' && _extends({
+}, ownerState.variant === 'filled' && _extends$4({
   // Chrome's autofill feature gives the input field a yellow background.
   // Since the input field is behind the label in the HTML tree,
   // the input field is drawn last and hides the label with an opaque background color.
@@ -18437,12 +19081,12 @@ const InputLabelRoot = styled$1(FormLabel$1, {
   maxWidth: 'calc(100% - 24px)'
 }, ownerState.size === 'small' && {
   transform: 'translate(12px, 13px) scale(1)'
-}, ownerState.shrink && _extends({
+}, ownerState.shrink && _extends$4({
   transform: 'translate(12px, 7px) scale(0.75)',
   maxWidth: 'calc(133% - 24px)'
 }, ownerState.size === 'small' && {
   transform: 'translate(12px, 4px) scale(0.75)'
-})), ownerState.variant === 'outlined' && _extends({
+})), ownerState.variant === 'outlined' && _extends$4({
   // see comment above on filled.zIndex
   zIndex: 1,
   pointerEvents: 'none',
@@ -18464,7 +19108,7 @@ const InputLabel = /*#__PURE__*/e__default.forwardRef(function InputLabel(inProp
     disableAnimation = false,
     shrink: shrinkProp
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$u);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$u);
 
   const muiFormControl = useFormControl();
   let shrink = shrinkProp;
@@ -18479,7 +19123,7 @@ const InputLabel = /*#__PURE__*/e__default.forwardRef(function InputLabel(inProp
     states: ['size', 'variant', 'required']
   });
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     disableAnimation,
     formControl: muiFormControl,
     shrink,
@@ -18489,7 +19133,7 @@ const InputLabel = /*#__PURE__*/e__default.forwardRef(function InputLabel(inProp
   });
 
   const classes = useUtilityClasses$o(ownerState);
-  return /*#__PURE__*/jsxRuntime.jsx(InputLabelRoot, _extends({
+  return /*#__PURE__*/jsxRuntime.jsx(InputLabelRoot, _extends$4({
     "data-shrink": shrink,
     ownerState: ownerState,
     ref: ref
@@ -18524,11 +19168,11 @@ const FormControlRoot = styled$1('div', {
   overridesResolver: ({
     ownerState
   }, styles) => {
-    return _extends({}, styles.root, styles[`margin${capitalize(ownerState.margin)}`], ownerState.fullWidth && styles.fullWidth);
+    return _extends$4({}, styles.root, styles[`margin${capitalize(ownerState.margin)}`], ownerState.fullWidth && styles.fullWidth);
   }
 })(({
   ownerState
-}) => _extends({
+}) => _extends$4({
   display: 'inline-flex',
   flexDirection: 'column',
   position: 'relative',
@@ -18593,9 +19237,9 @@ const FormControl = /*#__PURE__*/e__default.forwardRef(function FormControl(inPr
     size = 'medium',
     variant = 'outlined'
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$t);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$t);
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     color,
     component,
     disabled,
@@ -18689,7 +19333,7 @@ const FormControl = /*#__PURE__*/e__default.forwardRef(function FormControl(inPr
   };
   return /*#__PURE__*/jsxRuntime.jsx(FormControlContext$1.Provider, {
     value: childContext,
-    children: /*#__PURE__*/jsxRuntime.jsx(FormControlRoot, _extends({
+    children: /*#__PURE__*/jsxRuntime.jsx(FormControlRoot, _extends$4({
       as: component,
       ownerState: ownerState,
       className: clsx(classes.root, className),
@@ -18738,7 +19382,7 @@ const FormHelperTextRoot = styled$1('p', {
 })(({
   theme,
   ownerState
-}) => _extends({
+}) => _extends$4({
   color: theme.palette.text.secondary
 }, theme.typography.caption, {
   textAlign: 'left',
@@ -18769,7 +19413,7 @@ const FormHelperText = /*#__PURE__*/e__default.forwardRef(function FormHelperTex
     className,
     component = 'p'
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$s);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$s);
 
   const muiFormControl = useFormControl();
   const fcs = formControlState({
@@ -18778,7 +19422,7 @@ const FormHelperText = /*#__PURE__*/e__default.forwardRef(function FormHelperTex
     states: ['variant', 'size', 'disabled', 'error', 'filled', 'focused', 'required']
   });
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     component,
     contained: fcs.variant === 'filled' || fcs.variant === 'outlined',
     variant: fcs.variant,
@@ -18791,7 +19435,7 @@ const FormHelperText = /*#__PURE__*/e__default.forwardRef(function FormHelperTex
   });
 
   const classes = useUtilityClasses$m(ownerState);
-  return /*#__PURE__*/jsxRuntime.jsx(FormHelperTextRoot, _extends({
+  return /*#__PURE__*/jsxRuntime.jsx(FormHelperTextRoot, _extends$4({
     as: component,
     ownerState: ownerState,
     className: clsx(classes.root, className),
@@ -18850,7 +19494,7 @@ const ListRoot = styled$1('ul', {
   }
 })(({
   ownerState
-}) => _extends({
+}) => _extends$4({
   listStyle: 'none',
   margin: 0,
   padding: 0,
@@ -18875,13 +19519,13 @@ const List = /*#__PURE__*/e__default.forwardRef(function List(inProps, ref) {
     disablePadding = false,
     subheader
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$r);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$r);
 
   const context = e__default.useMemo(() => ({
     dense
   }), [dense]);
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     component,
     dense,
     disablePadding
@@ -18890,7 +19534,7 @@ const List = /*#__PURE__*/e__default.forwardRef(function List(inProps, ref) {
   const classes = useUtilityClasses$l(ownerState);
   return /*#__PURE__*/jsxRuntime.jsx(ListContext$1.Provider, {
     value: context,
-    children: /*#__PURE__*/jsxRuntime.jsxs(ListRoot, _extends({
+    children: /*#__PURE__*/jsxRuntime.jsxs(ListRoot, _extends$4({
       as: component,
       className: clsx(classes.root, className),
       ref: ref,
@@ -19003,7 +19647,7 @@ const MenuList = /*#__PURE__*/e__default.forwardRef(function MenuList(props, ref
     onKeyDown,
     variant = 'selectedMenu'
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$q);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$q);
 
   const listRef = e__default.useRef(null);
   const textCriteriaRef = e__default.useRef({
@@ -19131,7 +19775,7 @@ const MenuList = /*#__PURE__*/e__default.forwardRef(function MenuList(props, ref
 
     return child;
   });
-  return /*#__PURE__*/jsxRuntime.jsx(List$1, _extends({
+  return /*#__PURE__*/jsxRuntime.jsx(List$1, _extends$4({
     role: "menu",
     ref: handleRef,
     className: className,
@@ -19179,7 +19823,7 @@ const Fade = /*#__PURE__*/e__default.forwardRef(function Fade(props, ref) {
     // eslint-disable-next-line react/prop-types
     TransitionComponent = Transition$1
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$p);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$p);
 
   const theme = useTheme();
   const nodeRef = e__default.useRef(null);
@@ -19242,7 +19886,7 @@ const Fade = /*#__PURE__*/e__default.forwardRef(function Fade(props, ref) {
     }
   };
 
-  return /*#__PURE__*/jsxRuntime.jsx(TransitionComponent, _extends({
+  return /*#__PURE__*/jsxRuntime.jsx(TransitionComponent, _extends$4({
     appear: appear,
     in: inProp,
     nodeRef: nodeRef ,
@@ -19256,8 +19900,8 @@ const Fade = /*#__PURE__*/e__default.forwardRef(function Fade(props, ref) {
     timeout: timeout
   }, other, {
     children: (state, childProps) => {
-      return /*#__PURE__*/e__default.cloneElement(children, _extends({
-        style: _extends({
+      return /*#__PURE__*/e__default.cloneElement(children, _extends$4({
+        style: _extends$4({
           opacity: 0,
           visibility: state === 'exited' && !inProp ? 'hidden' : undefined
         }, styles[state], style, children.props.style),
@@ -19288,7 +19932,7 @@ const BackdropRoot = styled$1('div', {
   }
 })(({
   ownerState
-}) => _extends({
+}) => _extends$4({
   position: 'fixed',
   display: 'flex',
   alignItems: 'center',
@@ -19321,26 +19965,26 @@ const Backdrop = /*#__PURE__*/e__default.forwardRef(function Backdrop(inProps, r
     // eslint-disable-next-line react/prop-types
     TransitionComponent = Fade$1
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$o);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$o);
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     invisible
   });
 
   const classes = extendUtilityClasses$1(ownerState);
-  return /*#__PURE__*/jsxRuntime.jsx(TransitionComponent, _extends({
+  return /*#__PURE__*/jsxRuntime.jsx(TransitionComponent, _extends$4({
     in: open,
     timeout: transitionDuration
   }, other, {
     children: /*#__PURE__*/jsxRuntime.jsx(BackdropUnstyled$1, {
       className: className,
       invisible: invisible,
-      components: _extends({
+      components: _extends$4({
         Root: BackdropRoot
       }, components),
       componentsProps: {
-        root: _extends({}, componentsProps.root, (!components.Root || !isHostComponent(components.Root)) && {
-          ownerState: _extends({}, (_componentsProps$root = componentsProps.root) == null ? void 0 : _componentsProps$root.ownerState)
+        root: _extends$4({}, componentsProps.root, (!components.Root || !isHostComponent(components.Root)) && {
+          ownerState: _extends$4({}, (_componentsProps$root = componentsProps.root) == null ? void 0 : _componentsProps$root.ownerState)
         })
       },
       classes: classes,
@@ -19369,7 +20013,7 @@ const ModalRoot = styled$1('div', {
 })(({
   theme,
   ownerState
-}) => _extends({
+}) => _extends$4({
   position: 'fixed',
   zIndex: theme.zIndex.modal,
   right: 0,
@@ -19425,7 +20069,7 @@ const Modal = /*#__PURE__*/e__default.forwardRef(function Modal(inProps, ref) {
     hideBackdrop = false,
     keepMounted = false
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$n);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$n);
 
   const [exited, setExited] = e__default.useState(true);
   const commonProps = {
@@ -19440,18 +20084,18 @@ const Modal = /*#__PURE__*/e__default.forwardRef(function Modal(inProps, ref) {
     keepMounted
   };
 
-  const ownerState = _extends({}, props, commonProps, {
+  const ownerState = _extends$4({}, props, commonProps, {
     exited
   });
 
   const classes = extendUtilityClasses(ownerState);
-  return /*#__PURE__*/jsxRuntime.jsx(ModalUnstyled$1, _extends({
-    components: _extends({
+  return /*#__PURE__*/jsxRuntime.jsx(ModalUnstyled$1, _extends$4({
+    components: _extends$4({
       Root: ModalRoot
     }, components),
     componentsProps: {
-      root: _extends({}, componentsProps.root, (!components.Root || !isHostComponent(components.Root)) && {
-        ownerState: _extends({}, (_componentsProps$root = componentsProps.root) == null ? void 0 : _componentsProps$root.ownerState)
+      root: _extends$4({}, componentsProps.root, (!components.Root || !isHostComponent(components.Root)) && {
+        ownerState: _extends$4({}, (_componentsProps$root = componentsProps.root) == null ? void 0 : _componentsProps$root.ownerState)
       })
     },
     BackdropComponent: BackdropComponent,
@@ -19573,13 +20217,13 @@ const Popover = /*#__PURE__*/e__default.forwardRef(function Popover(inProps, ref
       onEntering
     } = {}
   } = props,
-        TransitionProps = _objectWithoutPropertiesLoose(props.TransitionProps, _excluded$m),
-        other = _objectWithoutPropertiesLoose(props, _excluded2$2);
+        TransitionProps = _objectWithoutPropertiesLoose$3(props.TransitionProps, _excluded$m),
+        other = _objectWithoutPropertiesLoose$3(props, _excluded2$2);
 
   const paperRef = e__default.useRef();
   const handlePaperRef = useForkRef(paperRef, PaperProps.ref);
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     anchorOrigin,
     anchorReference,
     elevation,
@@ -19736,7 +20380,7 @@ const Popover = /*#__PURE__*/e__default.forwardRef(function Popover(inProps, ref
 
 
   const container = containerProp || (anchorEl ? ownerDocument(resolveAnchorEl(anchorEl)).body : undefined);
-  return /*#__PURE__*/jsxRuntime.jsx(PopoverRoot, _extends({
+  return /*#__PURE__*/jsxRuntime.jsx(PopoverRoot, _extends$4({
     BackdropProps: {
       invisible: true
     },
@@ -19746,13 +20390,13 @@ const Popover = /*#__PURE__*/e__default.forwardRef(function Popover(inProps, ref
     ref: ref,
     ownerState: ownerState
   }, other, {
-    children: /*#__PURE__*/jsxRuntime.jsx(TransitionComponent, _extends({
+    children: /*#__PURE__*/jsxRuntime.jsx(TransitionComponent, _extends$4({
       appear: true,
       in: open,
       onEntering: handleEntering,
       timeout: transitionDuration
     }, TransitionProps, {
-      children: /*#__PURE__*/jsxRuntime.jsx(PopoverPaper, _extends({
+      children: /*#__PURE__*/jsxRuntime.jsx(PopoverPaper, _extends$4({
         elevation: elevation
       }, PaperProps, {
         ref: handlePaperRef,
@@ -19839,13 +20483,13 @@ const Menu = /*#__PURE__*/e__default.forwardRef(function Menu(inProps, ref) {
     } = {},
     variant = 'selectedMenu'
   } = props,
-        TransitionProps = _objectWithoutPropertiesLoose(props.TransitionProps, _excluded$l),
-        other = _objectWithoutPropertiesLoose(props, _excluded2$1);
+        TransitionProps = _objectWithoutPropertiesLoose$3(props.TransitionProps, _excluded$l),
+        other = _objectWithoutPropertiesLoose$3(props, _excluded2$1);
 
   const theme = useTheme();
   const isRtl = theme.direction === 'rtl';
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     autoFocus,
     disableAutoFocusItem,
     MenuListProps,
@@ -19903,7 +20547,7 @@ const Menu = /*#__PURE__*/e__default.forwardRef(function Menu(inProps, ref) {
       }
     }
   });
-  return /*#__PURE__*/jsxRuntime.jsx(MenuRoot, _extends({
+  return /*#__PURE__*/jsxRuntime.jsx(MenuRoot, _extends$4({
     classes: PopoverClasses,
     onClose: onClose,
     anchorOrigin: {
@@ -19911,10 +20555,10 @@ const Menu = /*#__PURE__*/e__default.forwardRef(function Menu(inProps, ref) {
       horizontal: isRtl ? 'right' : 'left'
     },
     transformOrigin: isRtl ? RTL_ORIGIN : LTR_ORIGIN,
-    PaperProps: _extends({
+    PaperProps: _extends$4({
       component: MenuPaper
     }, PaperProps, {
-      classes: _extends({}, PaperProps.classes, {
+      classes: _extends$4({}, PaperProps.classes, {
         root: classes.paper
       })
     }),
@@ -19922,12 +20566,12 @@ const Menu = /*#__PURE__*/e__default.forwardRef(function Menu(inProps, ref) {
     open: open,
     ref: ref,
     transitionDuration: transitionDuration,
-    TransitionProps: _extends({
+    TransitionProps: _extends$4({
       onEntering: handleEntering
     }, TransitionProps),
     ownerState: ownerState
   }, other, {
-    children: /*#__PURE__*/jsxRuntime.jsx(MenuMenuList, _extends({
+    children: /*#__PURE__*/jsxRuntime.jsx(MenuMenuList, _extends$4({
       onKeyDown: handleListKeyDown,
       actions: menuListActionsRef,
       autoFocus: autoFocus && (activeItemIndex === -1 || disableAutoFocusItem),
@@ -19965,7 +20609,7 @@ const useUtilityClasses$i = ownerState => {
 const nativeSelectSelectStyles = ({
   ownerState,
   theme
-}) => _extends({
+}) => _extends$4({
   MozAppearance: 'none',
   // Reset
   WebkitAppearance: 'none',
@@ -20029,7 +20673,7 @@ const NativeSelectSelect = styled$1('select', {
 const nativeSelectIconStyles = ({
   ownerState,
   theme
-}) => _extends({
+}) => _extends$4({
   // We use a position absolute over a flexbox in order to forward the pointer events
   // to the input and to support wrapping tags..
   position: 'absolute',
@@ -20071,16 +20715,16 @@ const NativeSelectInput = /*#__PURE__*/e__default.forwardRef(function NativeSele
     inputRef,
     variant = 'standard'
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$k);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$k);
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     disabled,
     variant
   });
 
   const classes = useUtilityClasses$i(ownerState);
   return /*#__PURE__*/jsxRuntime.jsxs(e__default.Fragment, {
-    children: [/*#__PURE__*/jsxRuntime.jsx(NativeSelectSelect, _extends({
+    children: [/*#__PURE__*/jsxRuntime.jsx(NativeSelectSelect, _extends$4({
       ownerState: ownerState,
       className: clsx(classes.select, className),
       disabled: disabled,
@@ -20213,7 +20857,7 @@ const SelectInput = /*#__PURE__*/e__default.forwardRef(function SelectInput(prop
     value: valueProp,
     variant = 'standard'
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$j);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$j);
 
   const [value, setValueState] = useControlled({
     controlled: valueProp,
@@ -20481,7 +21125,7 @@ const SelectInput = /*#__PURE__*/e__default.forwardRef(function SelectInput(prop
 
   const buttonId = SelectDisplayProps.id || (name ? `mui-component-select-${name}` : undefined);
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     variant,
     value,
     open
@@ -20489,7 +21133,7 @@ const SelectInput = /*#__PURE__*/e__default.forwardRef(function SelectInput(prop
 
   const classes = useUtilityClasses$h(ownerState);
   return /*#__PURE__*/jsxRuntime.jsxs(e__default.Fragment, {
-    children: [/*#__PURE__*/jsxRuntime.jsx(SelectSelect, _extends({
+    children: [/*#__PURE__*/jsxRuntime.jsx(SelectSelect, _extends$4({
       ref: handleDisplayRef,
       tabIndex: tabIndex,
       role: "button",
@@ -20518,7 +21162,7 @@ const SelectInput = /*#__PURE__*/e__default.forwardRef(function SelectInput(prop
           __html: '&#8203;'
         }
       }) : display
-    })), /*#__PURE__*/jsxRuntime.jsx(SelectNativeInput, _extends({
+    })), /*#__PURE__*/jsxRuntime.jsx(SelectNativeInput, _extends$4({
       value: Array.isArray(value) ? value.join(',') : value,
       name: name,
       ref: inputRef,
@@ -20533,7 +21177,7 @@ const SelectInput = /*#__PURE__*/e__default.forwardRef(function SelectInput(prop
       as: IconComponent,
       className: classes.icon,
       ownerState: ownerState
-    }), /*#__PURE__*/jsxRuntime.jsx(Menu$1, _extends({
+    }), /*#__PURE__*/jsxRuntime.jsx(Menu$1, _extends$4({
       id: `menu-${name || ''}`,
       anchorEl: displayNode,
       open: open,
@@ -20547,13 +21191,13 @@ const SelectInput = /*#__PURE__*/e__default.forwardRef(function SelectInput(prop
         horizontal: 'center'
       }
     }, MenuProps, {
-      MenuListProps: _extends({
+      MenuListProps: _extends$4({
         'aria-labelledby': labelId,
         role: 'listbox',
         disableListWrap: true
       }, MenuProps.MenuListProps),
-      PaperProps: _extends({}, MenuProps.PaperProps, {
-        style: _extends({
+      PaperProps: _extends$4({}, MenuProps.PaperProps, {
+        style: _extends$4({
           minWidth: menuMinWidth
         }, MenuProps.PaperProps != null ? MenuProps.PaperProps.style : null)
       }),
@@ -20637,9 +21281,9 @@ const SvgIcon = /*#__PURE__*/e__default.forwardRef(function SvgIcon(inProps, ref
     titleAccess,
     viewBox = '0 0 24 24'
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$i);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$i);
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     color,
     component,
     fontSize,
@@ -20647,7 +21291,7 @@ const SvgIcon = /*#__PURE__*/e__default.forwardRef(function SvgIcon(inProps, ref
   });
 
   const classes = useUtilityClasses$g(ownerState);
-  return /*#__PURE__*/jsxRuntime.jsxs(SvgIconRoot, _extends({
+  return /*#__PURE__*/jsxRuntime.jsxs(SvgIconRoot, _extends$4({
     as: component,
     className: clsx(classes.root, className),
     ownerState: ownerState,
@@ -20667,7 +21311,7 @@ SvgIcon.muiName = 'SvgIcon';
 var SvgIcon$1 = SvgIcon;
 
 function createSvgIcon(path, displayName) {
-  const Component = (props, ref) => /*#__PURE__*/jsxRuntime.jsx(SvgIcon$1, _extends({
+  const Component = (props, ref) => /*#__PURE__*/jsxRuntime.jsx(SvgIcon$1, _extends$4({
     "data-testid": `${displayName}Icon`,
     ref: ref
   }, props, {
@@ -20725,7 +21369,7 @@ const Select = /*#__PURE__*/e__default.forwardRef(function Select(inProps, ref) 
     SelectDisplayProps,
     variant: variantProps = 'outlined'
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$h);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$h);
 
   const inputComponent = native ? NativeSelectInput$1 : SelectInput$1;
   const muiFormControl = useFormControl();
@@ -20743,20 +21387,20 @@ const Select = /*#__PURE__*/e__default.forwardRef(function Select(inProps, ref) 
     filled: _FilledInput || (_FilledInput = /*#__PURE__*/jsxRuntime.jsx(FilledInput$1, {}))
   }[variant];
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     classes: classesProp
   });
 
   const classes = useUtilityClasses$f(ownerState);
 
-  const otherClasses = _objectWithoutPropertiesLoose(classesProp, _excluded2);
+  const otherClasses = _objectWithoutPropertiesLoose$3(classesProp, _excluded2);
 
   const inputComponentRef = useForkRef(ref, InputComponent.ref);
-  return /*#__PURE__*/e__default.cloneElement(InputComponent, _extends({
+  return /*#__PURE__*/e__default.cloneElement(InputComponent, _extends$4({
     // Most of the logic is implemented in `SelectInput`.
     // The `Select` component is a simple API wrapper to expose something better to play with.
     inputComponent,
-    inputProps: _extends({
+    inputProps: _extends$4({
       children,
       IconComponent,
       variant,
@@ -20774,7 +21418,7 @@ const Select = /*#__PURE__*/e__default.forwardRef(function Select(inProps, ref) 
       onOpen,
       open,
       renderValue,
-      SelectDisplayProps: _extends({
+      SelectDisplayProps: _extends$4({
         id
       }, SelectDisplayProps)
     }, inputProps, {
@@ -20890,9 +21534,9 @@ const TextField = /*#__PURE__*/e__default.forwardRef(function TextField(inProps,
     value,
     variant = 'outlined'
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$g);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$g);
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     autoFocus,
     color,
     disabled,
@@ -20936,7 +21580,7 @@ const TextField = /*#__PURE__*/e__default.forwardRef(function TextField(inProps,
   const inputLabelId = label && id ? `${id}-label` : undefined;
   const InputComponent = variantComponent[variant];
 
-  const InputElement = /*#__PURE__*/jsxRuntime.jsx(InputComponent, _extends({
+  const InputElement = /*#__PURE__*/jsxRuntime.jsx(InputComponent, _extends$4({
     "aria-describedby": helperTextId,
     autoComplete: autoComplete,
     autoFocus: autoFocus,
@@ -20958,7 +21602,7 @@ const TextField = /*#__PURE__*/e__default.forwardRef(function TextField(inProps,
     inputProps: inputProps
   }, InputMore, InputProps));
 
-  return /*#__PURE__*/jsxRuntime.jsxs(TextFieldRoot, _extends({
+  return /*#__PURE__*/jsxRuntime.jsxs(TextFieldRoot, _extends$4({
     className: clsx(classes.root, className),
     disabled: disabled,
     error: error,
@@ -20969,12 +21613,12 @@ const TextField = /*#__PURE__*/e__default.forwardRef(function TextField(inProps,
     variant: variant,
     ownerState: ownerState
   }, other, {
-    children: [label && /*#__PURE__*/jsxRuntime.jsx(_$2, _extends({
+    children: [label && /*#__PURE__*/jsxRuntime.jsx(_$2, _extends$4({
       htmlFor: id,
       id: inputLabelId
     }, InputLabelProps, {
       children: label
-    })), select ? /*#__PURE__*/jsxRuntime.jsx(F, _extends({
+    })), select ? /*#__PURE__*/jsxRuntime.jsx(F, _extends$4({
       "aria-describedby": helperTextId,
       id: id,
       labelId: inputLabelId,
@@ -20982,7 +21626,7 @@ const TextField = /*#__PURE__*/e__default.forwardRef(function TextField(inProps,
       input: InputElement
     }, SelectProps, {
       children: children
-    })) : InputElement, helperText && /*#__PURE__*/jsxRuntime.jsx(FormHelperText$1, _extends({
+    })) : InputElement, helperText && /*#__PURE__*/jsxRuntime.jsx(FormHelperText$1, _extends$4({
       id: helperTextId
     }, FormHelperTextProps, {
       children: helperText
@@ -21016,7 +21660,7 @@ const SwitchBaseRoot = styled$1(ButtonBase$1, {
   skipSx: true
 })(({
   ownerState
-}) => _extends({
+}) => _extends$4({
   padding: 9,
   borderRadius: '50%'
 }, ownerState.edge === 'start' && {
@@ -21066,7 +21710,7 @@ const SwitchBase = /*#__PURE__*/e__default.forwardRef(function SwitchBase(props,
     type,
     value
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$f);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$f);
 
   const [checked, setCheckedState] = useControlled({
     controlled: checkedProp,
@@ -21121,7 +21765,7 @@ const SwitchBase = /*#__PURE__*/e__default.forwardRef(function SwitchBase(props,
 
   const hasLabelFor = type === 'checkbox' || type === 'radio';
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     checked,
     disabled,
     disableFocusRipple,
@@ -21129,7 +21773,7 @@ const SwitchBase = /*#__PURE__*/e__default.forwardRef(function SwitchBase(props,
   });
 
   const classes = useUtilityClasses$d(ownerState);
-  return /*#__PURE__*/jsxRuntime.jsxs(SwitchBaseRoot, _extends({
+  return /*#__PURE__*/jsxRuntime.jsxs(SwitchBaseRoot, _extends$4({
     component: "span",
     className: clsx(classes.root, className),
     centerRipple: true,
@@ -21142,7 +21786,7 @@ const SwitchBase = /*#__PURE__*/e__default.forwardRef(function SwitchBase(props,
     ownerState: ownerState,
     ref: ref
   }, other, {
-    children: [/*#__PURE__*/jsxRuntime.jsx(SwitchBaseInput, _extends({
+    children: [/*#__PURE__*/jsxRuntime.jsx(SwitchBaseInput, _extends$4({
       autoFocus: autoFocus,
       checked: checkedProp,
       defaultChecked: defaultChecked,
@@ -21194,7 +21838,7 @@ const useUtilityClasses$c = ownerState => {
     root: ['root', indeterminate && 'indeterminate', `color${capitalize(color)}`]
   };
   const composedClasses = composeClasses(slots, getCheckboxUtilityClass, classes);
-  return _extends({}, classes, composedClasses);
+  return _extends$4({}, classes, composedClasses);
 };
 
 const CheckboxRoot = styled$1(SwitchBase$1, {
@@ -21210,7 +21854,7 @@ const CheckboxRoot = styled$1(SwitchBase$1, {
 })(({
   theme,
   ownerState
-}) => _extends({
+}) => _extends$4({
   color: theme.palette.text.secondary
 }, !ownerState.disableRipple && {
   '&:hover': {
@@ -21252,21 +21896,21 @@ const Checkbox = /*#__PURE__*/e__default.forwardRef(function Checkbox(inProps, r
     inputProps,
     size = 'medium'
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$e);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$e);
 
   const icon = indeterminate ? indeterminateIconProp : iconProp;
   const indeterminateIcon = indeterminate ? indeterminateIconProp : checkedIcon;
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     color,
     indeterminate,
     size
   });
 
   const classes = useUtilityClasses$c(ownerState);
-  return /*#__PURE__*/jsxRuntime.jsx(CheckboxRoot, _extends({
+  return /*#__PURE__*/jsxRuntime.jsx(CheckboxRoot, _extends$4({
     type: "checkbox",
-    inputProps: _extends({
+    inputProps: _extends$4({
       'data-indeterminate': indeterminate
     }, inputProps),
     icon: /*#__PURE__*/e__default.cloneElement(icon, {
@@ -21317,7 +21961,7 @@ const ListItemIconRoot = styled$1('div', {
 })(({
   theme,
   ownerState
-}) => _extends({
+}) => _extends$4({
   minWidth: 56,
   color: theme.palette.action.active,
   flexShrink: 0,
@@ -21338,16 +21982,16 @@ const ListItemIcon = /*#__PURE__*/e__default.forwardRef(function ListItemIcon(in
   const {
     className
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$d);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$d);
 
   const context = e__default.useContext(ListContext$1);
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     alignItems: context.alignItems
   });
 
   const classes = useUtilityClasses$b(ownerState);
-  return /*#__PURE__*/jsxRuntime.jsx(ListItemIconRoot, _extends({
+  return /*#__PURE__*/jsxRuntime.jsx(ListItemIconRoot, _extends$4({
     className: clsx(classes.root, className),
     ownerState: ownerState,
     ref: ref
@@ -21389,7 +22033,7 @@ const TypographyRoot = styled$1('span', {
 })(({
   theme,
   ownerState
-}) => _extends({
+}) => _extends$4({
   margin: 0
 }, ownerState.variant && theme.typography[ownerState.variant], ownerState.align !== 'inherit' && {
   textAlign: ownerState.align
@@ -21434,7 +22078,7 @@ const Typography = /*#__PURE__*/e__default.forwardRef(function Typography(inProp
     name: 'MuiTypography'
   });
   const color = transformDeprecatedColors(themeProps.color);
-  const props = extendSxProp(_extends({}, themeProps, {
+  const props = extendSxProp(_extends$4({}, themeProps, {
     color
   }));
 
@@ -21448,9 +22092,9 @@ const Typography = /*#__PURE__*/e__default.forwardRef(function Typography(inProp
     variant = 'body1',
     variantMapping = defaultVariantMapping
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$c);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$c);
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     align,
     color,
     className,
@@ -21464,7 +22108,7 @@ const Typography = /*#__PURE__*/e__default.forwardRef(function Typography(inProp
 
   const Component = component || (paragraph ? 'p' : variantMapping[variant] || defaultVariantMapping[variant]) || 'span';
   const classes = useUtilityClasses$a(ownerState);
-  return /*#__PURE__*/jsxRuntime.jsx(TypographyRoot, _extends({
+  return /*#__PURE__*/jsxRuntime.jsx(TypographyRoot, _extends$4({
     as: Component,
     ref: ref,
     ownerState: ownerState,
@@ -21512,7 +22156,7 @@ const ListItemTextRoot = styled$1('div', {
   }
 })(({
   ownerState
-}) => _extends({
+}) => _extends$4({
   flex: '1 1 auto',
   minWidth: 0,
   marginTop: 4,
@@ -21539,7 +22183,7 @@ const ListItemText = /*#__PURE__*/e__default.forwardRef(function ListItemText(in
     secondary: secondaryProp,
     secondaryTypographyProps
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$b);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$b);
 
   const {
     dense
@@ -21547,7 +22191,7 @@ const ListItemText = /*#__PURE__*/e__default.forwardRef(function ListItemText(in
   let primary = primaryProp != null ? primaryProp : children;
   let secondary = secondaryProp;
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     disableTypography,
     inset,
     primary: !!primary,
@@ -21558,7 +22202,7 @@ const ListItemText = /*#__PURE__*/e__default.forwardRef(function ListItemText(in
   const classes = useUtilityClasses$9(ownerState);
 
   if (primary != null && primary.type !== Typography$1 && !disableTypography) {
-    primary = /*#__PURE__*/jsxRuntime.jsx(Typography$1, _extends({
+    primary = /*#__PURE__*/jsxRuntime.jsx(Typography$1, _extends$4({
       variant: dense ? 'body2' : 'body1',
       className: classes.primary,
       component: "span",
@@ -21569,7 +22213,7 @@ const ListItemText = /*#__PURE__*/e__default.forwardRef(function ListItemText(in
   }
 
   if (secondary != null && secondary.type !== Typography$1 && !disableTypography) {
-    secondary = /*#__PURE__*/jsxRuntime.jsx(Typography$1, _extends({
+    secondary = /*#__PURE__*/jsxRuntime.jsx(Typography$1, _extends$4({
       variant: "body2",
       className: classes.secondary,
       color: "text.secondary",
@@ -21579,7 +22223,7 @@ const ListItemText = /*#__PURE__*/e__default.forwardRef(function ListItemText(in
     }));
   }
 
-  return /*#__PURE__*/jsxRuntime.jsxs(ListItemTextRoot, _extends({
+  return /*#__PURE__*/jsxRuntime.jsxs(ListItemTextRoot, _extends$4({
     className: clsx(classes.root, className),
     ownerState: ownerState,
     ref: ref
@@ -21616,7 +22260,7 @@ const useUtilityClasses$8 = ownerState => {
     root: ['root', dense && 'dense', disabled && 'disabled', !disableGutters && 'gutters', divider && 'divider', selected && 'selected']
   };
   const composedClasses = composeClasses(slots, getMenuItemUtilityClass, classes);
-  return _extends({}, classes, composedClasses);
+  return _extends$4({}, classes, composedClasses);
 };
 
 const MenuItemRoot = styled$1(ButtonBase$1, {
@@ -21627,7 +22271,7 @@ const MenuItemRoot = styled$1(ButtonBase$1, {
 })(({
   theme,
   ownerState
-}) => _extends({}, theme.typography.body1, {
+}) => _extends$4({}, theme.typography.body1, {
   display: 'flex',
   justifyContent: 'flex-start',
   alignItems: 'center',
@@ -21693,7 +22337,7 @@ const MenuItemRoot = styled$1(ButtonBase$1, {
   [theme.breakpoints.up('sm')]: {
     minHeight: 'auto'
   }
-}, ownerState.dense && _extends({
+}, ownerState.dense && _extends$4({
   minHeight: 36
 }, theme.typography.body2, {
   [`& .${listItemIconClasses$1.root} svg`]: {
@@ -21716,7 +22360,7 @@ const MenuItem = /*#__PURE__*/e__default.forwardRef(function MenuItem(inProps, r
     role = 'menuitem',
     tabIndex: tabIndexProp
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$a);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$a);
 
   const context = e__default.useContext(ListContext$1);
   const childContext = {
@@ -21732,7 +22376,7 @@ const MenuItem = /*#__PURE__*/e__default.forwardRef(function MenuItem(inProps, r
     }
   }, [autoFocus]);
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     dense: childContext.dense,
     divider,
     disableGutters
@@ -21748,7 +22392,7 @@ const MenuItem = /*#__PURE__*/e__default.forwardRef(function MenuItem(inProps, r
 
   return /*#__PURE__*/jsxRuntime.jsx(ListContext$1.Provider, {
     value: childContext,
-    children: /*#__PURE__*/jsxRuntime.jsx(MenuItemRoot, _extends({
+    children: /*#__PURE__*/jsxRuntime.jsx(MenuItemRoot, _extends$4({
       ref: handleRef,
       role: role,
       tabIndex: tabIndex,
@@ -21787,7 +22431,7 @@ const useUtilityClasses$7 = ownerState => {
     input: ['input']
   };
   const composedClasses = composeClasses(slots, getSwitchUtilityClass, classes);
-  return _extends({}, classes, composedClasses);
+  return _extends$4({}, classes, composedClasses);
 };
 
 const SwitchRoot = styled$1('span', {
@@ -21801,7 +22445,7 @@ const SwitchRoot = styled$1('span', {
   }
 })(({
   ownerState
-}) => _extends({
+}) => _extends$4({
   display: 'inline-flex',
   width: 34 + 12 * 2,
   height: 14 + 12 * 2,
@@ -21878,7 +22522,7 @@ const SwitchSwitchBase = styled$1(SwitchBase$1, {
 }), ({
   theme,
   ownerState
-}) => _extends({
+}) => _extends$4({
   '&:hover': {
     backgroundColor: alpha(theme.palette.action.active, theme.palette.action.hoverOpacity),
     // Reset on touch devices, it doesn't add specificity
@@ -21946,9 +22590,9 @@ const Switch = /*#__PURE__*/e__default.forwardRef(function Switch(inProps, ref) 
     size = 'medium',
     sx
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$9);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$9);
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     color,
     edge,
     size
@@ -21965,14 +22609,14 @@ const Switch = /*#__PURE__*/e__default.forwardRef(function Switch(inProps, ref) 
     className: clsx(classes.root, className),
     sx: sx,
     ownerState: ownerState,
-    children: [/*#__PURE__*/jsxRuntime.jsx(SwitchSwitchBase, _extends({
+    children: [/*#__PURE__*/jsxRuntime.jsx(SwitchSwitchBase, _extends$4({
       type: "checkbox",
       icon: icon,
       checkedIcon: icon,
       ref: ref,
       ownerState: ownerState
     }, other, {
-      classes: _extends({}, classes, {
+      classes: _extends$4({}, classes, {
         root: classes.switchBase
       })
     })), /*#__PURE__*/jsxRuntime.jsx(SwitchTrack, {
@@ -22007,10 +22651,10 @@ const useUtilityClasses$6 = ownerState => {
     endIcon: ['endIcon', `iconSize${capitalize(size)}`]
   };
   const composedClasses = composeClasses(slots, getButtonUtilityClass, classes);
-  return _extends({}, classes, composedClasses);
+  return _extends$4({}, classes, composedClasses);
 };
 
-const commonIconStyles = ownerState => _extends({}, ownerState.size === 'small' && {
+const commonIconStyles = ownerState => _extends$4({}, ownerState.size === 'small' && {
   '& > *:nth-of-type(1)': {
     fontSize: 18
   }
@@ -22037,14 +22681,14 @@ const ButtonRoot = styled$1(ButtonBase$1, {
 })(({
   theme,
   ownerState
-}) => _extends({}, theme.typography.button, {
+}) => _extends$4({}, theme.typography.button, {
   minWidth: 64,
   padding: '6px 16px',
   borderRadius: theme.shape.borderRadius,
   transition: theme.transitions.create(['background-color', 'box-shadow', 'border-color', 'color'], {
     duration: theme.transitions.duration.short
   }),
-  '&:hover': _extends({
+  '&:hover': _extends$4({
     textDecoration: 'none',
     backgroundColor: alpha(theme.palette.text.primary, theme.palette.action.hoverOpacity),
     // Reset on touch devices, it doesn't add specificity
@@ -22079,13 +22723,13 @@ const ButtonRoot = styled$1(ButtonBase$1, {
       backgroundColor: theme.palette[ownerState.color].main
     }
   }),
-  '&:active': _extends({}, ownerState.variant === 'contained' && {
+  '&:active': _extends$4({}, ownerState.variant === 'contained' && {
     boxShadow: theme.shadows[8]
   }),
-  [`&.${buttonClasses$1.focusVisible}`]: _extends({}, ownerState.variant === 'contained' && {
+  [`&.${buttonClasses$1.focusVisible}`]: _extends$4({}, ownerState.variant === 'contained' && {
     boxShadow: theme.shadows[6]
   }),
-  [`&.${buttonClasses$1.disabled}`]: _extends({
+  [`&.${buttonClasses$1.disabled}`]: _extends$4({
     color: theme.palette.action.disabled
   }, ownerState.variant === 'outlined' && {
     border: `1px solid ${theme.palette.action.disabledBackground}`
@@ -22164,7 +22808,7 @@ const ButtonStartIcon = styled$1('span', {
   }
 })(({
   ownerState
-}) => _extends({
+}) => _extends$4({
   display: 'inherit',
   marginRight: 8,
   marginLeft: -4
@@ -22182,7 +22826,7 @@ const ButtonEndIcon = styled$1('span', {
   }
 })(({
   ownerState
-}) => _extends({
+}) => _extends$4({
   display: 'inherit',
   marginRight: -4,
   marginLeft: 8
@@ -22210,9 +22854,9 @@ const Button = /*#__PURE__*/e__default.forwardRef(function Button(inProps, ref) 
     type,
     variant = 'text'
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$8);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$8);
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     color,
     component,
     disabled,
@@ -22238,7 +22882,7 @@ const Button = /*#__PURE__*/e__default.forwardRef(function Button(inProps, ref) 
     children: endIconProp
   });
 
-  return /*#__PURE__*/jsxRuntime.jsxs(ButtonRoot, _extends({
+  return /*#__PURE__*/jsxRuntime.jsxs(ButtonRoot, _extends$4({
     ownerState: ownerState,
     component: component,
     disabled: disabled,
@@ -22288,7 +22932,7 @@ const FormControlLabelRoot = styled$1('label', {
 })(({
   theme,
   ownerState
-}) => _extends({
+}) => _extends$4({
   display: 'inline-flex',
   alignItems: 'center',
   cursor: 'pointer',
@@ -22339,7 +22983,7 @@ const FormControlLabel = /*#__PURE__*/e__default.forwardRef(function FormControl
     label,
     labelPlacement = 'end'
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$7);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$7);
 
   const muiFormControl = useFormControl();
   let disabled = disabledProp;
@@ -22361,19 +23005,19 @@ const FormControlLabel = /*#__PURE__*/e__default.forwardRef(function FormControl
     }
   });
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     disabled,
     label,
     labelPlacement
   });
 
   const classes = useUtilityClasses$5(ownerState);
-  return /*#__PURE__*/jsxRuntime.jsxs(FormControlLabelRoot, _extends({
+  return /*#__PURE__*/jsxRuntime.jsxs(FormControlLabelRoot, _extends$4({
     className: clsx(classes.root, className),
     ownerState: ownerState,
     ref: ref
   }, other, {
-    children: [/*#__PURE__*/e__default.cloneElement(control, controlProps), label.type === Typography$1 || disableTypography ? label : /*#__PURE__*/jsxRuntime.jsx(Typography$1, _extends({
+    children: [/*#__PURE__*/e__default.cloneElement(control, controlProps), label.type === Typography$1 || disableTypography ? label : /*#__PURE__*/jsxRuntime.jsx(Typography$1, _extends$4({
       component: "span",
       className: classes.label
     }, componentsProps.typography, {
@@ -22449,7 +23093,7 @@ const CircularProgressRoot = styled$1('span', {
 })(({
   ownerState,
   theme
-}) => _extends({
+}) => _extends$4({
   display: 'inline-block'
 }, ownerState.variant === 'determinate' && {
   transition: theme.transitions.create('transform')
@@ -22480,7 +23124,7 @@ const CircularProgressCircle = styled$1('circle', {
 })(({
   ownerState,
   theme
-}) => _extends({
+}) => _extends$4({
   stroke: 'currentColor'
 }, ownerState.variant === 'determinate' && {
   transition: theme.transitions.create('stroke-dashoffset')
@@ -22518,9 +23162,9 @@ const CircularProgress = /*#__PURE__*/e__default.forwardRef(function CircularPro
     value = 0,
     variant = 'indeterminate'
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$6);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$6);
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     color,
     disableShrink,
     size,
@@ -22542,9 +23186,9 @@ const CircularProgress = /*#__PURE__*/e__default.forwardRef(function CircularPro
     rootStyle.transform = 'rotate(-90deg)';
   }
 
-  return /*#__PURE__*/jsxRuntime.jsx(CircularProgressRoot, _extends({
+  return /*#__PURE__*/jsxRuntime.jsx(CircularProgressRoot, _extends$4({
     className: clsx(classes.root, className),
-    style: _extends({
+    style: _extends$4({
       width: size,
       height: size
     }, rootStyle, style),
@@ -22622,7 +23266,7 @@ const TableCellRoot = styled$1('td', {
 })(({
   theme,
   ownerState
-}) => _extends({}, theme.typography.body2, {
+}) => _extends$4({}, theme.typography.body2, {
   display: 'table-cell',
   verticalAlign: 'inherit',
   // Workaround for a rendering bug with spanned columns in Chrome 62.0.
@@ -22693,7 +23337,7 @@ const TableCell = /*#__PURE__*/e__default.forwardRef(function TableCell(inProps,
     sortDirection,
     variant: variantProp
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$5);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$5);
 
   const table = e__default.useContext(TableContext$1);
   const tablelvl2 = e__default.useContext(Tablelvl2Context$1);
@@ -22714,7 +23358,7 @@ const TableCell = /*#__PURE__*/e__default.forwardRef(function TableCell(inProps,
 
   const variant = variantProp || tablelvl2 && tablelvl2.variant;
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     align,
     component,
     padding: paddingProp || (table && table.padding ? table.padding : 'normal'),
@@ -22731,7 +23375,7 @@ const TableCell = /*#__PURE__*/e__default.forwardRef(function TableCell(inProps,
     ariaSort = sortDirection === 'asc' ? 'ascending' : 'descending';
   }
 
-  return /*#__PURE__*/jsxRuntime.jsx(TableCellRoot, _extends({
+  return /*#__PURE__*/jsxRuntime.jsx(TableCellRoot, _extends$4({
     as: component,
     ref: ref,
     className: clsx(classes.root, className),
@@ -22773,7 +23417,7 @@ const ToolbarRoot = styled$1('div', {
 })(({
   theme,
   ownerState
-}) => _extends({
+}) => _extends$4({
   position: 'relative',
   display: 'flex',
   alignItems: 'center'
@@ -22802,16 +23446,16 @@ const Toolbar = /*#__PURE__*/e__default.forwardRef(function Toolbar(inProps, ref
     disableGutters = false,
     variant = 'regular'
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$4);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$4);
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     component,
     disableGutters,
     variant
   });
 
   const classes = useUtilityClasses$2(ownerState);
-  return /*#__PURE__*/jsxRuntime.jsx(ToolbarRoot, _extends({
+  return /*#__PURE__*/jsxRuntime.jsx(ToolbarRoot, _extends$4({
     as: component,
     className: clsx(classes.root, className),
     ref: ref,
@@ -22851,7 +23495,7 @@ const TablePaginationActions = /*#__PURE__*/e__default.forwardRef(function Table
     showFirstButton,
     showLastButton
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$3);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$3);
 
   const theme = useTheme();
 
@@ -22871,7 +23515,7 @@ const TablePaginationActions = /*#__PURE__*/e__default.forwardRef(function Table
     onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
   };
 
-  return /*#__PURE__*/jsxRuntime.jsxs("div", _extends({
+  return /*#__PURE__*/jsxRuntime.jsxs("div", _extends$4({
     ref: ref
   }, other, {
     children: [showFirstButton && /*#__PURE__*/jsxRuntime.jsx(O, {
@@ -22880,7 +23524,7 @@ const TablePaginationActions = /*#__PURE__*/e__default.forwardRef(function Table
       "aria-label": getItemAriaLabel('first', page),
       title: getItemAriaLabel('first', page),
       children: theme.direction === 'rtl' ? _LastPageIcon || (_LastPageIcon = /*#__PURE__*/jsxRuntime.jsx(LastPageIcon, {})) : _FirstPageIcon || (_FirstPageIcon = /*#__PURE__*/jsxRuntime.jsx(FirstPageIcon, {}))
-    }), /*#__PURE__*/jsxRuntime.jsx(O, _extends({
+    }), /*#__PURE__*/jsxRuntime.jsx(O, _extends$4({
       onClick: handleBackButtonClick,
       disabled: page === 0,
       color: "inherit",
@@ -22888,7 +23532,7 @@ const TablePaginationActions = /*#__PURE__*/e__default.forwardRef(function Table
       title: getItemAriaLabel('previous', page)
     }, backIconButtonProps, {
       children: theme.direction === 'rtl' ? _KeyboardArrowRight || (_KeyboardArrowRight = /*#__PURE__*/jsxRuntime.jsx(KeyboardArrowRight, {})) : _KeyboardArrowLeft || (_KeyboardArrowLeft = /*#__PURE__*/jsxRuntime.jsx(KeyboardArrowLeft, {}))
-    })), /*#__PURE__*/jsxRuntime.jsx(O, _extends({
+    })), /*#__PURE__*/jsxRuntime.jsx(O, _extends$4({
       onClick: handleNextButtonClick,
       disabled: count !== -1 ? page >= Math.ceil(count / rowsPerPage) - 1 : false,
       color: "inherit",
@@ -22934,7 +23578,7 @@ const TablePaginationRoot = styled$1(TableCell$1, {
 const TablePaginationToolbar = styled$1(Toolbar$1, {
   name: 'MuiTablePagination',
   slot: 'Toolbar',
-  overridesResolver: (props, styles) => _extends({
+  overridesResolver: (props, styles) => _extends$4({
     [`& .${tablePaginationClasses$1.actions}`]: styles.actions
   }, styles.toolbar)
 })(({
@@ -22967,13 +23611,13 @@ const TablePaginationSelectLabel = styled$1('p', {
   overridesResolver: (props, styles) => styles.selectLabel
 })(({
   theme
-}) => _extends({}, theme.typography.body2, {
+}) => _extends$4({}, theme.typography.body2, {
   flexShrink: 0
 }));
 const TablePaginationSelect = styled$1(F, {
   name: 'MuiTablePagination',
   slot: 'Select',
-  overridesResolver: (props, styles) => _extends({
+  overridesResolver: (props, styles) => _extends$4({
     [`& .${tablePaginationClasses$1.selectIcon}`]: styles.selectIcon,
     [`& .${tablePaginationClasses$1.select}`]: styles.select
   }, styles.input, styles.selectRoot)
@@ -23002,7 +23646,7 @@ const TablePaginationDisplayedRows = styled$1('p', {
   overridesResolver: (props, styles) => styles.displayedRows
 })(({
   theme
-}) => _extends({}, theme.typography.body2, {
+}) => _extends$4({}, theme.typography.body2, {
   flexShrink: 0
 }));
 
@@ -23067,7 +23711,7 @@ const TablePagination = /*#__PURE__*/e__default.forwardRef(function TablePaginat
     showFirstButton = false,
     showLastButton = false
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$2);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$2);
 
   const ownerState = props;
   const classes = useUtilityClasses$1(ownerState);
@@ -23089,7 +23733,7 @@ const TablePagination = /*#__PURE__*/e__default.forwardRef(function TablePaginat
     return rowsPerPage === -1 ? count : Math.min(count, (page + 1) * rowsPerPage);
   };
 
-  return /*#__PURE__*/jsxRuntime.jsx(TablePaginationRoot, _extends({
+  return /*#__PURE__*/jsxRuntime.jsx(TablePaginationRoot, _extends$4({
     colSpan: colSpan,
     ref: ref,
     as: component,
@@ -23104,7 +23748,7 @@ const TablePagination = /*#__PURE__*/e__default.forwardRef(function TablePaginat
         className: classes.selectLabel,
         id: labelId,
         children: labelRowsPerPage
-      }), rowsPerPageOptions.length > 1 && /*#__PURE__*/jsxRuntime.jsx(TablePaginationSelect, _extends({
+      }), rowsPerPageOptions.length > 1 && /*#__PURE__*/jsxRuntime.jsx(TablePaginationSelect, _extends$4({
         variant: "standard",
         input: _InputBase || (_InputBase = /*#__PURE__*/jsxRuntime.jsx(R, {})),
         value: rowsPerPage,
@@ -23112,14 +23756,14 @@ const TablePagination = /*#__PURE__*/e__default.forwardRef(function TablePaginat
         id: selectId,
         labelId: labelId
       }, SelectProps, {
-        classes: _extends({}, SelectProps.classes, {
+        classes: _extends$4({}, SelectProps.classes, {
           // TODO v5 remove `classes.input`
           root: clsx(classes.input, classes.selectRoot, (SelectProps.classes || {}).root),
           select: clsx(classes.select, (SelectProps.classes || {}).select),
           // TODO v5 remove `selectIcon`
           icon: clsx(classes.selectIcon, (SelectProps.classes || {}).icon)
         }),
-        children: rowsPerPageOptions.map(rowsPerPageOption => /*#__PURE__*/createElement(MenuItemComponent, _extends({}, !isHostComponent(MenuItemComponent) && {
+        children: rowsPerPageOptions.map(rowsPerPageOption => /*#__PURE__*/createElement(MenuItemComponent, _extends$4({}, !isHostComponent(MenuItemComponent) && {
           ownerState
         }, {
           className: classes.menuItem,
@@ -25080,7 +25724,7 @@ const LinearProgressRoot = styled$1('span', {
 })(({
   ownerState,
   theme
-}) => _extends({
+}) => _extends$4({
   position: 'relative',
   overflow: 'hidden',
   display: 'block',
@@ -25122,7 +25766,7 @@ const LinearProgressDashed = styled$1('span', {
   theme
 }) => {
   const backgroundColor = getColorShade(theme, ownerState.color);
-  return _extends({
+  return _extends$4({
     position: 'absolute',
     marginTop: 0,
     height: '100%',
@@ -25149,7 +25793,7 @@ const LinearProgressBar1 = styled$1('span', {
 })(({
   ownerState,
   theme
-}) => _extends({
+}) => _extends$4({
   width: '100%',
   position: 'absolute',
   left: 0,
@@ -25181,7 +25825,7 @@ const LinearProgressBar2 = styled$1('span', {
 })(({
   ownerState,
   theme
-}) => _extends({
+}) => _extends$4({
   width: '100%',
   position: 'absolute',
   left: 0,
@@ -25223,9 +25867,9 @@ const LinearProgress = /*#__PURE__*/e__default.forwardRef(function LinearProgres
     valueBuffer,
     variant = 'indeterminate'
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1);
+        other = _objectWithoutPropertiesLoose$3(props, _excluded$1);
 
-  const ownerState = _extends({}, props, {
+  const ownerState = _extends$4({}, props, {
     color,
     variant
   });
@@ -25265,7 +25909,7 @@ const LinearProgress = /*#__PURE__*/e__default.forwardRef(function LinearProgres
     }
   }
 
-  return /*#__PURE__*/jsxRuntime.jsxs(LinearProgressRoot, _extends({
+  return /*#__PURE__*/jsxRuntime.jsxs(LinearProgressRoot, _extends$4({
     className: clsx(classes.root, className),
     ownerState: ownerState,
     role: "progressbar"
@@ -25309,7 +25953,7 @@ function LinearProgressWithLabel(props) {
       width: '100%',
       mr: 1
     }
-  }, /*#__PURE__*/e__default.createElement(LinearProgress$1, _extends$1({
+  }, /*#__PURE__*/e__default.createElement(LinearProgress$1, _extends$a({
     variant: "determinate"
   }, props))), /*#__PURE__*/e__default.createElement(Box$1, {
     sx: {
@@ -25538,6 +26182,15 @@ var DialogHelper = {
   }
 };
 
+function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 var DEFAULT_PAGE_SIZE = 9;
 var ROWS_PER_PAGE_OPTIONS = [9, 15, 21];
 var DEFAULT_COLUMN_WIDTH = 220;
@@ -25565,17 +26218,26 @@ var getDisplayFieldsFromConfig = function getDisplayFieldsFromConfig(config) {
   var fields = xml.getElementsByTagName('field');
   var headers = [];
 
-  for (var i = 0; i < fields.length; i += 1) {
-    var field = fields[i];
-    var fieldType = field.getElementsByTagName('type')[0].textContent;
-    if (!ContentTypeHelper.isFieldTypeSupported(fieldType)) continue;
-    var fieldId = field.getElementsByTagName('id')[0].textContent;
-    var title = field.getElementsByTagName('title')[0].textContent;
-    headers.push({
-      fieldId: fieldId,
-      fieldType: fieldType,
-      title: title
-    });
+  var _iterator = _createForOfIteratorHelper(fields),
+      _step;
+
+  try {
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      var field = _step.value;
+      var fieldType = field.getElementsByTagName('type')[0].textContent;
+      if (!ContentTypeHelper.isFieldTypeSupported(fieldType)) continue;
+      var fieldId = field.getElementsByTagName('id')[0].textContent;
+      var title = field.getElementsByTagName('title')[0].textContent;
+      headers.push({
+        fieldId: fieldId,
+        fieldType: fieldType,
+        title: title
+      });
+    }
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
   }
 
   return headers;
@@ -25612,30 +26274,39 @@ var buildColumnsFromDisplayFields = function buildColumnsFromDisplayFields(displ
     renderCell: PathCell
   }];
 
-  for (var i = 0; i < displayFields.length; i += 1) {
-    var field = displayFields[i];
-    var fieldId = field.fieldId,
-        fieldType = field.fieldType,
-        title = field.title;
-    var column = {
-      field: fieldId,
-      headerName: title,
-      description: title,
-      sortable: false,
-      width: DEFAULT_COLUMN_WIDTH,
-      editable: true,
-      fieldType: fieldType
-    };
+  var _iterator2 = _createForOfIteratorHelper(displayFields),
+      _step2;
 
-    if (fieldType === ContentTypeHelper.FIELD_TYPE_RTE) {
-      column.renderCell = RTECell;
+  try {
+    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+      var field = _step2.value;
+      var fieldId = field.fieldId,
+          fieldType = field.fieldType,
+          title = field.title;
+      var column = {
+        field: fieldId,
+        headerName: title,
+        description: title,
+        sortable: false,
+        width: DEFAULT_COLUMN_WIDTH,
+        editable: true,
+        fieldType: fieldType
+      };
+
+      if (fieldType === ContentTypeHelper.FIELD_TYPE_RTE) {
+        column.renderCell = RTECell;
+      }
+
+      if (ContentTypeHelper.isMediaType(fieldType)) {
+        column.renderCell = MediaCell;
+      }
+
+      columns.push(column);
     }
-
-    if (ContentTypeHelper.isMediaType(fieldType)) {
-      column.renderCell = MediaCell;
-    }
-
-    columns.push(column);
+  } catch (err) {
+    _iterator2.e(err);
+  } finally {
+    _iterator2.f();
   }
 
   return columns;
@@ -25654,14 +26325,23 @@ var rowFromApiContent = function rowFromApiContent(index, path, content, fieldId
     path: path
   };
 
-  if (meta && meta.lockOwner) {
+  if (meta !== null && meta !== void 0 && meta.lockOwner) {
     row.lockOwner = meta.lockOwner;
   }
 
-  for (var i = 0; i < fieldIds.length; i += 1) {
-    var fieldId = fieldIds[i];
-    var field = xml.getElementsByTagName(fieldId)[0];
-    row[fieldId] = field ? field.textContent : '';
+  var _iterator3 = _createForOfIteratorHelper(fieldIds),
+      _step3;
+
+  try {
+    for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+      var fieldId = _step3.value;
+      var field = xml.getElementsByTagName(fieldId)[0];
+      row[fieldId] = field ? field.textContent : '';
+    }
+  } catch (err) {
+    _iterator3.e(err);
+  } finally {
+    _iterator3.f();
   }
   return row;
 };
@@ -25681,9 +26361,10 @@ var isCellContainText = function isCellContainText(text, params) {
 };
 
 var writeContent = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(path, editedObj) {
-    var content, xml, keys, i, fieldName, value, node, newContent, res;
-    return regeneratorRuntime.wrap(function _callee$(_context) {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee(path, editedObj, contentType) {
+    var content, xml, keys, _i, _keys, key, value, node, newContent, res;
+
+    return regenerator.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
@@ -25704,10 +26385,10 @@ var writeContent = /*#__PURE__*/function () {
             xml = new DOMParser().parseFromString(content, 'text/xml');
             keys = Object.keys(editedObj);
 
-            for (i = 0; i < keys.length; i++) {
-              fieldName = keys[i];
-              value = editedObj[fieldName];
-              node = xml.getElementsByTagName(fieldName)[0];
+            for (_i = 0, _keys = keys; _i < _keys.length; _i++) {
+              key = _keys[_i];
+              value = editedObj[key];
+              node = xml.getElementsByTagName(key)[0];
 
               if (node) {
                 node.textContent = value;
@@ -25716,7 +26397,7 @@ var writeContent = /*#__PURE__*/function () {
 
             newContent = new XMLSerializer().serializeToString(xml);
             _context.next = 11;
-            return StudioAPI.writeContent(path, newContent);
+            return StudioAPI.writeContent(path, newContent, contentType);
 
           case 11:
             res = _context.sent;
@@ -25739,7 +26420,7 @@ var writeContent = /*#__PURE__*/function () {
     }, _callee);
   }));
 
-  return function writeContent(_x, _x2) {
+  return function writeContent(_x, _x2, _x3) {
     return _ref.apply(this, arguments);
   };
 }();
@@ -25853,10 +26534,10 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
         setRefresh(1 - refresh);
       },
       saveAllChanges: function () {
-        var _saveAllChanges = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+        var _saveAllChanges = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee2() {
           var keys, totalCount, completedCount, failedRows, fieldIds, _loop, i;
 
-          return regeneratorRuntime.wrap(function _callee2$(_context3) {
+          return regenerator.wrap(function _callee2$(_context3) {
             while (1) {
               switch (_context3.prev = _context3.next) {
                 case 0:
@@ -25880,9 +26561,9 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                   }).filter(function (field) {
                     return field !== 'id' && field !== 'path' && field !== 'action';
                   });
-                  _loop = /*#__PURE__*/regeneratorRuntime.mark(function _loop(i) {
+                  _loop = /*#__PURE__*/regenerator.mark(function _loop(i) {
                     var path, newContent, row, rowIndex;
-                    return regeneratorRuntime.wrap(function _loop$(_context2) {
+                    return regenerator.wrap(function _loop$(_context2) {
                       while (1) {
                         switch (_context2.prev = _context2.next) {
                           case 0:
@@ -25965,9 +26646,19 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
   var replaceTextInAllRows = function replaceTextInAllRows(text, replaceText, rows, columns) {
     var newRows = [];
 
-    for (var i = 0; i < rows.length; i += 1) {
-      var newRow = replaceTextInRow(text, replaceText, rows[i], columns);
-      newRows.push(newRow);
+    var _iterator4 = _createForOfIteratorHelper(rows),
+        _step4;
+
+    try {
+      for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+        var row = _step4.value;
+        var newRow = replaceTextInRow(text, replaceText, row, columns);
+        newRows.push(newRow);
+      }
+    } catch (err) {
+      _iterator4.e(err);
+    } finally {
+      _iterator4.f();
     }
 
     return newRows;
@@ -25977,8 +26668,8 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     var newRow = {};
     var keys = Object.keys(row);
 
-    for (var i = 0; i < keys.length; i += 1) {
-      var fieldName = keys[i];
+    for (var _i2 = 0, _keys2 = keys; _i2 < _keys2.length; _i2++) {
+      var fieldName = _keys2[_i2];
       var fieldValue = row[fieldName];
       var newFieldValue = fieldValue;
 
@@ -26042,10 +26733,10 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     setRefresh(1 - refresh);
   }, [contentType]);
   e__default.useEffect(function () {
-    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+    _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee3() {
       var config, displayFields, _yield$StudioAPI$sear, items, total, paths, dtRows, dtSessionRows, i, path, content, meta, fieldIds, row;
 
-      return regeneratorRuntime.wrap(function _callee3$(_context4) {
+      return regenerator.wrap(function _callee3$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
@@ -26101,8 +26792,8 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                 return elm.fieldId;
               });
               row = rowFromApiContent(i, path, content, fieldIds, meta);
-              dtRows.push(_objectSpread2({}, row));
-              dtSessionRows.push(_objectSpread2({}, row));
+              dtRows.push(_objectSpread$1({}, row));
+              dtSessionRows.push(_objectSpread$1({}, row));
 
             case 30:
               i += 1;
@@ -26205,9 +26896,9 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
   };
 
   var handleRowMenuActionUnlock = /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee4() {
       var row, res;
-      return regeneratorRuntime.wrap(function _callee4$(_context5) {
+      return regenerator.wrap(function _callee4$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
@@ -26248,9 +26939,9 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
   }();
 
   var handleRowMenuActionEdit = /*#__PURE__*/function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee5() {
       var row, payload, onEditedSussessful, onEditedFailed;
-      return regeneratorRuntime.wrap(function _callee5$(_context6) {
+      return regenerator.wrap(function _callee5$(_context6) {
         while (1) {
           switch (_context6.prev = _context6.next) {
             case 0:
@@ -26273,10 +26964,19 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                   return field !== 'id' && field !== 'path' && field !== 'action';
                 });
 
-                for (var i = 0; i < fieldIds.length; i += 1) {
-                  var field = fieldIds[i];
-                  sessionRows[model.id][field] = response.updatedModel[field];
-                  rows[model.id][field] = response.updatedModel[field];
+                var _iterator5 = _createForOfIteratorHelper(fieldIds),
+                    _step5;
+
+                try {
+                  for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+                    var field = _step5.value;
+                    sessionRows[model.id][field] = response.updatedModel[field];
+                    rows[model.id][field] = response.updatedModel[field];
+                  }
+                } catch (err) {
+                  _iterator5.e(err);
+                } finally {
+                  _iterator5.f();
                 }
 
                 setSessionRows(sessionRows);
@@ -26304,9 +27004,9 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
   }();
 
   var handleRowMenuActionSave = /*#__PURE__*/function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee6() {
       var row, path, newContent, fieldIds;
-      return regeneratorRuntime.wrap(function _callee6$(_context7) {
+      return regenerator.wrap(function _callee6$(_context7) {
         while (1) {
           switch (_context7.prev = _context7.next) {
             case 0:
@@ -26366,9 +27066,9 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
   }();
 
   var handleRowMenuActionClear = /*#__PURE__*/function () {
-    var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee7() {
       var row, path, content, meta, fieldIds, rowFromApi;
-      return regeneratorRuntime.wrap(function _callee7$(_context8) {
+      return regenerator.wrap(function _callee7$(_context8) {
         while (1) {
           switch (_context8.prev = _context8.next) {
             case 0:
@@ -26498,6 +27198,9 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
   }));
 });
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var DRAWER_WIDTH = 240;
 var TEXT_FIND_REPLACE = 'Find and Replace';
 var TEXT_FILTER = 'Apply Filters';
@@ -26510,7 +27213,7 @@ var Main = styled$3('main', {
 })(function (_ref) {
   var theme = _ref.theme,
       open = _ref.open;
-  return _objectSpread2({
+  return _objectSpread({
     flexGrow: 1,
     padding: theme.spacing(3),
     transition: theme.transitions.create('margin', {
@@ -26560,8 +27263,8 @@ function Editor() {
   };
 
   var handleSaveChangeClick = /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      return regeneratorRuntime.wrap(function _callee$(_context) {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee() {
+      return regenerator.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
@@ -26760,7 +27463,7 @@ var BootstrapDialogTitle = function BootstrapDialogTitle(props) {
       onClose = props.onClose,
       other = _objectWithoutProperties(props, _excluded);
 
-  return /*#__PURE__*/e__default.createElement(DialogTitle, _extends$1({
+  return /*#__PURE__*/e__default.createElement(DialogTitle, _extends$a({
     sx: {
       m: 0,
       p: 2,

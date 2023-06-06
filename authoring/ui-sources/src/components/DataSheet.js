@@ -67,8 +67,7 @@ const getDisplayFieldsFromConfig = (config) => {
   const xml = (new DOMParser()).parseFromString(config, 'text/xml');
   const fields = xml.getElementsByTagName('field');
   const headers = [];
-  for (let i = 0; i < fields.length; i += 1) {
-    const field = fields[i];
+  for (const field of fields) {
     const fieldType = field.getElementsByTagName('type')[0].textContent;
     if (!ContentTypeHelper.isFieldTypeSupported(fieldType)) continue;
 
@@ -113,8 +112,7 @@ const buildColumnsFromDisplayFields = (displayFields) => {
     renderCell: PathCell,
   }];
 
-  for (let i = 0; i < displayFields.length; i +=1 ) {
-    const field = displayFields[i];
+  for (const field of displayFields) {
     const { fieldId, fieldType, title } = field;
     const column = {
       field: fieldId,
@@ -147,11 +145,10 @@ const getColumnProperties = (fieldName, columns) => {
 const rowFromApiContent = (index, path, content, fieldIds, meta) => {
   const xml = (new DOMParser()).parseFromString(content, 'text/xml');
   const row = { id: index, path };
-  if (meta && meta.lockOwner) {
+  if (meta?.lockOwner) {
     row.lockOwner = meta.lockOwner;
   }
-  for (let i = 0; i < fieldIds.length; i += 1) {
-    const fieldId = fieldIds[i];
+  for (const fieldId of fieldIds) {
     const field = xml.getElementsByTagName(fieldId)[0];
     row[fieldId] = field ? field.textContent : '';
   };
@@ -175,7 +172,7 @@ const isCellContainText = (text, params) => {
   return cellValue.indexOf(text) >= 0;
 };
 
-const writeContent = async (path, editedObj) => {
+const writeContent = async (path, editedObj, contentType) => {
   const content = await StudioAPI.getContent(path);
   if (!content) {
     return;
@@ -184,17 +181,16 @@ const writeContent = async (path, editedObj) => {
   const xml = (new DOMParser()).parseFromString(content, 'text/xml');
 
   const keys = Object.keys(editedObj);
-  for (let i = 0; i < keys.length; i++) {
-    const fieldName = keys[i];
-    const value = editedObj[fieldName];
-      const node = xml.getElementsByTagName(fieldName)[0];
-      if (node) {
-        node.textContent = value;
-      }
+  for (const key of keys) {
+    const value = editedObj[key];
+    const node = xml.getElementsByTagName(key)[0];
+    if (node) {
+      node.textContent = value;
+    }
   }
 
   const newContent = new XMLSerializer().serializeToString(xml);
-  const res = await StudioAPI.writeContent(path, newContent);
+  const res = await StudioAPI.writeContent(path, newContent, contentType);
   if (res) {
     return newContent;
   }
@@ -279,8 +275,8 @@ const DataSheet = React.forwardRef((props, ref) => {
 
   const replaceTextInAllRows = (text, replaceText, rows, columns) => {
     const newRows = [];
-    for (let i = 0; i < rows.length; i +=1 ) {
-      const newRow = replaceTextInRow(text, replaceText, rows[i], columns);
+    for (const row of rows) {
+      const newRow = replaceTextInRow(text, replaceText, row, columns);
       newRows.push(newRow);
     }
 
@@ -291,8 +287,7 @@ const DataSheet = React.forwardRef((props, ref) => {
     const newRow = {};
     const keys = Object.keys(row);
 
-    for (let i = 0; i < keys.length; i +=1 ) {
-      const fieldName = keys[i];
+    for (const fieldName of keys) {
       const fieldValue = row[fieldName];
       let newFieldValue = fieldValue;
       const props = getColumnProperties(fieldName, columns);
@@ -499,8 +494,7 @@ const DataSheet = React.forwardRef((props, ref) => {
       model.path = response.updatedModel[model.field];
       model.value = response.updatedModel[model.field];
       const fieldIds = columns.map((cl) => cl.field).filter((field) => field !== 'id' && field !== 'path' && field !== 'action');
-      for (let i = 0; i < fieldIds.length; i += 1) {
-        const field = fieldIds[i];
+      for (const field of fieldIds) {
         sessionRows[model.id][field] = response.updatedModel[field];
         rows[model.id][field] = response.updatedModel[field];
       }

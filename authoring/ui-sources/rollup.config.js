@@ -79,8 +79,10 @@ export default {
       plugins: [
         'babel-plugin-transform-react-remove-prop-types',
         '@babel/plugin-proposal-nullish-coalescing-operator',
-        '@babel/plugin-proposal-optional-chaining'
+        '@babel/plugin-proposal-optional-chaining',
+        '@babel/plugin-transform-runtime',
       ],
+      runtimeHelpers: true
     }),
     json(),
     replace({
