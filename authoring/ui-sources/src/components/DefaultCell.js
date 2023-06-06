@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2023 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -16,18 +16,26 @@
 
 import React from 'react';
 import Typography from '@mui/material/Typography';
+import { Tooltip } from '@mui/material';
 
 export default function DefaultCell(props) {
+  const { value } = props;
+  const displayText = value ?? "Click to view or edit"
 
   return (
     <>
-      <div
-        style={{ cursor: 'pointer' }}
-      >
-        <Typography variant="body2" style={{ padding: 16 }}>
-          Click to view or edit
+      <Tooltip title={displayText} enterDelay={500}>
+        <Typography
+          variant="body2"
+          style={{
+            padding: 16,
+            overflow: 'hidden',
+            textOverflow: 'ellipsis'
+          }}
+        >
+          { displayText }
         </Typography>
-      </div>
+      </Tooltip>
     </>
   );
 };

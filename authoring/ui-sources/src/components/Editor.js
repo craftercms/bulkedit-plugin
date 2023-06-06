@@ -34,7 +34,7 @@ import {
 import FindReplaceIcon from '@mui/icons-material/FindReplace';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import SaveIcon from '@mui/icons-material/Save';
-import ClearAllIcon from '@mui/icons-material/ClearAll';
+import ClearIcon from '@mui/icons-material/Clear';
 import MenuIcon from '@mui/icons-material/Menu';
 
 import ContentTypeSelect from './ContentTypeSelect';
@@ -158,7 +158,7 @@ export default function Editor() {
                 edge="start"
                 sx={{ mr: 2 }}
               >
-                <ClearAllIcon />
+                <ClearIcon />
               </StyledIconButton>
             </Tooltip>
           </div>
@@ -232,7 +232,7 @@ export default function Editor() {
         </ListItemButton>
         <ListItemButton key={TEXT_CANCEL} onClick={handleCancelAllChangeClick}>
           <ListItemIcon>
-            <ClearAllIcon />
+            <ClearIcon />
           </ListItemIcon>
           <ListItemText primary={TEXT_CANCEL} />
         </ListItemButton>

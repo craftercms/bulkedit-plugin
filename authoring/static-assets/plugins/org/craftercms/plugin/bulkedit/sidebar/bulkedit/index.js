@@ -1,6 +1,6 @@
 var { forwardRef, useContext, createElement, Children, isValidElement, cloneElement } = craftercms.libs.React;
 var React = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
-var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$2, styled: styled$5, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box: Box$2, DialogActions, Paper: Paper$1, Accordion, AccordionSummary, Typography: Typography$2, AccordionDetails, FormLabel: FormLabel$2, RadioGroup, FormControlLabel: FormControlLabel$2, Radio, IconButton: IconButton$1, Drawer, List: List$2, ListItem, Divider: Divider$2, ListItemButton, ListItemIcon: ListItemIcon$2, ListItemText: ListItemText$2, CssBaseline, Toolbar: Toolbar$2, Tooltip: Tooltip$1, Stack } = craftercms.libs.MaterialUI;
+var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$2, styled: styled$5, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box: Box$2, DialogActions, Paper: Paper$1, Accordion, AccordionSummary, Typography: Typography$2, AccordionDetails, FormLabel: FormLabel$2, RadioGroup, FormControlLabel: FormControlLabel$2, Radio, Tooltip: Tooltip$1, IconButton: IconButton$1, Drawer, List: List$2, ListItem, Divider: Divider$2, ListItemButton, ListItemIcon: ListItemIcon$2, ListItemText: ListItemText$2, CssBaseline: CssBaseline$1, Toolbar: Toolbar$2, Stack } = craftercms.libs.MaterialUI;
 var { createSvgIcon: createSvgIcon$2 } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
 var { Subject } = CrafterCMSNext.rxjs;
@@ -371,7 +371,7 @@ exports.default = _default;
 
 var SaveIcon = /*@__PURE__*/getDefaultExportFromCjs(Save);
 
-var ClearAll = createCommonjsModule(function (module, exports) {
+var Clear = createCommonjsModule(function (module, exports) {
 
 
 Object.defineProperty(exports, "__esModule", {
@@ -381,12 +381,12 @@ exports.default = void 0;
 var _createSvgIcon = interopRequireDefault(require$$0$1);
 
 var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
-  d: "M5 13h14v-2H5v2zm-2 4h14v-2H3v2zM7 7v2h14V7H7z"
-}), 'ClearAll');
+  d: "M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+}), 'Clear');
 exports.default = _default;
 });
 
-var ClearAllIcon = /*@__PURE__*/getDefaultExportFromCjs(ClearAll);
+var ClearIcon$1 = /*@__PURE__*/getDefaultExportFromCjs(Clear);
 
 var Menu$2 = createCommonjsModule(function (module, exports) {
 
@@ -5486,7 +5486,7 @@ function _objectWithoutPropertiesLoose$2(source, excluded) {
   return target;
 }
 
-const _excluded$1U = ["values", "unit", "step"];
+const _excluded$1V = ["values", "unit", "step"];
 const sortBreakpointsValues = values => {
   const breakpointsAsArray = Object.keys(values).map(key => ({
     key,
@@ -5521,7 +5521,7 @@ function createBreakpoints(breakpoints) {
       unit = 'px',
       step = 5
     } = breakpoints,
-    other = _objectWithoutPropertiesLoose$2(breakpoints, _excluded$1U);
+    other = _objectWithoutPropertiesLoose$2(breakpoints, _excluded$1V);
   const sortedValues = sortBreakpointsValues(values);
   const keys = Object.keys(sortedValues);
   function up(key) {
@@ -6507,7 +6507,7 @@ const styleFunctionSx = unstable_createStyleFunctionSx();
 styleFunctionSx.filterProps = ['sx'];
 var styleFunctionSx$1 = styleFunctionSx;
 
-const _excluded$1T = ["breakpoints", "palette", "spacing", "shape"];
+const _excluded$1U = ["breakpoints", "palette", "spacing", "shape"];
 function createTheme$1(options = {}, ...args) {
   const {
       breakpoints: breakpointsInput = {},
@@ -6515,7 +6515,7 @@ function createTheme$1(options = {}, ...args) {
       spacing: spacingInput,
       shape: shapeInput = {}
     } = options,
-    other = _objectWithoutPropertiesLoose$2(options, _excluded$1T);
+    other = _objectWithoutPropertiesLoose$2(options, _excluded$1U);
   const breakpoints = createBreakpoints(breakpointsInput);
   const spacing = createSpacing(spacingInput);
   let muiTheme = deepmerge({
@@ -6565,7 +6565,7 @@ function GlobalStyles$1({
   });
 }
 
-const _excluded$1S = ["sx"];
+const _excluded$1T = ["sx"];
 const splitProps = props => {
   var _props$theme$unstable, _props$theme;
   const result = {
@@ -6586,7 +6586,7 @@ function extendSxProp(props) {
   const {
       sx: inSx
     } = props,
-    other = _objectWithoutPropertiesLoose$2(props, _excluded$1S);
+    other = _objectWithoutPropertiesLoose$2(props, _excluded$1T);
   const {
     systemProps,
     otherProps
@@ -6612,7 +6612,7 @@ function extendSxProp(props) {
 
 function r(e){var t,f,n="";if("string"==typeof e||"number"==typeof e)n+=e;else if("object"==typeof e)if(Array.isArray(e))for(t=0;t<e.length;t++)e[t]&&(f=r(e[t]))&&(n&&(n+=" "),n+=f);else for(t in e)e[t]&&(n&&(n+=" "),n+=t);return n}function clsx(){for(var e,t,f=0,n="";f<arguments.length;)(e=arguments[f++])&&(t=r(e))&&(n&&(n+=" "),n+=t);return n}
 
-const _excluded$1R = ["className", "component"];
+const _excluded$1S = ["className", "component"];
 function createBox(options = {}) {
   const {
     themeId,
@@ -6630,7 +6630,7 @@ function createBox(options = {}) {
         className,
         component = 'div'
       } = _extendSxProp,
-      other = _objectWithoutPropertiesLoose$2(_extendSxProp, _excluded$1R);
+      other = _objectWithoutPropertiesLoose$2(_extendSxProp, _excluded$1S);
     return /*#__PURE__*/jsxRuntime.jsx(BoxRoot, _extends$4({
       as: component,
       ref: ref,
@@ -6641,7 +6641,7 @@ function createBox(options = {}) {
   return Box;
 }
 
-const _excluded$1Q = ["variant"];
+const _excluded$1R = ["variant"];
 function isEmpty$4(string) {
   return string.length === 0;
 }
@@ -6655,7 +6655,7 @@ function propsToClassKey$1(props) {
   const {
       variant
     } = props,
-    other = _objectWithoutPropertiesLoose$2(props, _excluded$1Q);
+    other = _objectWithoutPropertiesLoose$2(props, _excluded$1R);
   let classKey = variant || '';
   Object.keys(other).sort().forEach(key => {
     if (key === 'color') {
@@ -6667,7 +6667,7 @@ function propsToClassKey$1(props) {
   return classKey;
 }
 
-const _excluded$1P = ["name", "slot", "skipVariantsResolver", "skipSx", "overridesResolver"];
+const _excluded$1Q = ["name", "slot", "skipVariantsResolver", "skipSx", "overridesResolver"];
 function isEmpty$3(obj) {
   return Object.keys(obj).length === 0;
 }
@@ -6759,7 +6759,7 @@ function createStyled(input = {}) {
         skipSx: inputSkipSx,
         overridesResolver
       } = inputOptions,
-      options = _objectWithoutPropertiesLoose$2(inputOptions, _excluded$1P);
+      options = _objectWithoutPropertiesLoose$2(inputOptions, _excluded$1Q);
 
     // if skipVariantsResolver option is defined, take the value, otherwise, true for root and false for other slots.
     const skipVariantsResolver = inputSkipVariantsResolver !== undefined ? inputSkipVariantsResolver : componentSlot && componentSlot !== 'Root' || false;
@@ -7127,6 +7127,89 @@ function useTheme$2() {
 
 const hasSymbol = typeof Symbol === 'function' && Symbol.for;
 var nested = hasSymbol ? Symbol.for('mui.nested') : '__THEME_NESTED__';
+
+function mergeOuterLocalTheme(outerTheme, localTheme) {
+  if (typeof localTheme === 'function') {
+    const mergedTheme = localTheme(outerTheme);
+    return mergedTheme;
+  }
+  return {
+    ...outerTheme,
+    ...localTheme
+  };
+}
+
+/**
+ * This component takes a `theme` prop.
+ * It makes the `theme` available down the React tree thanks to React context.
+ * This component should preferably be used at **the root of your component tree**.
+ */
+function ThemeProvider$2(props) {
+  const {
+    children,
+    theme: localTheme
+  } = props;
+  const outerTheme = useTheme$2();
+  const theme = React.useMemo(() => {
+    const output = outerTheme === null ? localTheme : mergeOuterLocalTheme(outerTheme, localTheme);
+    if (output != null) {
+      output[nested] = outerTheme !== null;
+    }
+    return output;
+  }, [localTheme, outerTheme]);
+  return /*#__PURE__*/jsxRuntime.jsx(ThemeContext$1.Provider, {
+    value: theme,
+    children: children
+  });
+}
+
+const EMPTY_THEME = {};
+function useThemeScoping(themeId, upperTheme, localTheme, isPrivate = false) {
+  return React.useMemo(() => {
+    const resolvedTheme = themeId ? upperTheme[themeId] || upperTheme : upperTheme;
+    if (typeof localTheme === 'function') {
+      const mergedTheme = localTheme(resolvedTheme);
+      const result = themeId ? _extends$4({}, upperTheme, {
+        [themeId]: mergedTheme
+      }) : mergedTheme;
+      // must return a function for the private theme to NOT merge with the upper theme.
+      // see the test case "use provided theme from a callback" in ThemeProvider.test.js
+      if (isPrivate) {
+        return () => result;
+      }
+      return result;
+    }
+    return themeId ? _extends$4({}, upperTheme, {
+      [themeId]: localTheme
+    }) : _extends$4({}, upperTheme, localTheme);
+  }, [themeId, upperTheme, localTheme, isPrivate]);
+}
+
+/**
+ * This component makes the `theme` available down the React tree.
+ * It should preferably be used at **the root of your component tree**.
+ *
+ * <ThemeProvider theme={theme}> // existing use case
+ * <ThemeProvider theme={{ id: theme }}> // theme scoping
+ */
+function ThemeProvider$1(props) {
+  const {
+    children,
+    theme: localTheme,
+    themeId
+  } = props;
+  const upperTheme = useTheme$4(EMPTY_THEME);
+  const upperPrivateTheme = useTheme$2() || EMPTY_THEME;
+  const engineTheme = useThemeScoping(themeId, upperTheme, localTheme);
+  const privateTheme = useThemeScoping(themeId, upperPrivateTheme, localTheme, true);
+  return /*#__PURE__*/jsxRuntime.jsx(ThemeProvider$2, {
+    theme: privateTheme,
+    children: /*#__PURE__*/jsxRuntime.jsx(ThemeContext$2.Provider, {
+      value: engineTheme,
+      children: children
+    })
+  });
+}
 
 function getDataGridUtilityClass(slot) {
   return generateUtilityClass('MuiDataGrid', slot);
@@ -8405,7 +8488,7 @@ function isLeaf(node) {
  * The union type representing the [[GridColDef]] column header class type.
  */
 
-const _excluded$1O = ["align", "children", "colIndex", "colDef", "cellMode", "field", "formattedValue", "hasFocus", "height", "isEditable", "isSelected", "rowId", "tabIndex", "value", "width", "className", "showRightBorder", "extendRowFullWidth", "row", "colSpan", "disableDragEvents", "onClick", "onDoubleClick", "onMouseDown", "onMouseUp", "onMouseOver", "onKeyDown", "onKeyUp", "onDragEnter", "onDragOver"];
+const _excluded$1P = ["align", "children", "colIndex", "colDef", "cellMode", "field", "formattedValue", "hasFocus", "height", "isEditable", "isSelected", "rowId", "tabIndex", "value", "width", "className", "showRightBorder", "extendRowFullWidth", "row", "colSpan", "disableDragEvents", "onClick", "onDoubleClick", "onMouseDown", "onMouseUp", "onMouseOver", "onKeyDown", "onKeyUp", "onDragEnter", "onDragOver"];
 // Based on https://stackoverflow.com/a/59518678
 let cachedSupportsPreventScroll;
 function doesSupportPreventScroll() {
@@ -8463,7 +8546,7 @@ const GridCell = /*#__PURE__*/React.forwardRef((props, ref) => {
       onDragEnter,
       onDragOver
     } = props,
-    other = _objectWithoutPropertiesLoose$2(props, _excluded$1O);
+    other = _objectWithoutPropertiesLoose$2(props, _excluded$1P);
   const valueToRender = formattedValue == null ? value : formattedValue;
   const cellRef = React.useRef(null);
   const handleRef = useForkRef(ref, cellRef);
@@ -8576,7 +8659,7 @@ const GridCell = /*#__PURE__*/React.forwardRef((props, ref) => {
 });
 const MemoizedCell = /*#__PURE__*/React.memo(GridCell);
 
-const _excluded$1N = ["id", "value", "formattedValue", "api", "field", "row", "rowNode", "colDef", "cellMode", "isEditable", "hasFocus", "tabIndex"];
+const _excluded$1O = ["id", "value", "formattedValue", "api", "field", "row", "rowNode", "colDef", "cellMode", "isEditable", "hasFocus", "tabIndex"];
 const useUtilityClasses$1d = ownerState => {
   const {
     classes
@@ -8590,7 +8673,7 @@ function GridBooleanCellRaw(props) {
   const {
       value
     } = props,
-    other = _objectWithoutPropertiesLoose$2(props, _excluded$1N);
+    other = _objectWithoutPropertiesLoose$2(props, _excluded$1O);
   const apiRef = useGridApiContext();
   const rootProps = useGridRootProps();
   const ownerState = {
@@ -8613,7 +8696,7 @@ const renderBooleanCell = params => {
   return /*#__PURE__*/jsxRuntime.jsx(GridBooleanCell, _extends$4({}, params));
 };
 
-const _excluded$1M = ["id", "value", "formattedValue", "api", "field", "row", "rowNode", "colDef", "cellMode", "isEditable", "tabIndex", "className", "hasFocus", "isValidating", "isProcessingProps", "error", "onValueChange"];
+const _excluded$1N = ["id", "value", "formattedValue", "api", "field", "row", "rowNode", "colDef", "cellMode", "isEditable", "tabIndex", "className", "hasFocus", "isValidating", "isProcessingProps", "error", "onValueChange"];
 const useUtilityClasses$1c = ownerState => {
   const {
     classes
@@ -8633,7 +8716,7 @@ function GridEditBooleanCell(props) {
       hasFocus,
       onValueChange
     } = props,
-    other = _objectWithoutPropertiesLoose$2(props, _excluded$1M);
+    other = _objectWithoutPropertiesLoose$2(props, _excluded$1N);
   const apiRef = useGridApiContext();
   const inputRef = React.useRef(null);
   const id = useId();
@@ -8844,7 +8927,7 @@ function mergeSlotProps(parameters) {
   };
 }
 
-const _excluded$1L = ["elementType", "externalSlotProps", "ownerState"];
+const _excluded$1M = ["elementType", "externalSlotProps", "ownerState"];
 /**
  * @ignore - do not document.
  * Builds the props to be passed into the slot of an unstyled component.
@@ -8860,7 +8943,7 @@ function useSlotProps(parameters) {
       externalSlotProps,
       ownerState
     } = parameters,
-    rest = _objectWithoutPropertiesLoose$2(parameters, _excluded$1L);
+    rest = _objectWithoutPropertiesLoose$2(parameters, _excluded$1M);
   const resolvedComponentsProps = resolveComponentProps(externalSlotProps, ownerState);
   const {
     props: mergedProps,
@@ -11161,7 +11244,7 @@ function getPopperUtilityClass(slot) {
 }
 generateUtilityClasses('MuiPopper', ['root']);
 
-const _excluded$1K = ["anchorEl", "children", "direction", "disablePortal", "modifiers", "open", "placement", "popperOptions", "popperRef", "slotProps", "slots", "TransitionProps", "ownerState"],
+const _excluded$1L = ["anchorEl", "children", "direction", "disablePortal", "modifiers", "open", "placement", "popperOptions", "popperRef", "slotProps", "slots", "TransitionProps", "ownerState"],
   _excluded2$a = ["anchorEl", "children", "container", "direction", "disablePortal", "keepMounted", "modifiers", "open", "placement", "popperOptions", "popperRef", "style", "transition", "slotProps", "slots"];
 function flipPlacement(placement, direction) {
   if (direction === 'ltr') {
@@ -11211,7 +11294,7 @@ const PopperTooltip = /*#__PURE__*/React.forwardRef(function PopperTooltip(props
       // @ts-ignore internal logic
       // prevent from spreading to DOM, it can come from the parent component e.g. Select.
     } = props,
-    other = _objectWithoutPropertiesLoose$2(props, _excluded$1K);
+    other = _objectWithoutPropertiesLoose$2(props, _excluded$1L);
   const tooltipRef = React.useRef(null);
   const ownRef = useForkRef(tooltipRef, forwardedRef);
   const popperRef = React.useRef(null);
@@ -11612,7 +11695,7 @@ function getModalUtilityClass(slot) {
 }
 generateUtilityClasses('MuiModal', ['root', 'hidden', 'backdrop']);
 
-const _excluded$1J = ["children", "closeAfterTransition", "container", "disableAutoFocus", "disableEnforceFocus", "disableEscapeKeyDown", "disablePortal", "disableRestoreFocus", "disableScrollLock", "hideBackdrop", "keepMounted", "manager", "onBackdropClick", "onClose", "onKeyDown", "open", "onTransitionEnter", "onTransitionExited", "slotProps", "slots"];
+const _excluded$1K = ["children", "closeAfterTransition", "container", "disableAutoFocus", "disableEnforceFocus", "disableEscapeKeyDown", "disablePortal", "disableRestoreFocus", "disableScrollLock", "hideBackdrop", "keepMounted", "manager", "onBackdropClick", "onClose", "onKeyDown", "open", "onTransitionEnter", "onTransitionExited", "slotProps", "slots"];
 const useUtilityClasses$1a = ownerState => {
   const {
     open,
@@ -11681,7 +11764,7 @@ const Modal$2 = /*#__PURE__*/React.forwardRef(function Modal(props, forwardedRef
       slotProps = {},
       slots = {}
     } = props,
-    other = _objectWithoutPropertiesLoose$2(props, _excluded$1J);
+    other = _objectWithoutPropertiesLoose$2(props, _excluded$1K);
   // TODO: `modal`` must change its type in this file to match the type of methods
   // provided by `ModalManager`
   const manager = managerProp;
@@ -11863,11 +11946,11 @@ const Modal$2 = /*#__PURE__*/React.forwardRef(function Modal(props, forwardedRef
 });
 var ModalUnstyled = Modal$2;
 
-const _excluded$1I = ["onChange", "maxRows", "minRows", "style", "value"];
+const _excluded$1J = ["onChange", "maxRows", "minRows", "style", "value"];
 function getStyleValue(value) {
   return parseInt(value, 10) || 0;
 }
-const styles$2 = {
+const styles$3 = {
   shadow: {
     // Visibility needed to hide the extra text area on iPads
     visibility: 'hidden',
@@ -11905,7 +11988,7 @@ const TextareaAutosize = /*#__PURE__*/React.forwardRef(function TextareaAutosize
       style,
       value
     } = props,
-    other = _objectWithoutPropertiesLoose$2(props, _excluded$1I);
+    other = _objectWithoutPropertiesLoose$2(props, _excluded$1J);
   const {
     current: isControlled
   } = React.useRef(value != null);
@@ -12068,7 +12151,7 @@ const TextareaAutosize = /*#__PURE__*/React.forwardRef(function TextareaAutosize
       readOnly: true,
       ref: shadowRef,
       tabIndex: -1,
-      style: _extends$4({}, styles$2.shadow, style, {
+      style: _extends$4({}, styles$3.shadow, style, {
         padding: 0
       })
     })]
@@ -13184,7 +13267,7 @@ const green = {
 };
 var green$1 = green;
 
-const _excluded$1H = ["mode", "contrastThreshold", "tonalOffset"];
+const _excluded$1I = ["mode", "contrastThreshold", "tonalOffset"];
 const light = {
   // The colors used to style the text.
   text: {
@@ -13353,7 +13436,7 @@ function createPalette(palette) {
       contrastThreshold = 3,
       tonalOffset = 0.2
     } = palette,
-    other = _objectWithoutPropertiesLoose$2(palette, _excluded$1H);
+    other = _objectWithoutPropertiesLoose$2(palette, _excluded$1I);
   const primary = palette.primary || getDefaultPrimary(mode);
   const secondary = palette.secondary || getDefaultSecondary(mode);
   const error = palette.error || getDefaultError(mode);
@@ -13452,7 +13535,7 @@ function createPalette(palette) {
   return paletteOutput;
 }
 
-const _excluded$1G = ["fontFamily", "fontSize", "fontWeightLight", "fontWeightRegular", "fontWeightMedium", "fontWeightBold", "htmlFontSize", "allVariants", "pxToRem"];
+const _excluded$1H = ["fontFamily", "fontSize", "fontWeightLight", "fontWeightRegular", "fontWeightMedium", "fontWeightBold", "htmlFontSize", "allVariants", "pxToRem"];
 function round$1(value) {
   return Math.round(value * 1e5) / 1e5;
 }
@@ -13483,7 +13566,7 @@ function createTypography(palette, typography) {
       allVariants,
       pxToRem: pxToRem2
     } = _ref,
-    other = _objectWithoutPropertiesLoose$2(_ref, _excluded$1G);
+    other = _objectWithoutPropertiesLoose$2(_ref, _excluded$1H);
   const coef = fontSize / 14;
   const pxToRem = pxToRem2 || (size => `${size / htmlFontSize * coef}rem`);
   const buildVariant = (fontWeight, size, lineHeight, letterSpacing, casing) => _extends$4({
@@ -13542,7 +13625,7 @@ function createShadow(...px) {
 const shadows = ['none', createShadow(0, 2, 1, -1, 0, 1, 1, 0, 0, 1, 3, 0), createShadow(0, 3, 1, -2, 0, 2, 2, 0, 0, 1, 5, 0), createShadow(0, 3, 3, -2, 0, 3, 4, 0, 0, 1, 8, 0), createShadow(0, 2, 4, -1, 0, 4, 5, 0, 0, 1, 10, 0), createShadow(0, 3, 5, -1, 0, 5, 8, 0, 0, 1, 14, 0), createShadow(0, 3, 5, -1, 0, 6, 10, 0, 0, 1, 18, 0), createShadow(0, 4, 5, -2, 0, 7, 10, 1, 0, 2, 16, 1), createShadow(0, 5, 5, -3, 0, 8, 10, 1, 0, 3, 14, 2), createShadow(0, 5, 6, -3, 0, 9, 12, 1, 0, 3, 16, 2), createShadow(0, 6, 6, -3, 0, 10, 14, 1, 0, 4, 18, 3), createShadow(0, 6, 7, -4, 0, 11, 15, 1, 0, 4, 20, 3), createShadow(0, 7, 8, -4, 0, 12, 17, 2, 0, 5, 22, 4), createShadow(0, 7, 8, -4, 0, 13, 19, 2, 0, 5, 24, 4), createShadow(0, 7, 9, -4, 0, 14, 21, 2, 0, 5, 26, 4), createShadow(0, 8, 9, -5, 0, 15, 22, 2, 0, 6, 28, 5), createShadow(0, 8, 10, -5, 0, 16, 24, 2, 0, 6, 30, 5), createShadow(0, 8, 11, -5, 0, 17, 26, 2, 0, 6, 32, 5), createShadow(0, 9, 11, -5, 0, 18, 28, 2, 0, 7, 34, 6), createShadow(0, 9, 12, -6, 0, 19, 29, 2, 0, 7, 36, 6), createShadow(0, 10, 13, -6, 0, 20, 31, 3, 0, 8, 38, 7), createShadow(0, 10, 13, -6, 0, 21, 33, 3, 0, 8, 40, 7), createShadow(0, 10, 14, -6, 0, 22, 35, 3, 0, 8, 42, 7), createShadow(0, 11, 14, -7, 0, 23, 36, 3, 0, 9, 44, 8), createShadow(0, 11, 15, -7, 0, 24, 38, 3, 0, 9, 46, 8)];
 var shadows$1 = shadows;
 
-const _excluded$1F = ["duration", "easing", "delay"];
+const _excluded$1G = ["duration", "easing", "delay"];
 // Follow https://material.google.com/motion/duration-easing.html#duration-easing-natural-easing-curves
 // to learn the context in which each easing should be used.
 const easing = {
@@ -13593,7 +13676,7 @@ function createTransitions(inputTransitions) {
         easing: easingOption = mergedEasing.easeInOut,
         delay = 0
       } = options;
-      _objectWithoutPropertiesLoose$2(options, _excluded$1F);
+      _objectWithoutPropertiesLoose$2(options, _excluded$1G);
     return (Array.isArray(props) ? props : [props]).map(animatedProp => `${animatedProp} ${typeof durationOption === 'string' ? durationOption : formatMs(durationOption)} ${easingOption} ${typeof delay === 'string' ? delay : formatMs(delay)}`).join(',');
   };
   return _extends$4({
@@ -13619,7 +13702,7 @@ const zIndex = {
 };
 var zIndex$1 = zIndex;
 
-const _excluded$1E = ["breakpoints", "mixins", "spacing", "palette", "transitions", "typography", "shape"];
+const _excluded$1F = ["breakpoints", "mixins", "spacing", "palette", "transitions", "typography", "shape"];
 function createTheme(options = {}, ...args) {
   const {
       mixins: mixinsInput = {},
@@ -13627,7 +13710,7 @@ function createTheme(options = {}, ...args) {
       transitions: transitionsInput = {},
       typography: typographyInput = {}
     } = options,
-    other = _objectWithoutPropertiesLoose$2(options, _excluded$1E);
+    other = _objectWithoutPropertiesLoose$2(options, _excluded$1F);
   if (options.vars) {
     throw new Error(formatMuiErrorMessage(18));
   }
@@ -13724,7 +13807,7 @@ function getInputBaseUtilityClass(slot) {
 const inputBaseClasses = generateUtilityClasses('MuiInputBase', ['root', 'formControl', 'focused', 'disabled', 'adornedStart', 'adornedEnd', 'error', 'sizeSmall', 'multiline', 'colorSecondary', 'fullWidth', 'hiddenLabel', 'readOnly', 'input', 'inputSizeSmall', 'inputMultiline', 'inputTypeSearch', 'inputAdornedStart', 'inputAdornedEnd', 'inputHiddenLabel']);
 var inputBaseClasses$1 = inputBaseClasses;
 
-const _excluded$1D = ["aria-describedby", "autoComplete", "autoFocus", "className", "color", "components", "componentsProps", "defaultValue", "disabled", "disableInjectingGlobalStyles", "endAdornment", "error", "fullWidth", "id", "inputComponent", "inputProps", "inputRef", "margin", "maxRows", "minRows", "multiline", "name", "onBlur", "onChange", "onClick", "onFocus", "onKeyDown", "onKeyUp", "placeholder", "readOnly", "renderSuffix", "rows", "size", "slotProps", "slots", "startAdornment", "type", "value"];
+const _excluded$1E = ["aria-describedby", "autoComplete", "autoFocus", "className", "color", "components", "componentsProps", "defaultValue", "disabled", "disableInjectingGlobalStyles", "endAdornment", "error", "fullWidth", "id", "inputComponent", "inputProps", "inputRef", "margin", "maxRows", "minRows", "multiline", "name", "onBlur", "onChange", "onClick", "onFocus", "onKeyDown", "onKeyUp", "placeholder", "readOnly", "renderSuffix", "rows", "size", "slotProps", "slots", "startAdornment", "type", "value"];
 const rootOverridesResolver = (props, styles) => {
   const {
     ownerState
@@ -13955,7 +14038,7 @@ const InputBase = /*#__PURE__*/React.forwardRef(function InputBase(inProps, ref)
       type = 'text',
       value: valueProp
     } = props,
-    other = _objectWithoutPropertiesLoose$2(props, _excluded$1D);
+    other = _objectWithoutPropertiesLoose$2(props, _excluded$1E);
   const value = inputPropsProp.value != null ? inputPropsProp.value : valueProp;
   const {
     current: isControlled
@@ -14177,6 +14260,19 @@ function toUnitless(length) {
 function useTheme$1() {
   const theme = useTheme$3(defaultTheme$2);
   return theme[THEME_ID] || theme;
+}
+
+const _excluded$1D = ["theme"];
+function ThemeProvider(_ref) {
+  let {
+      theme: themeInput
+    } = _ref,
+    props = _objectWithoutPropertiesLoose$2(_ref, _excluded$1D);
+  const scopedTheme = themeInput[THEME_ID];
+  return /*#__PURE__*/jsxRuntime.jsx(ThemeProvider$1, _extends$4({}, props, {
+    themeId: scopedTheme ? THEME_ID : undefined,
+    theme: scopedTheme || themeInput
+  }));
 }
 
 // Inspired by https://github.com/material-components/material-components-ios/blob/bca36107405594d5b7b16265a5b0ed698f85a5ee/components/Elevation/src/UIColor%2BMaterialElevation.m#L61
@@ -15781,7 +15877,7 @@ const _excluded$1x = ["addEndListener", "appear", "children", "easing", "in", "o
 function getScale(value) {
   return `scale(${value}, ${value ** 2})`;
 }
-const styles$1 = {
+const styles$2 = {
   entering: {
     opacity: 1,
     transform: getScale(1)
@@ -15942,7 +16038,7 @@ const Grow = /*#__PURE__*/React.forwardRef(function Grow(props, ref) {
           opacity: 0,
           transform: getScale(0.75),
           visibility: state === 'exited' && !inProp ? 'hidden' : undefined
-        }, styles$1[state], style, children.props.style),
+        }, styles$2[state], style, children.props.style),
         ref: handleRef
       }, childProps));
     }
@@ -23316,7 +23412,7 @@ function getFilledInputUtilityClass(slot) {
 const filledInputClasses = _extends$4({}, inputBaseClasses$1, generateUtilityClasses('MuiFilledInput', ['root', 'underline', 'input']));
 var filledInputClasses$1 = filledInputClasses;
 
-var ClearIcon$1 = createSvgIcon( /*#__PURE__*/jsxRuntime.jsx("path", {
+var ClearIcon = createSvgIcon( /*#__PURE__*/jsxRuntime.jsx("path", {
   d: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
 }), 'Close');
 
@@ -23684,7 +23780,7 @@ const Autocomplete = /*#__PURE__*/React.forwardRef(function Autocomplete(inProps
       blurOnSelect = false,
       ChipProps,
       className,
-      clearIcon = _ClearIcon || (_ClearIcon = /*#__PURE__*/jsxRuntime.jsx(ClearIcon$1, {
+      clearIcon = _ClearIcon || (_ClearIcon = /*#__PURE__*/jsxRuntime.jsx(ClearIcon, {
         fontSize: "small"
       })),
       clearOnBlur = !props.freeSolo,
@@ -25150,7 +25246,7 @@ const FormHelperText = /*#__PURE__*/React.forwardRef(function FormHelperText(inP
 var FormHelperText$1 = FormHelperText;
 
 const _excluded$D = ["addEndListener", "appear", "children", "easing", "in", "onEnter", "onEntered", "onEntering", "onExit", "onExited", "onExiting", "style", "timeout", "TransitionComponent"];
-const styles = {
+const styles$1 = {
   entering: {
     opacity: 1
   },
@@ -25259,7 +25355,7 @@ const Fade = /*#__PURE__*/React.forwardRef(function Fade(props, ref) {
         style: _extends$4({
           opacity: 0,
           visibility: state === 'exited' && !inProp ? 'hidden' : undefined
-        }, styles[state], style, children.props.style),
+        }, styles$1[state], style, children.props.style),
         ref: handleRef
       }, childProps));
     }
@@ -43229,17 +43325,18 @@ var LockOutlinedIcon = /*@__PURE__*/getDefaultExportFromCjs(LockOutlined);
 function PathCell(props) {
   var value = props.value,
       row = props.row;
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    style: {
-      cursor: 'auto'
-    }
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Tooltip$1, {
+    title: value,
+    enterDelay: 500
   }, /*#__PURE__*/React.createElement(Typography$1, {
     variant: "body2",
     style: {
       padding: 16,
       display: 'flex',
       alignItems: 'center',
-      flexWrap: 'wrap'
+      flexWrap: 'wrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
     }
   }, row.lockOwner && /*#__PURE__*/React.createElement(LockOutlinedIcon, {
     style: {
@@ -43249,65 +43346,7 @@ function PathCell(props) {
 }
 
 /*
- * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License version 3 as published by
- * the Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-function MediaCell(props) {
-  var value = props.value;
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    style: {
-      cursor: 'pointer'
-    }
-  }, /*#__PURE__*/React.createElement(Typography$1, {
-    variant: "body2",
-    style: {
-      padding: 16
-    }
-  }, value)));
-}
-
-/*
- * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License version 3 as published by
- * the Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-function RTECell(props) {
-  var value = props.value;
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    style: {
-      cursor: 'pointer'
-    }
-  }, /*#__PURE__*/React.createElement(Typography$1, {
-    variant: "body2",
-    style: {
-      padding: 16
-    }
-  }, value)));
-}
-
-/*
- * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2023 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -43322,16 +43361,19 @@ function RTECell(props) {
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 function DefaultCell(props) {
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    style: {
-      cursor: 'pointer'
-    }
+  var value = props.value;
+  var displayText = value !== null && value !== void 0 ? value : "Click to view or edit";
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Tooltip$1, {
+    title: displayText,
+    enterDelay: 500
   }, /*#__PURE__*/React.createElement(Typography$1, {
     variant: "body2",
     style: {
-      padding: 16
+      padding: 16,
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
     }
-  }, "Click to view or edit")));
+  }, displayText)));
 }
 
 var Preview = createCommonjsModule(function (module, exports) {
@@ -43770,23 +43812,6 @@ exports.default = _default;
 
 var LockOpenOutlinedIcon = /*@__PURE__*/getDefaultExportFromCjs(LockOpenOutlined);
 
-var Clear = createCommonjsModule(function (module, exports) {
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _createSvgIcon = interopRequireDefault(require$$0$1);
-
-var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
-  d: "M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-}), 'Clear');
-exports.default = _default;
-});
-
-var ClearIcon = /*@__PURE__*/getDefaultExportFromCjs(Clear);
-
 /*
  * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
  *
@@ -43838,7 +43863,7 @@ function RowActionMenu(_ref) {
     primary: "Save Item"
   })), /*#__PURE__*/React.createElement(MenuItem$1, {
     onClick: handleClearAction
-  }, /*#__PURE__*/React.createElement(ListItemIcon$1, null, /*#__PURE__*/React.createElement(ClearIcon, null)), /*#__PURE__*/React.createElement(ListItemText$1, {
+  }, /*#__PURE__*/React.createElement(ListItemIcon$1, null, /*#__PURE__*/React.createElement(ClearIcon$1, null)), /*#__PURE__*/React.createElement(ListItemText$1, {
     primary: "Clear Change"
   })));
 }
@@ -43860,15 +43885,23 @@ function RowActionMenu(_ref) {
  */
 var ContentTypeHelper = {
   FIELD_TYPE_INPUT: 'input',
+  FIELD_TYPE_NUMERIC_INPUT: 'numeric-input',
   FIELD_TYPE_TEXTAREA: 'textarea',
   FIELD_TYPE_RTE: 'rte',
   FIELD_TYPE_VIDEO_PICKER: 'video-picker',
   FIELD_TYPE_IMAGE_PICKER: 'image-picker',
-  supportedFieldTypes: function supportedFieldTypes() {
-    return [ContentTypeHelper.FIELD_TYPE_INPUT, ContentTypeHelper.FIELD_TYPE_TEXTAREA, ContentTypeHelper.FIELD_TYPE_RTE, ContentTypeHelper.FIELD_TYPE_VIDEO_PICKER, ContentTypeHelper.FIELD_TYPE_IMAGE_PICKER];
+  FIELD_TYPE_AUTO_FILENAME: 'auto-filename',
+  renderableFieldTypes: function renderableFieldTypes() {
+    return [ContentTypeHelper.FIELD_TYPE_INPUT, ContentTypeHelper.FIELD_TYPE_NUMERIC_INPUT, ContentTypeHelper.FIELD_TYPE_TEXTAREA, ContentTypeHelper.FIELD_TYPE_RTE, ContentTypeHelper.FIELD_TYPE_VIDEO_PICKER, ContentTypeHelper.FIELD_TYPE_IMAGE_PICKER];
+  },
+  unsupportedFieldTypes: function unsupportedFieldTypes() {
+    return [ContentTypeHelper.FIELD_TYPE_AUTO_FILENAME];
   },
   isRenderableFieldType: function isRenderableFieldType(fieldType) {
-    return ContentTypeHelper.supportedFieldTypes().includes(fieldType);
+    return ContentTypeHelper.renderableFieldTypes().includes(fieldType);
+  },
+  isUnsupportedFieldType: function isUnsupportedFieldType(fieldType) {
+    return ContentTypeHelper.unsupportedFieldTypes().includes(fieldType);
   },
   isMediaType: function isMediaType(fieldType) {
     return ContentTypeHelper.FIELD_TYPE_VIDEO_PICKER === fieldType || ContentTypeHelper.FIELD_TYPE_IMAGE_PICKER === fieldType;
@@ -43972,18 +44005,22 @@ var getDisplayFieldsFromConfig = function getDisplayFieldsFromConfig(config) {
   var xmlDoc = new DOMParser().parseFromString(config, 'text/xml');
   var xpath = '/form/sections/section/fields/field';
   var result = xmlDoc.evaluate(xpath, xmlDoc, null, XPathResult.ANY_TYPE, null);
-  var node = result.iterateNext();
   var headers = [];
+  var node = result.iterateNext();
 
   while (node) {
     var fieldType = node.getElementsByTagName('type')[0].textContent;
-    var fieldId = node.getElementsByTagName('id')[0].textContent;
-    var title = node.getElementsByTagName('title')[0].textContent;
-    headers.push({
-      fieldId: fieldId,
-      fieldType: fieldType,
-      title: title
-    });
+
+    if (!ContentTypeHelper.isUnsupportedFieldType(fieldType)) {
+      var fieldId = node.getElementsByTagName('id')[0].textContent;
+      var title = node.getElementsByTagName('title')[0].textContent;
+      headers.push({
+        fieldId: fieldId,
+        fieldType: fieldType,
+        title: title
+      });
+    }
+
     node = result.iterateNext();
   }
 
@@ -44039,11 +44076,7 @@ var buildColumnsFromDisplayFields = function buildColumnsFromDisplayFields(displ
         fieldType: fieldType
       };
 
-      if (fieldType === ContentTypeHelper.FIELD_TYPE_RTE) {
-        column.renderCell = RTECell;
-      } else if (ContentTypeHelper.isMediaType(fieldType)) {
-        column.renderCell = MediaCell;
-      } else if (!ContentTypeHelper.isRenderableFieldType(fieldType)) {
+      if (fieldType === ContentTypeHelper.FIELD_TYPE_RTE || ContentTypeHelper.isMediaType(fieldType) || !ContentTypeHelper.isRenderableFieldType(fieldType)) {
         column.renderCell = DefaultCell;
       }
 
@@ -44593,7 +44626,7 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
     }
 
     var fieldType = model.colDef.fieldType;
-    var fieldName = model.colDef.fieldName;
+    var fieldName = model.colDef.field;
     var openEditForm = fieldName !== 'path' && (ContentTypeHelper.isMediaType(fieldType) || ContentTypeHelper.isRteType(fieldType) || !ContentTypeHelper.isRenderableFieldType(fieldType));
 
     if (openEditForm) {
@@ -44907,8 +44940,12 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
     loading: loading,
     disableSelectionOnClick: true,
     editRowsModel: editRowsModel,
-    columnVisibilityModel: {
-      id: false
+    initialState: {
+      columns: {
+        columnVisibilityModel: {
+          id: false
+        }
+      }
     },
     onCellClick: handleOnCellClick,
     getCellClassName: function getCellClassName(params) {
@@ -45085,7 +45122,7 @@ function Editor() {
     sx: {
       mr: 2
     }
-  }, /*#__PURE__*/React.createElement(ClearAllIcon, null))))));
+  }, /*#__PURE__*/React.createElement(ClearIcon$1, null))))));
   var drawer = /*#__PURE__*/React.createElement(Drawer, {
     variant: "persistent",
     sx: {
@@ -45147,10 +45184,10 @@ function Editor() {
   })), /*#__PURE__*/React.createElement(ListItemButton, {
     key: TEXT_CANCEL,
     onClick: handleCancelAllChangeClick
-  }, /*#__PURE__*/React.createElement(ListItemIcon$2, null, /*#__PURE__*/React.createElement(ClearAllIcon, null)), /*#__PURE__*/React.createElement(ListItemText$2, {
+  }, /*#__PURE__*/React.createElement(ListItemIcon$2, null, /*#__PURE__*/React.createElement(ClearIcon$1, null)), /*#__PURE__*/React.createElement(ListItemText$2, {
     primary: TEXT_CANCEL
   }))), /*#__PURE__*/React.createElement(Divider$2, null));
-  return /*#__PURE__*/React.createElement(Box$2, null, /*#__PURE__*/React.createElement(CssBaseline, null), appbar, /*#__PURE__*/React.createElement("section", {
+  return /*#__PURE__*/React.createElement(Box$2, null, /*#__PURE__*/React.createElement(CssBaseline$1, null), appbar, /*#__PURE__*/React.createElement("section", {
     id: "drawer-container",
     position: "relative",
     bgcolor: "white",
@@ -45256,6 +45293,191 @@ function MainDialog() {
   }, /*#__PURE__*/React.createElement(Editor, null))));
 }
 
+/**
+ * @deprecated Not used internally. Use `MediaQueryListEvent` from lib.dom.d.ts instead.
+ */
+
+/**
+ * @deprecated Not used internally. Use `MediaQueryList` from lib.dom.d.ts instead.
+ */
+
+/**
+ * @deprecated Not used internally. Use `(event: MediaQueryListEvent) => void` instead.
+ */
+
+function useMediaQueryOld(query, defaultMatches, matchMedia, ssrMatchMedia, noSsr) {
+  const [match, setMatch] = React.useState(() => {
+    if (noSsr && matchMedia) {
+      return matchMedia(query).matches;
+    }
+    if (ssrMatchMedia) {
+      return ssrMatchMedia(query).matches;
+    }
+
+    // Once the component is mounted, we rely on the
+    // event listeners to return the correct matches value.
+    return defaultMatches;
+  });
+  useEnhancedEffect$1(() => {
+    let active = true;
+    if (!matchMedia) {
+      return undefined;
+    }
+    const queryList = matchMedia(query);
+    const updateMatch = () => {
+      // Workaround Safari wrong implementation of matchMedia
+      // TODO can we remove it?
+      // https://github.com/mui/material-ui/pull/17315#issuecomment-528286677
+      if (active) {
+        setMatch(queryList.matches);
+      }
+    };
+    updateMatch();
+    // TODO: Use `addEventListener` once support for Safari < 14 is dropped
+    queryList.addListener(updateMatch);
+    return () => {
+      active = false;
+      queryList.removeListener(updateMatch);
+    };
+  }, [query, matchMedia]);
+  return match;
+}
+
+// eslint-disable-next-line no-useless-concat -- Workaround for https://github.com/webpack/webpack/issues/14814
+const maybeReactUseSyncExternalStore = React['useSyncExternalStore' + ''];
+function useMediaQueryNew(query, defaultMatches, matchMedia, ssrMatchMedia, noSsr) {
+  const getDefaultSnapshot = React.useCallback(() => defaultMatches, [defaultMatches]);
+  const getServerSnapshot = React.useMemo(() => {
+    if (noSsr && matchMedia) {
+      return () => matchMedia(query).matches;
+    }
+    if (ssrMatchMedia !== null) {
+      const {
+        matches
+      } = ssrMatchMedia(query);
+      return () => matches;
+    }
+    return getDefaultSnapshot;
+  }, [getDefaultSnapshot, query, ssrMatchMedia, noSsr, matchMedia]);
+  const [getSnapshot, subscribe] = React.useMemo(() => {
+    if (matchMedia === null) {
+      return [getDefaultSnapshot, () => () => {}];
+    }
+    const mediaQueryList = matchMedia(query);
+    return [() => mediaQueryList.matches, notify => {
+      // TODO: Use `addEventListener` once support for Safari < 14 is dropped
+      mediaQueryList.addListener(notify);
+      return () => {
+        mediaQueryList.removeListener(notify);
+      };
+    }];
+  }, [getDefaultSnapshot, matchMedia, query]);
+  const match = maybeReactUseSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  return match;
+}
+function useMediaQuery(queryInput, options = {}) {
+  const theme = useTheme$4();
+  // Wait for jsdom to support the match media feature.
+  // All the browsers MUI support have this built-in.
+  // This defensive check is here for simplicity.
+  // Most of the time, the match media logic isn't central to people tests.
+  const supportMatchMedia = typeof window !== 'undefined' && typeof window.matchMedia !== 'undefined';
+  const {
+    defaultMatches = false,
+    matchMedia = supportMatchMedia ? window.matchMedia : null,
+    ssrMatchMedia = null,
+    noSsr = false
+  } = getThemeProps({
+    name: 'MuiUseMediaQuery',
+    props: options,
+    theme
+  });
+  let query = typeof queryInput === 'function' ? queryInput(theme) : queryInput;
+  query = query.replace(/^@media( ?)/m, '');
+
+  // TODO: Drop `useMediaQueryOld` and use  `use-sync-external-store` shim in `useMediaQueryNew` once the package is stable
+  const useMediaQueryImplementation = maybeReactUseSyncExternalStore !== undefined ? useMediaQueryNew : useMediaQueryOld;
+  const match = useMediaQueryImplementation(query, defaultMatches, matchMedia, ssrMatchMedia, noSsr);
+  return match;
+}
+
+const html = (theme, enableColorScheme) => _extends$4({
+  WebkitFontSmoothing: 'antialiased',
+  // Antialiasing.
+  MozOsxFontSmoothing: 'grayscale',
+  // Antialiasing.
+  // Change from `box-sizing: content-box` so that `width`
+  // is not affected by `padding` or `border`.
+  boxSizing: 'border-box',
+  // Fix font resize problem in iOS
+  WebkitTextSizeAdjust: '100%'
+}, enableColorScheme && !theme.vars && {
+  colorScheme: theme.palette.mode
+});
+const body = theme => _extends$4({
+  color: (theme.vars || theme).palette.text.primary
+}, theme.typography.body1, {
+  backgroundColor: (theme.vars || theme).palette.background.default,
+  '@media print': {
+    // Save printer ink.
+    backgroundColor: (theme.vars || theme).palette.common.white
+  }
+});
+const styles = (theme, enableColorScheme = false) => {
+  var _theme$components, _theme$components$Mui;
+  const colorSchemeStyles = {};
+  if (enableColorScheme && theme.colorSchemes) {
+    Object.entries(theme.colorSchemes).forEach(([key, scheme]) => {
+      var _scheme$palette;
+      colorSchemeStyles[theme.getColorSchemeSelector(key).replace(/\s*&/, '')] = {
+        colorScheme: (_scheme$palette = scheme.palette) == null ? void 0 : _scheme$palette.mode
+      };
+    });
+  }
+  let defaultStyles = _extends$4({
+    html: html(theme, enableColorScheme),
+    '*, *::before, *::after': {
+      boxSizing: 'inherit'
+    },
+    'strong, b': {
+      fontWeight: theme.typography.fontWeightBold
+    },
+    body: _extends$4({
+      margin: 0
+    }, body(theme), {
+      // Add support for document.body.requestFullScreen().
+      // Other elements, if background transparent, are not supported.
+      '&::backdrop': {
+        backgroundColor: (theme.vars || theme).palette.background.default
+      }
+    })
+  }, colorSchemeStyles);
+  const themeOverrides = (_theme$components = theme.components) == null ? void 0 : (_theme$components$Mui = _theme$components.MuiCssBaseline) == null ? void 0 : _theme$components$Mui.styleOverrides;
+  if (themeOverrides) {
+    defaultStyles = [defaultStyles, themeOverrides];
+  }
+  return defaultStyles;
+};
+
+/**
+ * Kickstart an elegant, consistent, and simple baseline to build upon.
+ */
+function CssBaseline(inProps) {
+  const props = useThemeProps({
+    props: inProps,
+    name: 'MuiCssBaseline'
+  });
+  const {
+    children,
+    enableColorScheme = false
+  } = props;
+  return /*#__PURE__*/jsxRuntime.jsxs(React.Fragment, {
+    children: [/*#__PURE__*/jsxRuntime.jsx(GlobalStyles, {
+      styles: theme => styles(theme, enableColorScheme)
+    }), children]
+  });
+}
+
 /*
  * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
  *
@@ -45273,9 +45495,19 @@ function MainDialog() {
  */
 
 function BulkEditApp() {
-  return /*#__PURE__*/React.createElement(Stack, {
+  var prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  var theme = React.useMemo(function () {
+    return createTheme({
+      palette: {
+        mode: prefersDarkMode ? 'dark' : 'light'
+      }
+    });
+  }, [prefersDarkMode]);
+  return /*#__PURE__*/React.createElement(ThemeProvider, {
+    theme: theme
+  }, /*#__PURE__*/React.createElement(CssBaseline, null), /*#__PURE__*/React.createElement(Stack, {
     spacing: 2
-  }, /*#__PURE__*/React.createElement(MainDialog, null));
+  }, /*#__PURE__*/React.createElement(MainDialog, null)));
 }
 
 /*

@@ -17,22 +17,24 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { Tooltip } from '@mui/material';
+
 
 export default function PathCell(props) {
   const { value, row } = props;
 
   return (
     <>
-      <div
-        style={{ cursor: 'auto' }}
-      >
+      <Tooltip title={value} enterDelay={500}>
         <Typography
           variant="body2"
           style={{
             padding: 16,
             display: 'flex',
             alignItems: 'center',
-            flexWrap: 'wrap'
+            flexWrap: 'wrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis'
           }}
         >
           {row.lockOwner && (
@@ -40,7 +42,7 @@ export default function PathCell(props) {
           )}
           {value}
         </Typography>
-      </div>
+      </Tooltip>
     </>
   );
 };

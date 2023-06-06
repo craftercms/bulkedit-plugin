@@ -23,8 +23,6 @@ import {
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import PathCell from './PathCell';
-import MediaCell from './MediaCell';
-import RTECell from './RTECell';
 import DefaultCell from './DefaultCell';
 import CellActionMenu from './CellActionMenu';
 import SaveProgress from './SaveProgress';
@@ -38,7 +36,7 @@ import {
 } from '../services/subscribe';
 import StudioAPI from '../api/studio';
 import ActionHelper from '../helpers/action';
-import ContentTypeHelper from '../helpers/content_type';
+import ContentTypeHelper from '../helpers/ContentTypeHelper';
 import DialogHelper from '../helpers/dialog';
 
 const DEFAULT_PAGE_SIZE = 9;
@@ -68,14 +66,16 @@ const getDisplayFieldsFromConfig = (config) => {
   const xmlDoc = (new DOMParser()).parseFromString(config, 'text/xml');
   const xpath = '/form/sections/section/fields/field';
   const result = xmlDoc.evaluate(xpath, xmlDoc, null, XPathResult.ANY_TYPE, null);
-  let node = result.iterateNext();
+
   const headers = [];
+  let node = result.iterateNext();
   while (node) {
     const fieldType = node.getElementsByTagName('type')[0].textContent;
-
-    const fieldId = node.getElementsByTagName('id')[0].textContent;
-    const title = node.getElementsByTagName('title')[0].textContent;
-    headers.push({ fieldId, fieldType, title });
+    if (!ContentTypeHelper.isUnsupportedFieldType(fieldType)) {
+      const fieldId = node.getElementsByTagName('id')[0].textContent;
+      const title = node.getElementsByTagName('title')[0].textContent;
+      headers.push({ fieldId, fieldType, title });
+    }
 
     node = result.iterateNext();
   }
@@ -127,11 +127,9 @@ const buildColumnsFromDisplayFields = (displayFields) => {
       fieldType,
     };
 
-    if (fieldType === ContentTypeHelper.FIELD_TYPE_RTE) {
-      column.renderCell = RTECell;
-    } else if (ContentTypeHelper.isMediaType(fieldType)) {
-      column.renderCell = MediaCell;
-    } else if (!ContentTypeHelper.isRenderableFieldType(fieldType)) {
+    if (fieldType === ContentTypeHelper.FIELD_TYPE_RTE ||
+                      ContentTypeHelper.isMediaType(fieldType) ||
+                      !ContentTypeHelper.isRenderableFieldType(fieldType)) {
       column.renderCell = DefaultCell;
     }
 
@@ -421,7 +419,7 @@ const DataSheet = React.forwardRef((props, ref) => {
     }
 
     const fieldType = model.colDef.fieldType;
-    const fieldName = model.colDef.fieldName;
+    const fieldName = model.colDef.field;
     const openEditForm = fieldName !== 'path' && (ContentTypeHelper.isMediaType(fieldType) ||
                          ContentTypeHelper.isRteType(fieldType) ||
                          !ContentTypeHelper.isRenderableFieldType(fieldType));
@@ -586,8 +584,12 @@ const DataSheet = React.forwardRef((props, ref) => {
         loading={loading}
         disableSelectionOnClick
         editRowsModel={editRowsModel}
-        columnVisibilityModel={{
-          id: false
+        initialState={{
+          columns: {
+            columnVisibilityModel: {
+              id: false
+            }
+          }
         }}
         onCellClick={handleOnCellClick}
         getCellClassName={(params) => {
