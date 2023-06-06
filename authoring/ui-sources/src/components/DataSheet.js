@@ -25,6 +25,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import PathCell from './PathCell';
 import MediaCell from './MediaCell';
 import RTECell from './RTECell';
+import DefaultCell from './DefaultCell';
 import CellActionMenu from './CellActionMenu';
 import SaveProgress from './SaveProgress';
 import RowActionMenu from './RowActionMenu';
@@ -64,16 +65,19 @@ const useStyles = makeStyles({
  * @returns
  */
 const getDisplayFieldsFromConfig = (config) => {
-  const xml = (new DOMParser()).parseFromString(config, 'text/xml');
-  const fields = xml.getElementsByTagName('field');
+  const xmlDoc = (new DOMParser()).parseFromString(config, 'text/xml');
+  const xpath = '/form/sections/section/fields/field';
+  const result = xmlDoc.evaluate(xpath, xmlDoc, null, XPathResult.ANY_TYPE, null);
+  let node = result.iterateNext();
   const headers = [];
-  for (const field of fields) {
-    const fieldType = field.getElementsByTagName('type')[0].textContent;
-    if (!ContentTypeHelper.isFieldTypeSupported(fieldType)) continue;
+  while (node) {
+    const fieldType = node.getElementsByTagName('type')[0].textContent;
 
-    const fieldId = field.getElementsByTagName('id')[0].textContent;
-    const title = field.getElementsByTagName('title')[0].textContent;
+    const fieldId = node.getElementsByTagName('id')[0].textContent;
+    const title = node.getElementsByTagName('title')[0].textContent;
     headers.push({ fieldId, fieldType, title });
+
+    node = result.iterateNext();
   }
 
   return headers;
@@ -101,7 +105,6 @@ const buildColumnsFromDisplayFields = (displayFields) => {
     sortable: false,
     width: 0,
     editable: false,
-    hide: true,
   }, {
     field: 'path',
     headerName: 'Path',
@@ -109,7 +112,7 @@ const buildColumnsFromDisplayFields = (displayFields) => {
     sortable: false,
     width: DEFAULT_COLUMN_WIDTH,
     editable: false,
-    renderCell: PathCell,
+    renderCell: PathCell
   }];
 
   for (const field of displayFields) {
@@ -126,10 +129,10 @@ const buildColumnsFromDisplayFields = (displayFields) => {
 
     if (fieldType === ContentTypeHelper.FIELD_TYPE_RTE) {
       column.renderCell = RTECell;
-    }
-
-    if (ContentTypeHelper.isMediaType(fieldType)) {
+    } else if (ContentTypeHelper.isMediaType(fieldType)) {
       column.renderCell = MediaCell;
+    } else if (!ContentTypeHelper.isRenderableFieldType(fieldType)) {
+      column.renderCell = DefaultCell;
     }
 
     columns.push(column);
@@ -392,8 +395,6 @@ const DataSheet = React.forwardRef((props, ref) => {
 
   const handleOnCellEditCommit = (model, event) => {
     saveEditState(model);
-    const newSessionRows = sessionRows;
-    newSessionRows
   };
 
   const saveEditState = (model) => {
@@ -420,7 +421,11 @@ const DataSheet = React.forwardRef((props, ref) => {
     }
 
     const fieldType = model.colDef.fieldType;
-    if (ContentTypeHelper.isMediaType(fieldType) || ContentTypeHelper.isRteType(fieldType)) {
+    const fieldName = model.colDef.fieldName;
+    const openEditForm = fieldName !== 'path' && (ContentTypeHelper.isMediaType(fieldType) ||
+                         ContentTypeHelper.isRteType(fieldType) ||
+                         !ContentTypeHelper.isRenderableFieldType(fieldType));
+    if (openEditForm) {
       event.preventDefault();
       event.stopPropagation();
       setMenuActionAnchor(event.currentTarget);
@@ -581,6 +586,9 @@ const DataSheet = React.forwardRef((props, ref) => {
         loading={loading}
         disableSelectionOnClick
         editRowsModel={editRowsModel}
+        columnVisibilityModel={{
+          id: false
+        }}
         onCellClick={handleOnCellClick}
         getCellClassName={(params) => {
           if (!params.isEditable) return '';

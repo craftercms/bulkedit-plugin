@@ -101,6 +101,6 @@ export default {
       targets: [{ src: 'dist/*', dest: '../static-assets/plugins/org/craftercms/plugin/bulkedit/sidebar/bulkedit/' }],
       hook: 'writeBundle'
     }),
-    rollupPluginCommit()
+    // rollupPluginCommit()
   ]
 }

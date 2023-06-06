@@ -28,7 +28,7 @@ const ContentTypeHelper = {
       ContentTypeHelper.FIELD_TYPE_IMAGE_PICKER,
     ]
   },
-  isFieldTypeSupported(fieldType) {
+  isRenderableFieldType(fieldType) {
     return ContentTypeHelper.supportedFieldTypes().includes(fieldType);
   },
   isMediaType(fieldType) {
