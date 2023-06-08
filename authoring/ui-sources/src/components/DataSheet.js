@@ -169,8 +169,12 @@ const isCellEdited = (params, rows) => {
 const isCellContainText = (text, params) => {
   if (!text || !params) return false;
 
+  if (!ContentTypeHelper.isRenderableFieldType(params.colDef.fieldType)) {
+    return false;
+  }
+
   const cellValue = params.value;
-  return cellValue.indexOf(text) >= 0;
+  return cellValue?.indexOf(text) >= 0;
 };
 
 const writeContent = async (path, editedObj, contentType) => {
@@ -292,7 +296,7 @@ const DataSheet = React.forwardRef((props, ref) => {
       const fieldValue = row[fieldName];
       let newFieldValue = fieldValue;
       const props = getColumnProperties(fieldName, columns);
-      if (props.editable) {
+      if (props.editable && ContentTypeHelper.isRenderableFieldType(props.fieldType)) {
         newFieldValue = fieldValue.replaceAll(text, replaceText);
       }
 
@@ -391,8 +395,24 @@ const DataSheet = React.forwardRef((props, ref) => {
     setEditRowsModel(model);
   };
 
-  const handleOnCellEditCommit = (model, event) => {
-    saveEditState(model);
+  const processRowUpdate = (newRow, oldRow) => {
+    const currentEditedRows = editedRows;
+
+    const key = oldRow.path;
+    if (!currentEditedRows[key]) {
+      currentEditedRows[key] = {};
+    }
+
+    const fields = Object.keys(oldRow);
+    for (const field of fields) {
+      if (oldRow[field] !== newRow[field]) {
+        currentEditedRows[key][field] = newRow[field];
+      }
+    }
+
+    setEditedRows(currentEditedRows);
+
+    return newRow;
   };
 
   const saveEditState = (model) => {
@@ -442,6 +462,10 @@ const DataSheet = React.forwardRef((props, ref) => {
     openEditDialog(isEdit);
   };
 
+  /**
+   * Open the Studio edit dialog to direct update
+   * @param {*} isEdit true if in edit mode, false if in view mode
+   */
   const openEditDialog = (isEdit) => {
     const { row, field } = selectedRow;
     const payload = {
@@ -452,14 +476,20 @@ const DataSheet = React.forwardRef((props, ref) => {
       selectedFields: [field]
     };
 
-    const onEditedSussessful = (response) => {
-      const model = selectedRow;
-      model.path = response.updatedModel[model.field];
-      model.value = response.updatedModel[model.field];
-      sessionRows[model.id][model.field] = response.updatedModel[model.field];
-      setSessionRows(sessionRows);
-      saveEditState(model);
-      setSelectedRow({});
+    const onEditedSussessful = async (response) => {
+      const fieldId = selectedRow.field;
+      const path = selectedRow.row.path;
+
+      const content = await StudioAPI.getContent(path);
+      const xml = (new DOMParser()).parseFromString(content, 'text/xml');
+      const field = xml.getElementsByTagName(fieldId)[0];
+      if (field) {
+        sessionRows[selectedRow.id][selectedRow.field] = field.textContent;
+        rows[selectedRow.id][selectedRow.field] = field.textContent;
+      }
+
+      setSessionRows([...sessionRows]);
+      setRows(rows);
     };
 
     const onEditedFailed = (error) => {
@@ -606,7 +636,8 @@ const DataSheet = React.forwardRef((props, ref) => {
           return '';
         }}
         onEditRowsModelChange={handleEditRowsModelChange}
-        onCellEditCommit={handleOnCellEditCommit}
+        processRowUpdate={processRowUpdate}
+        onProcessRowUpdateError={(error) => { console.log(`Error while updating row: ${error}`); }}
       />
       <RowActionMenu
         anchorEl={rowActionMenuAnchor}

@@ -262,6 +262,42 @@ exports.default = _default;
 
 var KeyboardArrowRightIcon = /*@__PURE__*/getDefaultExportFromCjs(KeyboardArrowRight$1);
 
+var asyncToGenerator = createCommonjsModule(function (module) {
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+      args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+      function _next(value) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      }
+      function _throw(err) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+      _next(undefined);
+    });
+  };
+}
+module.exports = _asyncToGenerator, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+var _asyncToGenerator = /*@__PURE__*/getDefaultExportFromCjs(asyncToGenerator);
+
 var _typeof_1 = createCommonjsModule(function (module) {
 function _typeof(obj) {
   "@babel/helpers - typeof";
@@ -319,127 +355,6 @@ module.exports = _defineProperty, module.exports.__esModule = true, module.expor
 });
 
 var _defineProperty = /*@__PURE__*/getDefaultExportFromCjs(defineProperty);
-
-var FindReplace = createCommonjsModule(function (module, exports) {
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _createSvgIcon = interopRequireDefault(require$$0$1);
-
-var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
-  d: "M11 6c1.38 0 2.63.56 3.54 1.46L12 10h6V4l-2.05 2.05C14.68 4.78 12.93 4 11 4c-3.53 0-6.43 2.61-6.92 6H6.1c.46-2.28 2.48-4 4.9-4zm5.64 9.14c.66-.9 1.12-1.97 1.28-3.14H15.9c-.46 2.28-2.48 4-4.9 4-1.38 0-2.63-.56-3.54-1.46L10 12H4v6l2.05-2.05C7.32 17.22 9.07 18 11 18c1.55 0 2.98-.51 4.14-1.36L20 21.49 21.49 20l-4.85-4.86z"
-}), 'FindReplace');
-exports.default = _default;
-});
-
-var FindReplaceIcon = /*@__PURE__*/getDefaultExportFromCjs(FindReplace);
-
-var FilterList = createCommonjsModule(function (module, exports) {
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _createSvgIcon = interopRequireDefault(require$$0$1);
-
-var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
-  d: "M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"
-}), 'FilterList');
-exports.default = _default;
-});
-
-var FilterListIcon = /*@__PURE__*/getDefaultExportFromCjs(FilterList);
-
-var Save = createCommonjsModule(function (module, exports) {
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _createSvgIcon = interopRequireDefault(require$$0$1);
-
-var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
-  d: "M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"
-}), 'Save');
-exports.default = _default;
-});
-
-var SaveIcon = /*@__PURE__*/getDefaultExportFromCjs(Save);
-
-var Clear = createCommonjsModule(function (module, exports) {
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _createSvgIcon = interopRequireDefault(require$$0$1);
-
-var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
-  d: "M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-}), 'Clear');
-exports.default = _default;
-});
-
-var ClearIcon$1 = /*@__PURE__*/getDefaultExportFromCjs(Clear);
-
-var Menu$2 = createCommonjsModule(function (module, exports) {
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _createSvgIcon = interopRequireDefault(require$$0$1);
-
-var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
-  d: "M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
-}), 'Menu');
-exports.default = _default;
-});
-
-var MenuIcon = /*@__PURE__*/getDefaultExportFromCjs(Menu$2);
-
-var asyncToGenerator = createCommonjsModule(function (module) {
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-function _asyncToGenerator(fn) {
-  return function () {
-    var self = this,
-      args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-      function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-      }
-      function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-      _next(undefined);
-    });
-  };
-}
-module.exports = _asyncToGenerator, module.exports.__esModule = true, module.exports["default"] = module.exports;
-});
-
-var _asyncToGenerator = /*@__PURE__*/getDefaultExportFromCjs(asyncToGenerator);
 
 var regeneratorRuntime$1 = createCommonjsModule(function (module) {
 var _typeof = _typeof_1["default"];
@@ -762,6 +677,91 @@ try {
     Function("r", "regeneratorRuntime = r")(runtime);
   }
 }
+
+var FindReplace = createCommonjsModule(function (module, exports) {
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _createSvgIcon = interopRequireDefault(require$$0$1);
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
+  d: "M11 6c1.38 0 2.63.56 3.54 1.46L12 10h6V4l-2.05 2.05C14.68 4.78 12.93 4 11 4c-3.53 0-6.43 2.61-6.92 6H6.1c.46-2.28 2.48-4 4.9-4zm5.64 9.14c.66-.9 1.12-1.97 1.28-3.14H15.9c-.46 2.28-2.48 4-4.9 4-1.38 0-2.63-.56-3.54-1.46L10 12H4v6l2.05-2.05C7.32 17.22 9.07 18 11 18c1.55 0 2.98-.51 4.14-1.36L20 21.49 21.49 20l-4.85-4.86z"
+}), 'FindReplace');
+exports.default = _default;
+});
+
+var FindReplaceIcon = /*@__PURE__*/getDefaultExportFromCjs(FindReplace);
+
+var FilterList = createCommonjsModule(function (module, exports) {
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _createSvgIcon = interopRequireDefault(require$$0$1);
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
+  d: "M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"
+}), 'FilterList');
+exports.default = _default;
+});
+
+var FilterListIcon = /*@__PURE__*/getDefaultExportFromCjs(FilterList);
+
+var Save = createCommonjsModule(function (module, exports) {
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _createSvgIcon = interopRequireDefault(require$$0$1);
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
+  d: "M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"
+}), 'Save');
+exports.default = _default;
+});
+
+var SaveIcon = /*@__PURE__*/getDefaultExportFromCjs(Save);
+
+var Clear = createCommonjsModule(function (module, exports) {
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _createSvgIcon = interopRequireDefault(require$$0$1);
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
+  d: "M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+}), 'Clear');
+exports.default = _default;
+});
+
+var ClearIcon$1 = /*@__PURE__*/getDefaultExportFromCjs(Clear);
+
+var Menu$2 = createCommonjsModule(function (module, exports) {
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _createSvgIcon = interopRequireDefault(require$$0$1);
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
+  d: "M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+}), 'Menu');
+exports.default = _default;
+});
+
+var MenuIcon = /*@__PURE__*/getDefaultExportFromCjs(Menu$2);
 
 /*
  * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
@@ -44135,8 +44135,13 @@ var isCellEdited = function isCellEdited(params, rows) {
 
 var isCellContainText = function isCellContainText(text, params) {
   if (!text || !params) return false;
+
+  if (!ContentTypeHelper.isRenderableFieldType(params.colDef.fieldType)) {
+    return false;
+  }
+
   var cellValue = params.value;
-  return cellValue.indexOf(text) >= 0;
+  return (cellValue === null || cellValue === void 0 ? void 0 : cellValue.indexOf(text)) >= 0;
 };
 
 var writeContent = /*#__PURE__*/function () {
@@ -44454,7 +44459,7 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
 
       var _props = getColumnProperties(fieldName, columns);
 
-      if (_props.editable) {
+      if (_props.editable && ContentTypeHelper.isRenderableFieldType(_props.fieldType)) {
         newFieldValue = fieldValue.replaceAll(text, replaceText);
       }
 
@@ -44597,8 +44602,26 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
     setEditRowsModel(model);
   };
 
-  var handleOnCellEditCommit = function handleOnCellEditCommit(model, event) {
-    saveEditState(model);
+  var processRowUpdate = function processRowUpdate(newRow, oldRow) {
+    var currentEditedRows = editedRows;
+    var key = oldRow.path;
+
+    if (!currentEditedRows[key]) {
+      currentEditedRows[key] = {};
+    }
+
+    var fields = Object.keys(oldRow);
+
+    for (var _i3 = 0, _fields = fields; _i3 < _fields.length; _i3++) {
+      var field = _fields[_i3];
+
+      if (oldRow[field] !== newRow[field]) {
+        currentEditedRows[key][field] = newRow[field];
+      }
+    }
+
+    setEditedRows(currentEditedRows);
+    return newRow;
   };
 
   var saveEditState = function saveEditState(model) {
@@ -44647,6 +44670,11 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
     var isEdit = true;
     openEditDialog(isEdit);
   };
+  /**
+   * Open the Studio edit dialog to direct update
+   * @param {*} isEdit true if in edit mode, false if in view mode
+   */
+
 
   var openEditDialog = function openEditDialog(isEdit) {
     var row = selectedRow.row,
@@ -44659,15 +44687,43 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
       selectedFields: [field]
     };
 
-    var onEditedSussessful = function onEditedSussessful(response) {
-      var model = selectedRow;
-      model.path = response.updatedModel[model.field];
-      model.value = response.updatedModel[model.field];
-      sessionRows[model.id][model.field] = response.updatedModel[model.field];
-      setSessionRows(sessionRows);
-      saveEditState(model);
-      setSelectedRow({});
-    };
+    var onEditedSussessful = /*#__PURE__*/function () {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee4(response) {
+        var fieldId, path, content, xml, field;
+        return regenerator.wrap(function _callee4$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                fieldId = selectedRow.field;
+                path = selectedRow.row.path;
+                _context5.next = 4;
+                return StudioAPI.getContent(path);
+
+              case 4:
+                content = _context5.sent;
+                xml = new DOMParser().parseFromString(content, 'text/xml');
+                field = xml.getElementsByTagName(fieldId)[0];
+
+                if (field) {
+                  sessionRows[selectedRow.id][selectedRow.field] = field.textContent;
+                  rows[selectedRow.id][selectedRow.field] = field.textContent;
+                }
+
+                setSessionRows(_toConsumableArray$1(sessionRows));
+                setRows(rows);
+
+              case 10:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee4);
+      }));
+
+      return function onEditedSussessful(_x4) {
+        return _ref3.apply(this, arguments);
+      };
+    }();
 
     var onEditedFailed = function onEditedFailed(error) {
       setSelectedRow({});
@@ -44677,27 +44733,27 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
   };
 
   var handleRowMenuActionUnlock = /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee4() {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee5() {
       var row, res;
-      return regenerator.wrap(function _callee4$(_context5) {
+      return regenerator.wrap(function _callee5$(_context6) {
         while (1) {
-          switch (_context5.prev = _context5.next) {
+          switch (_context6.prev = _context6.next) {
             case 0:
               row = selectedRow.row;
 
               if (!(!row || !row.path || !row.lockOwner)) {
-                _context5.next = 3;
+                _context6.next = 3;
                 break;
               }
 
-              return _context5.abrupt("return");
+              return _context6.abrupt("return");
 
             case 3:
-              _context5.next = 5;
+              _context6.next = 5;
               return StudioAPI.unlockContent(row.path);
 
             case 5:
-              res = _context5.sent;
+              res = _context6.sent;
 
               if (res) {
                 sessionRows[row.id].lockOwner = null;
@@ -44708,23 +44764,23 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
 
             case 8:
             case "end":
-              return _context5.stop();
+              return _context6.stop();
           }
         }
-      }, _callee4);
+      }, _callee5);
     }));
 
     return function handleRowMenuActionUnlock() {
-      return _ref3.apply(this, arguments);
+      return _ref4.apply(this, arguments);
     };
   }();
 
   var handleRowMenuActionEdit = /*#__PURE__*/function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee5() {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee6() {
       var row, payload, onEditedSussessful, onEditedFailed;
-      return regenerator.wrap(function _callee5$(_context6) {
+      return regenerator.wrap(function _callee6$(_context7) {
         while (1) {
-          switch (_context6.prev = _context6.next) {
+          switch (_context7.prev = _context7.next) {
             case 0:
               setRowActionMenuAnchor(null);
               row = selectedRow.row;
@@ -44773,51 +44829,51 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
 
             case 6:
             case "end":
-              return _context6.stop();
+              return _context7.stop();
           }
         }
-      }, _callee5);
+      }, _callee6);
     }));
 
     return function handleRowMenuActionEdit() {
-      return _ref4.apply(this, arguments);
+      return _ref5.apply(this, arguments);
     };
   }();
 
   var handleRowMenuActionSave = /*#__PURE__*/function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee6() {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee7() {
       var row, path, newContent, fieldIds;
-      return regenerator.wrap(function _callee6$(_context7) {
+      return regenerator.wrap(function _callee7$(_context8) {
         while (1) {
-          switch (_context7.prev = _context7.next) {
+          switch (_context8.prev = _context8.next) {
             case 0:
               row = selectedRow.row;
 
               if (!(!row || !row.path)) {
-                _context7.next = 4;
+                _context8.next = 4;
                 break;
               }
 
               setRowActionMenuAnchor(null);
-              return _context7.abrupt("return");
+              return _context8.abrupt("return");
 
             case 4:
               path = row.path;
 
               if (editedRows[path]) {
-                _context7.next = 8;
+                _context8.next = 8;
                 break;
               }
 
               setRowActionMenuAnchor(null);
-              return _context7.abrupt("return");
+              return _context8.abrupt("return");
 
             case 8:
-              _context7.next = 10;
+              _context8.next = 10;
               return writeContent(path, editedRows[path], contentType);
 
             case 10:
-              newContent = _context7.sent;
+              newContent = _context8.sent;
 
               if (newContent) {
                 fieldIds = columns.map(function (cl) {
@@ -44835,64 +44891,64 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
 
             case 13:
             case "end":
-              return _context7.stop();
+              return _context8.stop();
           }
         }
-      }, _callee6);
+      }, _callee7);
     }));
 
     return function handleRowMenuActionSave() {
-      return _ref5.apply(this, arguments);
+      return _ref6.apply(this, arguments);
     };
   }();
 
   var handleRowMenuActionClear = /*#__PURE__*/function () {
-    var _ref6 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee7() {
+    var _ref7 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee8() {
       var row, path, content, meta, fieldIds, rowFromApi;
-      return regenerator.wrap(function _callee7$(_context8) {
+      return regenerator.wrap(function _callee8$(_context9) {
         while (1) {
-          switch (_context8.prev = _context8.next) {
+          switch (_context9.prev = _context9.next) {
             case 0:
               row = selectedRow.row;
 
               if (!(!row || !row.path)) {
-                _context8.next = 4;
+                _context9.next = 4;
                 break;
               }
 
               setRowActionMenuAnchor(null);
-              return _context8.abrupt("return");
+              return _context9.abrupt("return");
 
             case 4:
               path = row.path;
-              _context8.next = 7;
+              _context9.next = 7;
               return StudioAPI.getContent(path);
 
             case 7:
-              content = _context8.sent;
+              content = _context9.sent;
 
               if (content) {
-                _context8.next = 11;
+                _context9.next = 11;
                 break;
               }
 
               setRowActionMenuAnchor(null);
-              return _context8.abrupt("return");
+              return _context9.abrupt("return");
 
             case 11:
-              _context8.next = 13;
+              _context9.next = 13;
               return StudioAPI.getSandboxItemByPath(path);
 
             case 13:
-              meta = _context8.sent;
+              meta = _context9.sent;
 
               if (meta) {
-                _context8.next = 17;
+                _context9.next = 17;
                 break;
               }
 
               setRowActionMenuAnchor(null);
-              return _context8.abrupt("return");
+              return _context9.abrupt("return");
 
             case 17:
               fieldIds = columns.map(function (cl) {
@@ -44909,14 +44965,14 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
 
             case 24:
             case "end":
-              return _context8.stop();
+              return _context9.stop();
           }
         }
-      }, _callee7);
+      }, _callee8);
     }));
 
     return function handleRowMenuActionClear() {
-      return _ref6.apply(this, arguments);
+      return _ref7.apply(this, arguments);
     };
   }();
 
@@ -44962,7 +45018,10 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
       return '';
     },
     onEditRowsModelChange: handleEditRowsModelChange,
-    onCellEditCommit: handleOnCellEditCommit
+    processRowUpdate: processRowUpdate,
+    onProcessRowUpdateError: function onProcessRowUpdateError(error) {
+      console.log("Error while updating row: ".concat(error));
+    }
   }), /*#__PURE__*/React.createElement(RowActionMenu, {
     anchorEl: rowActionMenuAnchor,
     handleClose: function handleClose() {
@@ -45052,11 +45111,37 @@ function Editor() {
   };
 
   var handleSaveChangeClick = function handleSaveChangeClick() {
-    dataSheetRef.current.saveAllChanges();
+    _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee() {
+      return regenerator.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              dataSheetRef.current.saveAllChanges();
+
+            case 1:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
   };
 
   var handleCancelAllChangeClick = function handleCancelAllChangeClick() {
-    dataSheetRef.current.cancelAllChanges();
+    _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee2() {
+      return regenerator.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              dataSheetRef.current.cancelAllChanges();
+
+            case 1:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }))();
   };
 
   var toggleDrawer = function toggleDrawer() {

@@ -92,11 +92,15 @@ export default function Editor() {
   };
 
   const handleSaveChangeClick = () => {
-    dataSheetRef.current.saveAllChanges();
+    (async () => {
+      dataSheetRef.current.saveAllChanges();
+    })();
   };
 
   const handleCancelAllChangeClick = () => {
-    dataSheetRef.current.cancelAllChanges();
+    (async () => {
+      dataSheetRef.current.cancelAllChanges();
+    })();
   };
 
   const toggleDrawer = () => {
