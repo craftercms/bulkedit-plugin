@@ -16,15 +16,34 @@
 
 import React from 'react';
 import MainDialog from './components/MainDialog';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+
 import {
   Stack,
 } from '@mui/material';
 
 function BulkEditApp() {
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: prefersDarkMode ? 'dark' : 'light',
+        },
+      }),
+    [prefersDarkMode],
+  );
+
   return (
-    <Stack spacing={2}>
-      <MainDialog />
-    </Stack>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Stack spacing={2}>
+        <MainDialog />
+      </Stack>
+    </ThemeProvider>
   );
 }
 

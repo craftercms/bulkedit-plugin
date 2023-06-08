@@ -21,6 +21,7 @@ import {
   Divider,
   List,
   ListItem,
+  ListItemButton,
   ListItemIcon,
   ListItemText,
   Toolbar,
@@ -33,7 +34,7 @@ import {
 import FindReplaceIcon from '@mui/icons-material/FindReplace';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import SaveIcon from '@mui/icons-material/Save';
-import ClearAllIcon from '@mui/icons-material/ClearAll';
+import ClearIcon from '@mui/icons-material/Clear';
 import MenuIcon from '@mui/icons-material/Menu';
 
 import ContentTypeSelect from './ContentTypeSelect';
@@ -51,6 +52,7 @@ const TEXT_CANCEL = 'Cancel All Change';
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     flexGrow: 1,
+    overflow: 'auto',
     padding: theme.spacing(3),
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
@@ -89,12 +91,16 @@ export default function Editor() {
     setFilterDialogOpen(false);
   };
 
-  const handleSaveChangeClick = async () => {
-    dataSheetRef.current.saveAllChanges();
+  const handleSaveChangeClick = () => {
+    (async () => {
+      dataSheetRef.current.saveAllChanges();
+    })();
   };
 
   const handleCancelAllChangeClick = () => {
-    dataSheetRef.current.cancelAllChanges();
+    (async () => {
+      dataSheetRef.current.cancelAllChanges();
+    })();
   };
 
   const toggleDrawer = () => {
@@ -156,7 +162,7 @@ export default function Editor() {
                 edge="start"
                 sx={{ mr: 2 }}
               >
-                <ClearAllIcon />
+                <ClearIcon />
               </StyledIconButton>
             </Tooltip>
           </div>
@@ -180,7 +186,8 @@ export default function Editor() {
         style: {
           position: "absolute",
           width: DRAWER_WIDTH,
-          top: "130px",
+          top: "155px",
+          left: "13px",
           height: "auto"
         }
       }}
@@ -194,9 +201,8 @@ export default function Editor() {
       }}
       SlideProps={{
         onExiting: (node) => {
-          node.style.webkitTransform = "scaleX(0)";
           node.style.transform = "scaleX(0)";
-          node.style.transformOrigin = "top left ";
+          node.style.transformOrigin = "top left";
         },
       }}
     >
@@ -207,33 +213,33 @@ export default function Editor() {
       </List>
       <Divider />
       <List>
-        <ListItem button key={TEXT_FIND_REPLACE} onClick={() => setFindReplaceDialogOpen(true)}>
+        <ListItemButton key={TEXT_FIND_REPLACE} onClick={() => setFindReplaceDialogOpen(true)}>
               <ListItemIcon>
                 <FindReplaceIcon />
               </ListItemIcon>
               <ListItemText primary={TEXT_FIND_REPLACE} />
-        </ListItem>
-        <ListItem button key={TEXT_FILTER} onClick={() => setFilterDialogOpen(true)}>
+        </ListItemButton>
+        <ListItemButton key={TEXT_FILTER} onClick={() => setFilterDialogOpen(true)}>
           <ListItemIcon>
             <FilterListIcon />
           </ListItemIcon>
           <ListItemText primary={TEXT_FILTER} />
-        </ListItem>
+        </ListItemButton>
       </List>
       <Divider />
       <List>
-        <ListItem button key={TEXT_SAVE} onClick={handleSaveChangeClick}>
+        <ListItemButton key={TEXT_SAVE} onClick={handleSaveChangeClick}>
           <ListItemIcon>
             <SaveIcon />
           </ListItemIcon>
           <ListItemText primary={TEXT_SAVE} />
-        </ListItem>
-        <ListItem button key={TEXT_CANCEL} onClick={handleCancelAllChangeClick}>
+        </ListItemButton>
+        <ListItemButton key={TEXT_CANCEL} onClick={handleCancelAllChangeClick}>
           <ListItemIcon>
-            <ClearAllIcon />
+            <ClearIcon />
           </ListItemIcon>
           <ListItemText primary={TEXT_CANCEL} />
-        </ListItem>
+        </ListItemButton>
       </List>
       <Divider />
     </Drawer>

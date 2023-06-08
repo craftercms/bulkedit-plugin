@@ -36,16 +36,12 @@ export default function ContentTypeSelect() {
     })();
   }, []);
 
-  React.useEffect(() => {
-    (async () => {
-      if (contentType) {
-        contentTypeSub.next(contentType);
-      }
-    })();
-  }, [contentType]);
-
   const handleChange = (event) => {
-    setContentType(event.target.value);
+    const newContentType = event.target.value;
+    if (newContentType) {
+      setContentType(newContentType);
+      contentTypeSub.next(newContentType);
+    }
   };
 
   return (

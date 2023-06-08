@@ -15,21 +15,32 @@
  */
 const ContentTypeHelper = {
   FIELD_TYPE_INPUT: 'input',
+  FIELD_TYPE_NUMERIC_INPUT: 'numeric-input',
   FIELD_TYPE_TEXTAREA: 'textarea',
   FIELD_TYPE_RTE: 'rte',
   FIELD_TYPE_VIDEO_PICKER: 'video-picker',
   FIELD_TYPE_IMAGE_PICKER: 'image-picker',
-  supportedFieldTypes() {
+  FIELD_TYPE_AUTO_FILENAME: 'auto-filename',
+  renderableFieldTypes() {
     return [
       ContentTypeHelper.FIELD_TYPE_INPUT,
+      ContentTypeHelper.FIELD_TYPE_NUMERIC_INPUT,
       ContentTypeHelper.FIELD_TYPE_TEXTAREA,
       ContentTypeHelper.FIELD_TYPE_RTE,
       ContentTypeHelper.FIELD_TYPE_VIDEO_PICKER,
       ContentTypeHelper.FIELD_TYPE_IMAGE_PICKER,
-    ]
+    ];
   },
-  isFieldTypeSupported(fieldType) {
-    return ContentTypeHelper.supportedFieldTypes().includes(fieldType);
+  unsupportedFieldTypes() {
+    return [
+      ContentTypeHelper.FIELD_TYPE_AUTO_FILENAME
+    ];
+  },
+  isRenderableFieldType(fieldType) {
+    return ContentTypeHelper.renderableFieldTypes().includes(fieldType);
+  },
+  isUnsupportedFieldType(fieldType) {
+    return ContentTypeHelper.unsupportedFieldTypes().includes(fieldType);
   },
   isMediaType(fieldType) {
     return ContentTypeHelper.FIELD_TYPE_VIDEO_PICKER === fieldType || ContentTypeHelper.FIELD_TYPE_IMAGE_PICKER === fieldType;
