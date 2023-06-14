@@ -16,7 +16,7 @@ plugin:
   version:
     major: 1
     minor: 0
-    patch: 7
+    patch: 8
   description: Provide bulk editing capability to Crafter Studio
   documentation: "https://raw.githubusercontent.com/craftercms/bulkedit-plugin/master/README.md"
   website:
@@ -52,8 +52,20 @@ plugin:
       minor: 0
       patch: 3
     - major: 4
+      minor: 0
+      patch: 4
+    - major: 4
+      minor: 0
+      patch: 5
+    - major: 4
+      minor: 0
+      patch: 6
+    - major: 4
       minor: 1
       patch: 0
+    - major: 4
+      minor: 1
+      patch: 1
   crafterCmsEditions:
     - community
     - enterprise
