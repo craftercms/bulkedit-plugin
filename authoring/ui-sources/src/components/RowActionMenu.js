@@ -49,7 +49,7 @@ export default function RowActionMenu({
           },
        }}
       >
-      {row && row.lockOwner && (
+      {row?.lockOwner && (
         <MenuItem onClick={handleUnlockAction}>
           <ListItemIcon>
             <LockOpenOutlinedIcon />

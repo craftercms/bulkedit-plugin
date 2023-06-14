@@ -23,8 +23,7 @@ import {
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import PathCell from './PathCell';
-import MediaCell from './MediaCell';
-import RTECell from './RTECell';
+import DefaultCell from './DefaultCell';
 import CellActionMenu from './CellActionMenu';
 import SaveProgress from './SaveProgress';
 import RowActionMenu from './RowActionMenu';
@@ -37,7 +36,7 @@ import {
 } from '../services/subscribe';
 import StudioAPI from '../api/studio';
 import ActionHelper from '../helpers/action';
-import ContentTypeHelper from '../helpers/content_type';
+import ContentTypeHelper from '../helpers/ContentTypeHelper';
 import DialogHelper from '../helpers/dialog';
 
 const DEFAULT_PAGE_SIZE = 9;
@@ -64,17 +63,21 @@ const useStyles = makeStyles({
  * @returns
  */
 const getDisplayFieldsFromConfig = (config) => {
-  const xml = (new DOMParser()).parseFromString(config, 'text/xml');
-  const fields = xml.getElementsByTagName('field');
-  const headers = [];
-  for (let i = 0; i < fields.length; i += 1) {
-    const field = fields[i];
-    const fieldType = field.getElementsByTagName('type')[0].textContent;
-    if (!ContentTypeHelper.isFieldTypeSupported(fieldType)) continue;
+  const xmlDoc = (new DOMParser()).parseFromString(config, 'text/xml');
+  const xpath = '/form/sections/section/fields/field';
+  const result = xmlDoc.evaluate(xpath, xmlDoc, null, XPathResult.ANY_TYPE, null);
 
-    const fieldId = field.getElementsByTagName('id')[0].textContent;
-    const title = field.getElementsByTagName('title')[0].textContent;
-    headers.push({ fieldId, fieldType, title });
+  const headers = [];
+  let node = result.iterateNext();
+  while (node) {
+    const fieldType = node.getElementsByTagName('type')[0].textContent;
+    if (!ContentTypeHelper.isUnsupportedFieldType(fieldType)) {
+      const fieldId = node.getElementsByTagName('id')[0].textContent;
+      const title = node.getElementsByTagName('title')[0].textContent;
+      headers.push({ fieldId, fieldType, title });
+    }
+
+    node = result.iterateNext();
   }
 
   return headers;
@@ -102,7 +105,6 @@ const buildColumnsFromDisplayFields = (displayFields) => {
     sortable: false,
     width: 0,
     editable: false,
-    hide: true,
   }, {
     field: 'path',
     headerName: 'Path',
@@ -110,11 +112,10 @@ const buildColumnsFromDisplayFields = (displayFields) => {
     sortable: false,
     width: DEFAULT_COLUMN_WIDTH,
     editable: false,
-    renderCell: PathCell,
+    renderCell: PathCell
   }];
 
-  for (let i = 0; i < displayFields.length; i +=1 ) {
-    const field = displayFields[i];
+  for (const field of displayFields) {
     const { fieldId, fieldType, title } = field;
     const column = {
       field: fieldId,
@@ -126,12 +127,10 @@ const buildColumnsFromDisplayFields = (displayFields) => {
       fieldType,
     };
 
-    if (fieldType === ContentTypeHelper.FIELD_TYPE_RTE) {
-      column.renderCell = RTECell;
-    }
-
-    if (ContentTypeHelper.isMediaType(fieldType)) {
-      column.renderCell = MediaCell;
+    if (fieldType === ContentTypeHelper.FIELD_TYPE_RTE ||
+                      ContentTypeHelper.isMediaType(fieldType) ||
+                      !ContentTypeHelper.isRenderableFieldType(fieldType)) {
+      column.renderCell = DefaultCell;
     }
 
     columns.push(column);
@@ -147,11 +146,10 @@ const getColumnProperties = (fieldName, columns) => {
 const rowFromApiContent = (index, path, content, fieldIds, meta) => {
   const xml = (new DOMParser()).parseFromString(content, 'text/xml');
   const row = { id: index, path };
-  if (meta && meta.lockOwner) {
+  if (meta?.lockOwner) {
     row.lockOwner = meta.lockOwner;
   }
-  for (let i = 0; i < fieldIds.length; i += 1) {
-    const fieldId = fieldIds[i];
+  for (const fieldId of fieldIds) {
     const field = xml.getElementsByTagName(fieldId)[0];
     row[fieldId] = field ? field.textContent : '';
   };
@@ -171,11 +169,15 @@ const isCellEdited = (params, rows) => {
 const isCellContainText = (text, params) => {
   if (!text || !params) return false;
 
+  if (!ContentTypeHelper.isRenderableFieldType(params.colDef.fieldType)) {
+    return false;
+  }
+
   const cellValue = params.value;
-  return cellValue.indexOf(text) >= 0;
+  return cellValue?.indexOf(text) >= 0;
 };
 
-const writeContent = async (path, editedObj) => {
+const writeContent = async (path, editedObj, contentType) => {
   const content = await StudioAPI.getContent(path);
   if (!content) {
     return;
@@ -184,17 +186,16 @@ const writeContent = async (path, editedObj) => {
   const xml = (new DOMParser()).parseFromString(content, 'text/xml');
 
   const keys = Object.keys(editedObj);
-  for (let i = 0; i < keys.length; i++) {
-    const fieldName = keys[i];
-    const value = editedObj[fieldName];
-      const node = xml.getElementsByTagName(fieldName)[0];
-      if (node) {
-        node.textContent = value;
-      }
+  for (const key of keys) {
+    const value = editedObj[key];
+    const node = xml.getElementsByTagName(key)[0];
+    if (node) {
+      node.textContent = value;
+    }
   }
 
   const newContent = new XMLSerializer().serializeToString(xml);
-  const res = await StudioAPI.writeContent(path, newContent);
+  const res = await StudioAPI.writeContent(path, newContent, contentType);
   if (res) {
     return newContent;
   }
@@ -279,8 +280,8 @@ const DataSheet = React.forwardRef((props, ref) => {
 
   const replaceTextInAllRows = (text, replaceText, rows, columns) => {
     const newRows = [];
-    for (let i = 0; i < rows.length; i +=1 ) {
-      const newRow = replaceTextInRow(text, replaceText, rows[i], columns);
+    for (const row of rows) {
+      const newRow = replaceTextInRow(text, replaceText, row, columns);
       newRows.push(newRow);
     }
 
@@ -291,12 +292,11 @@ const DataSheet = React.forwardRef((props, ref) => {
     const newRow = {};
     const keys = Object.keys(row);
 
-    for (let i = 0; i < keys.length; i +=1 ) {
-      const fieldName = keys[i];
+    for (const fieldName of keys) {
       const fieldValue = row[fieldName];
       let newFieldValue = fieldValue;
       const props = getColumnProperties(fieldName, columns);
-      if (props.editable) {
+      if (props.editable && ContentTypeHelper.isRenderableFieldType(props.fieldType)) {
         newFieldValue = fieldValue.replaceAll(text, replaceText);
       }
 
@@ -395,10 +395,24 @@ const DataSheet = React.forwardRef((props, ref) => {
     setEditRowsModel(model);
   };
 
-  const handleOnCellEditCommit = (model, event) => {
-    saveEditState(model);
-    const newSessionRows = sessionRows;
-    newSessionRows
+  const processRowUpdate = (newRow, oldRow) => {
+    const currentEditedRows = editedRows;
+
+    const key = oldRow.path;
+    if (!currentEditedRows[key]) {
+      currentEditedRows[key] = {};
+    }
+
+    const fields = Object.keys(oldRow);
+    for (const field of fields) {
+      if (oldRow[field] !== newRow[field]) {
+        currentEditedRows[key][field] = newRow[field];
+      }
+    }
+
+    setEditedRows(currentEditedRows);
+
+    return newRow;
   };
 
   const saveEditState = (model) => {
@@ -425,7 +439,11 @@ const DataSheet = React.forwardRef((props, ref) => {
     }
 
     const fieldType = model.colDef.fieldType;
-    if (ContentTypeHelper.isMediaType(fieldType) || ContentTypeHelper.isRteType(fieldType)) {
+    const fieldName = model.colDef.field;
+    const openEditForm = fieldName !== 'path' && (ContentTypeHelper.isMediaType(fieldType) ||
+                         ContentTypeHelper.isRteType(fieldType) ||
+                         !ContentTypeHelper.isRenderableFieldType(fieldType));
+    if (openEditForm) {
       event.preventDefault();
       event.stopPropagation();
       setMenuActionAnchor(event.currentTarget);
@@ -444,6 +462,10 @@ const DataSheet = React.forwardRef((props, ref) => {
     openEditDialog(isEdit);
   };
 
+  /**
+   * Open the Studio edit dialog to direct update
+   * @param {*} isEdit true if in edit mode, false if in view mode
+   */
   const openEditDialog = (isEdit) => {
     const { row, field } = selectedRow;
     const payload = {
@@ -454,14 +476,20 @@ const DataSheet = React.forwardRef((props, ref) => {
       selectedFields: [field]
     };
 
-    const onEditedSussessful = (response) => {
-      const model = selectedRow;
-      model.path = response.updatedModel[model.field];
-      model.value = response.updatedModel[model.field];
-      sessionRows[model.id][model.field] = response.updatedModel[model.field];
-      setSessionRows(sessionRows);
-      saveEditState(model);
-      setSelectedRow({});
+    const onEditedSussessful = async (response) => {
+      const fieldId = selectedRow.field;
+      const path = selectedRow.row.path;
+
+      const content = await StudioAPI.getContent(path);
+      const xml = (new DOMParser()).parseFromString(content, 'text/xml');
+      const field = xml.getElementsByTagName(fieldId)[0];
+      if (field) {
+        sessionRows[selectedRow.id][selectedRow.field] = field.textContent;
+        rows[selectedRow.id][selectedRow.field] = field.textContent;
+      }
+
+      setSessionRows([...sessionRows]);
+      setRows(rows);
     };
 
     const onEditedFailed = (error) => {
@@ -499,8 +527,7 @@ const DataSheet = React.forwardRef((props, ref) => {
       model.path = response.updatedModel[model.field];
       model.value = response.updatedModel[model.field];
       const fieldIds = columns.map((cl) => cl.field).filter((field) => field !== 'id' && field !== 'path' && field !== 'action');
-      for (let i = 0; i < fieldIds.length; i += 1) {
-        const field = fieldIds[i];
+      for (const field of fieldIds) {
         sessionRows[model.id][field] = response.updatedModel[field];
         rows[model.id][field] = response.updatedModel[field];
       }
@@ -587,6 +614,13 @@ const DataSheet = React.forwardRef((props, ref) => {
         loading={loading}
         disableSelectionOnClick
         editRowsModel={editRowsModel}
+        initialState={{
+          columns: {
+            columnVisibilityModel: {
+              id: false
+            }
+          }
+        }}
         onCellClick={handleOnCellClick}
         getCellClassName={(params) => {
           if (!params.isEditable) return '';
@@ -602,7 +636,8 @@ const DataSheet = React.forwardRef((props, ref) => {
           return '';
         }}
         onEditRowsModelChange={handleEditRowsModelChange}
-        onCellEditCommit={handleOnCellEditCommit}
+        processRowUpdate={processRowUpdate}
+        onProcessRowUpdateError={(error) => { console.log(`Error while updating row: ${error}`); }}
       />
       <RowActionMenu
         anchorEl={rowActionMenuAnchor}
