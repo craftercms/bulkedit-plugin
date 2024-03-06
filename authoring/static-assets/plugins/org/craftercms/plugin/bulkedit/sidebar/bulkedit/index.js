@@ -764,7 +764,7 @@ exports.default = _default;
 var MenuIcon = /*@__PURE__*/getDefaultExportFromCjs(Menu$2);
 
 /*
- * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2024 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -787,7 +787,7 @@ var CookieHelper = {
 };
 
 /*
- * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2024 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -880,8 +880,16 @@ var StudioAPI = {
       }, _callee);
     }))();
   },
-  getContentTypeConfig: function getContentTypeConfig(contentType) {
+
+  /**
+   * Get string value of form-definition.xml
+   * @param contentType
+   * @returns Configuration in string
+   */
+  getContentTypeDefinitionConfig: function getContentTypeDefinitionConfig(contentType) {
     return _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee2() {
+      var _res$response;
+
       var path, url, res;
       return regenerator.wrap(function _callee2$(_context2) {
         while (1) {
@@ -895,7 +903,7 @@ var StudioAPI = {
             case 4:
               res = _context2.sent;
 
-              if (!(res.status === 200 && res.response && res.response.content)) {
+              if (!(res.status === 200 && (_res$response = res.response) !== null && _res$response !== void 0 && _res$response.content)) {
                 _context2.next = 7;
                 break;
               }
@@ -1130,7 +1138,7 @@ var StudioAPI = {
 };
 
 /*
- * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2024 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -3122,7 +3130,7 @@ cjs.default = _default;
 cjs.DraggableCore = DraggableCore_1;
 
 /*
- * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2024 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -3294,7 +3302,7 @@ exports.default = _default;
 var CheckIcon = /*@__PURE__*/getDefaultExportFromCjs(Check);
 
 /*
- * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2024 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -43308,7 +43316,7 @@ exports.default = _default;
 var LockOutlinedIcon = /*@__PURE__*/getDefaultExportFromCjs(LockOutlined);
 
 /*
- * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2024 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -43325,7 +43333,7 @@ var LockOutlinedIcon = /*@__PURE__*/getDefaultExportFromCjs(LockOutlined);
 function PathCell(props) {
   var value = props.value,
       row = props.row;
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Tooltip$1, {
+  return /*#__PURE__*/React.createElement(Tooltip$1, {
     title: value,
     enterDelay: 500
   }, /*#__PURE__*/React.createElement(Typography$1, {
@@ -43342,7 +43350,7 @@ function PathCell(props) {
     style: {
       color: 'rgb(255, 149, 0)'
     }
-  }), value)));
+  }), value));
 }
 
 /*
@@ -43411,7 +43419,7 @@ exports.default = _default;
 var EditIcon = /*@__PURE__*/getDefaultExportFromCjs(Edit);
 
 /*
- * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2024 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -43813,7 +43821,7 @@ exports.default = _default;
 var LockOpenOutlinedIcon = /*@__PURE__*/getDefaultExportFromCjs(LockOpenOutlined);
 
 /*
- * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2024 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -43869,7 +43877,7 @@ function RowActionMenu(_ref) {
 }
 
 /*
- * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2024 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -43912,7 +43920,7 @@ var ContentTypeHelper = {
 };
 
 /*
- * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2024 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -43998,14 +44006,14 @@ var useStyles = makeStyles({
 });
 /**
  * @param {*} config - form-definition.xml
- * @returns
+ * @returns Array of field object
  */
 
-var getDisplayFieldsFromConfig = function getDisplayFieldsFromConfig(config) {
+var getFieldsFromConfig = function getFieldsFromConfig(config) {
   var xmlDoc = new DOMParser().parseFromString(config, 'text/xml');
   var xpath = '/form/sections/section/fields/field';
   var result = xmlDoc.evaluate(xpath, xmlDoc, null, XPathResult.ANY_TYPE, null);
-  var headers = [];
+  var fields = [];
   var node = result.iterateNext();
 
   while (node) {
@@ -44014,7 +44022,7 @@ var getDisplayFieldsFromConfig = function getDisplayFieldsFromConfig(config) {
     if (!ContentTypeHelper.isUnsupportedFieldType(fieldType)) {
       var fieldId = node.getElementsByTagName('id')[0].textContent;
       var title = node.getElementsByTagName('title')[0].textContent;
-      headers.push({
+      fields.push({
         fieldId: fieldId,
         fieldType: fieldType,
         title: title
@@ -44024,10 +44032,10 @@ var getDisplayFieldsFromConfig = function getDisplayFieldsFromConfig(config) {
     node = result.iterateNext();
   }
 
-  return headers;
+  return fields;
 };
 
-var buildColumnsFromDisplayFields = function buildColumnsFromDisplayFields(displayFields) {
+var getColumnsFromFields = function getColumnsFromFields(fields) {
   // default to have `id` and `path`
   var columns = [{
     field: 'action',
@@ -44057,7 +44065,7 @@ var buildColumnsFromDisplayFields = function buildColumnsFromDisplayFields(displ
     renderCell: PathCell
   }];
 
-  var _iterator = _createForOfIteratorHelper(displayFields),
+  var _iterator = _createForOfIteratorHelper(fields),
       _step;
 
   try {
@@ -44097,7 +44105,7 @@ var getColumnProperties = function getColumnProperties(fieldName, columns) {
   });
 };
 
-var rowFromApiContent = function rowFromApiContent(index, path, content, fieldIds, meta) {
+var rowFromApiContent = function rowFromApiContent(index, path, content, fields, meta) {
   var xml = new DOMParser().parseFromString(content, 'text/xml');
   var row = {
     id: index,
@@ -44108,14 +44116,18 @@ var rowFromApiContent = function rowFromApiContent(index, path, content, fieldId
     row.lockOwner = meta.lockOwner;
   }
 
-  var _iterator2 = _createForOfIteratorHelper(fieldIds),
+  var _iterator2 = _createForOfIteratorHelper(fields),
       _step2;
 
   try {
     for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-      var fieldId = _step2.value;
-      var field = xml.getElementsByTagName(fieldId)[0];
-      row[fieldId] = field ? field.textContent : '';
+      var object = _step2.value;
+      var field = xml.getElementsByTagName(object.fieldId)[0];
+      row[object.fieldId] = field ? field.textContent : '';
+
+      if (object.fieldType === 'node-selector') {
+        row["".concat(object.fieldId, "_raw")] = field;
+      }
     }
   } catch (err) {
     _iterator2.e(err);
@@ -44144,9 +44156,9 @@ var isCellContainText = function isCellContainText(text, params) {
   return (cellValue === null || cellValue === void 0 ? void 0 : cellValue.indexOf(text)) >= 0;
 };
 
-var writeContent = /*#__PURE__*/function () {
+var writeTableContent = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee(path, editedObj, contentType) {
-    var content, xml, keys, _i, _keys, key, value, node, newContent, res;
+    var content, xml, keys, _iterator3, _step3, key, value, node, newContent, res;
 
     return regenerator.wrap(function _callee$(_context) {
       while (1) {
@@ -44167,44 +44179,86 @@ var writeContent = /*#__PURE__*/function () {
 
           case 5:
             xml = new DOMParser().parseFromString(content, 'text/xml');
-            keys = Object.keys(editedObj);
+            keys = Object.keys(editedObj).filter(function (key) {
+              return !key.endsWith('_raw');
+            });
+            _iterator3 = _createForOfIteratorHelper(keys);
+            _context.prev = 8;
 
-            for (_i = 0, _keys = keys; _i < _keys.length; _i++) {
-              key = _keys[_i];
-              value = editedObj[key];
-              node = xml.getElementsByTagName(key)[0];
+            _iterator3.s();
 
-              if (node) {
-                node.textContent = value;
-              }
+          case 10:
+            if ((_step3 = _iterator3.n()).done) {
+              _context.next = 19;
+              break;
             }
 
+            key = _step3.value;
+            value = editedObj[key];
+            node = xml.getElementsByTagName(key)[0];
+
+            if (node) {
+              _context.next = 16;
+              break;
+            }
+
+            return _context.abrupt("continue", 17);
+
+          case 16:
+            if (editedObj["".concat(key, "_raw")]) {
+              node.parentNode.replaceChild(editedObj["".concat(key, "_raw")], node);
+            } else {
+              node.textContent = value;
+            }
+
+          case 17:
+            _context.next = 10;
+            break;
+
+          case 19:
+            _context.next = 24;
+            break;
+
+          case 21:
+            _context.prev = 21;
+            _context.t0 = _context["catch"](8);
+
+            _iterator3.e(_context.t0);
+
+          case 24:
+            _context.prev = 24;
+
+            _iterator3.f();
+
+            return _context.finish(24);
+
+          case 27:
             newContent = new XMLSerializer().serializeToString(xml);
-            _context.next = 11;
+            _context.next = 30;
             return StudioAPI.writeContent(path, newContent, contentType);
 
-          case 11:
+          case 30:
             res = _context.sent;
 
             if (!res) {
-              _context.next = 14;
+              _context.next = 33;
               break;
             }
 
             return _context.abrupt("return", newContent);
 
-          case 14:
+          case 33:
             return _context.abrupt("return", null);
 
-          case 15:
+          case 34:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee);
+    }, _callee, null, [[8, 21, 24, 27]]);
   }));
 
-  return function writeContent(_x, _x2, _x3) {
+  return function writeTableContent(_x, _x2, _x3) {
     return _ref.apply(this, arguments);
   };
 }();
@@ -44319,7 +44373,7 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
       },
       saveAllChanges: function () {
         var _saveAllChanges = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee2() {
-          var keys, totalCount, completedCount, failedRows, fieldIds, _loop, i;
+          var keys, totalCount, completedCount, failedRows, fields, _loop, i;
 
           return regenerator.wrap(function _callee2$(_context3) {
             while (1) {
@@ -44340,10 +44394,13 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
                 case 6:
                   setIsProcessing(true);
                   setBulkTotalCount(totalCount);
-                  fieldIds = columns.map(function (cl) {
-                    return cl.field;
+                  fields = columns.map(function (cl) {
+                    return {
+                      fieldId: cl.field,
+                      fieldType: cl.fieldType
+                    };
                   }).filter(function (field) {
-                    return field !== 'id' && field !== 'path' && field !== 'action';
+                    return field.fieldId !== 'id' && field.fieldId !== 'path' && field.fieldId !== 'action';
                   });
                   _loop = /*#__PURE__*/regenerator.mark(function _loop(i) {
                     var path, newContent, row, rowIndex;
@@ -44353,7 +44410,7 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
                           case 0:
                             path = keys[i];
                             _context2.next = 3;
-                            return writeContent(path, editedRows[path], contentType);
+                            return writeTableContent(path, editedRows[path], contentType);
 
                           case 3:
                             newContent = _context2.sent;
@@ -44370,7 +44427,7 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
 
                               if (row) {
                                 rowIndex = row.id;
-                                sessionRows[rowIndex] = rowFromApiContent(rowIndex, path, newContent, fieldIds);
+                                sessionRows[rowIndex] = rowFromApiContent(rowIndex, path, newContent, fields);
                               }
                             }
 
@@ -44430,19 +44487,19 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
   var replaceTextInAllRows = function replaceTextInAllRows(text, replaceText, rows, columns) {
     var newRows = [];
 
-    var _iterator3 = _createForOfIteratorHelper(rows),
-        _step3;
+    var _iterator4 = _createForOfIteratorHelper(rows),
+        _step4;
 
     try {
-      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-        var row = _step3.value;
+      for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+        var row = _step4.value;
         var newRow = replaceTextInRow(text, replaceText, row, columns);
         newRows.push(newRow);
       }
     } catch (err) {
-      _iterator3.e(err);
+      _iterator4.e(err);
     } finally {
-      _iterator3.f();
+      _iterator4.f();
     }
 
     return newRows;
@@ -44450,29 +44507,52 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
 
   var replaceTextInRow = function replaceTextInRow(text, replaceText, row, columns) {
     var newRow = {};
-    var keys = Object.keys(row);
+    var keys = Object.keys(row).filter(function (key) {
+      return !key.endsWith('_raw');
+    });
 
-    for (var _i2 = 0, _keys2 = keys; _i2 < _keys2.length; _i2++) {
-      var fieldName = _keys2[_i2];
-      var fieldValue = row[fieldName];
-      var newFieldValue = fieldValue;
+    var _iterator5 = _createForOfIteratorHelper(keys),
+        _step5;
 
-      var _props = getColumnProperties(fieldName, columns);
+    try {
+      for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+        var fieldName = _step5.value;
+        var fieldValue = row[fieldName];
+        var newFieldValue = fieldValue;
 
-      if (_props.editable && ContentTypeHelper.isRenderableFieldType(_props.fieldType)) {
-        newFieldValue = fieldValue.replaceAll(text, replaceText);
+        var _props = getColumnProperties(fieldName, columns);
+
+        if (_props !== null && _props !== void 0 && _props.editable && (ContentTypeHelper.isRenderableFieldType(_props === null || _props === void 0 ? void 0 : _props.fieldType) || (_props === null || _props === void 0 ? void 0 : _props.fieldType) === 'node-selector')) {
+          newFieldValue = fieldValue.replaceAll(text, replaceText);
+        }
+
+        if (newFieldValue !== fieldValue) {
+          var model = {
+            id: row.id,
+            field: fieldName,
+            value: newFieldValue
+          };
+
+          if (_props.fieldType === 'node-selector') {
+            var rawField = "".concat(fieldName, "_raw");
+            var xmlDoc = row[rawField];
+            var serializer = new XMLSerializer();
+            var xmlStr = serializer.serializeToString(xmlDoc);
+            var updatedXmlStr = xmlStr.replaceAll(text, replaceText);
+            var parser = new DOMParser();
+            var updatedXmlDoc = parser.parseFromString(updatedXmlStr, 'text/xml');
+            model.rawValue = updatedXmlDoc.documentElement;
+          }
+
+          saveEditState(model);
+        }
+
+        newRow[fieldName] = newFieldValue;
       }
-
-      if (newFieldValue !== fieldValue) {
-        var model = {
-          id: row.id,
-          field: fieldName,
-          value: newFieldValue
-        };
-        saveEditState(model);
-      }
-
-      newRow[fieldName] = newFieldValue;
+    } catch (err) {
+      _iterator5.e(err);
+    } finally {
+      _iterator5.f();
     }
 
     return newRow;
@@ -44518,7 +44598,7 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
   }, [contentType]);
   React.useEffect(function () {
     _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee3() {
-      var config, displayFields, _yield$StudioAPI$sear, items, total, paths, dtRows, dtSessionRows, i, path, content, meta, fieldIds, row;
+      var config, fields, _yield$StudioAPI$sear, items, total, paths, dtRows, dtSessionRows, i, path, content, meta, row;
 
       return regenerator.wrap(function _callee3$(_context4) {
         while (1) {
@@ -44534,12 +44614,12 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
             case 2:
               setLoading(true);
               _context4.next = 5;
-              return StudioAPI.getContentTypeConfig(contentType);
+              return StudioAPI.getContentTypeDefinitionConfig(contentType);
 
             case 5:
               config = _context4.sent;
-              displayFields = getDisplayFieldsFromConfig(config);
-              setColumns(buildColumnsFromDisplayFields(displayFields));
+              fields = getFieldsFromConfig(config);
+              setColumns(getColumnsFromFields(fields));
               _context4.next = 10;
               return StudioAPI.searchByContentType(contentType, keyword, filterEditDate, page * pageSize, pageSize);
 
@@ -44557,7 +44637,7 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
 
             case 18:
               if (!(i < paths.length)) {
-                _context4.next = 33;
+                _context4.next = 32;
                 break;
               }
 
@@ -44572,24 +44652,21 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
 
             case 25:
               meta = _context4.sent;
-              fieldIds = displayFields.map(function (elm) {
-                return elm.fieldId;
-              });
-              row = rowFromApiContent(i, path, content, fieldIds, meta);
+              row = rowFromApiContent(i, path, content, fields, meta);
               dtRows.push(_objectSpread$1({}, row));
               dtSessionRows.push(_objectSpread$1({}, row));
 
-            case 30:
+            case 29:
               i += 1;
               _context4.next = 18;
               break;
 
-            case 33:
+            case 32:
               setRows(dtRows);
               setSessionRows(dtSessionRows);
               setLoading(false);
 
-            case 36:
+            case 35:
             case "end":
               return _context4.stop();
           }
@@ -44612,8 +44689,8 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
 
     var fields = Object.keys(oldRow);
 
-    for (var _i3 = 0, _fields = fields; _i3 < _fields.length; _i3++) {
-      var field = _fields[_i3];
+    for (var _i = 0, _fields = fields; _i < _fields.length; _i++) {
+      var field = _fields[_i];
 
       if (oldRow[field] !== newRow[field]) {
         currentEditedRows[key][field] = newRow[field];
@@ -44634,6 +44711,11 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
     }
 
     currentEditedRows[key][model.field] = model.value;
+
+    if (model.rawValue) {
+      currentEditedRows[key]["".concat(model.field, "_raw")] = model.rawValue;
+    }
+
     setEditedRows(currentEditedRows);
   };
 
@@ -44741,7 +44823,7 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
             case 0:
               row = selectedRow.row;
 
-              if (!(!row || !row.path || !row.lockOwner)) {
+              if (!(!(row !== null && row !== void 0 && row.path) || !(row !== null && row !== void 0 && row.lockOwner))) {
                 _context6.next = 3;
                 break;
               }
@@ -44801,19 +44883,19 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
                   return field !== 'id' && field !== 'path' && field !== 'action';
                 });
 
-                var _iterator4 = _createForOfIteratorHelper(fieldIds),
-                    _step4;
+                var _iterator6 = _createForOfIteratorHelper(fieldIds),
+                    _step6;
 
                 try {
-                  for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-                    var field = _step4.value;
+                  for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+                    var field = _step6.value;
                     sessionRows[model.id][field] = response.updatedModel[field];
                     rows[model.id][field] = response.updatedModel[field];
                   }
                 } catch (err) {
-                  _iterator4.e(err);
+                  _iterator6.e(err);
                 } finally {
-                  _iterator4.f();
+                  _iterator6.f();
                 }
 
                 setSessionRows(sessionRows);
@@ -44842,14 +44924,14 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
 
   var handleRowMenuActionSave = /*#__PURE__*/function () {
     var _ref6 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee7() {
-      var row, path, newContent, fieldIds;
+      var row, path, newContent, fields;
       return regenerator.wrap(function _callee7$(_context8) {
         while (1) {
           switch (_context8.prev = _context8.next) {
             case 0:
               row = selectedRow.row;
 
-              if (!(!row || !row.path)) {
+              if (row !== null && row !== void 0 && row.path) {
                 _context8.next = 4;
                 break;
               }
@@ -44870,18 +44952,21 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
 
             case 8:
               _context8.next = 10;
-              return writeContent(path, editedRows[path], contentType);
+              return writeTableContent(path, editedRows[path], contentType);
 
             case 10:
               newContent = _context8.sent;
 
               if (newContent) {
-                fieldIds = columns.map(function (cl) {
-                  return cl.field;
+                fields = columns.map(function (cl) {
+                  return {
+                    fieldId: cl.field,
+                    fieldType: cl.fieldType
+                  };
                 }).filter(function (field) {
-                  return field !== 'id' && field !== 'path' && field !== 'action';
+                  return field.fieldId !== 'id' && field.fieldId !== 'path' && field.fieldId !== 'action';
                 });
-                sessionRows[row.id] = rowFromApiContent(row.id, path, newContent, fieldIds);
+                sessionRows[row.id] = rowFromApiContent(row.id, path, newContent, fields);
                 rows[row.id] = sessionRows[row.id];
                 setSessionRows(sessionRows);
                 setRows(rows);
@@ -44904,14 +44989,14 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
 
   var handleRowMenuActionClear = /*#__PURE__*/function () {
     var _ref7 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee8() {
-      var row, path, content, meta, fieldIds, rowFromApi;
+      var row, path, content, meta, fields, rowFromApi;
       return regenerator.wrap(function _callee8$(_context9) {
         while (1) {
           switch (_context9.prev = _context9.next) {
             case 0:
               row = selectedRow.row;
 
-              if (!(!row || !row.path)) {
+              if (row !== null && row !== void 0 && row.path) {
                 _context9.next = 4;
                 break;
               }
@@ -44951,12 +45036,15 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
               return _context9.abrupt("return");
 
             case 17:
-              fieldIds = columns.map(function (cl) {
-                return cl.field;
+              fields = columns.map(function (cl) {
+                return {
+                  fieldId: cl.field,
+                  fieldType: cl.fieldType
+                };
               }).filter(function (field) {
-                return field !== 'id' && field !== 'path' && field != 'action';
+                return field.fieldId !== 'id' && field.fieldId !== 'path' && field.fieldId != 'action';
               });
-              rowFromApi = rowFromApiContent(row.id, path, content, fieldIds, meta);
+              rowFromApi = rowFromApiContent(row.id, path, content, fields, meta);
               sessionRows[row.id] = rowFromApi;
               setSessionRows(_toConsumableArray$1(sessionRows));
               delete editedRows[path];
@@ -45564,7 +45652,7 @@ function CssBaseline(inProps) {
 }
 
 /*
- * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2024 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -45596,7 +45684,7 @@ function BulkEditApp() {
 }
 
 /*
- * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2024 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by

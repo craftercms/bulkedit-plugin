@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2024 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -60,30 +60,30 @@ const useStyles = makeStyles({
 
 /**
  * @param {*} config - form-definition.xml
- * @returns
+ * @returns Array of field object
  */
-const getDisplayFieldsFromConfig = (config) => {
+const getFieldsFromConfig = (config) => {
   const xmlDoc = (new DOMParser()).parseFromString(config, 'text/xml');
   const xpath = '/form/sections/section/fields/field';
   const result = xmlDoc.evaluate(xpath, xmlDoc, null, XPathResult.ANY_TYPE, null);
 
-  const headers = [];
+  const fields = [];
   let node = result.iterateNext();
   while (node) {
     const fieldType = node.getElementsByTagName('type')[0].textContent;
     if (!ContentTypeHelper.isUnsupportedFieldType(fieldType)) {
       const fieldId = node.getElementsByTagName('id')[0].textContent;
       const title = node.getElementsByTagName('title')[0].textContent;
-      headers.push({ fieldId, fieldType, title });
+      fields.push({ fieldId, fieldType, title });
     }
 
     node = result.iterateNext();
   }
 
-  return headers;
+  return fields;
 };
 
-const buildColumnsFromDisplayFields = (displayFields) => {
+const getColumnsFromFields = (fields) => {
   // default to have `id` and `path`
   const columns = [{
     field: 'action',
@@ -115,7 +115,7 @@ const buildColumnsFromDisplayFields = (displayFields) => {
     renderCell: PathCell
   }];
 
-  for (const field of displayFields) {
+  for (const field of fields) {
     const { fieldId, fieldType, title } = field;
     const column = {
       field: fieldId,
@@ -143,15 +143,18 @@ const getColumnProperties = (fieldName, columns) => {
   return columns.find((cl) => cl.field === fieldName);
 };
 
-const rowFromApiContent = (index, path, content, fieldIds, meta) => {
+const rowFromApiContent = (index, path, content, fields, meta) => {
   const xml = (new DOMParser()).parseFromString(content, 'text/xml');
   const row = { id: index, path };
   if (meta?.lockOwner) {
     row.lockOwner = meta.lockOwner;
   }
-  for (const fieldId of fieldIds) {
-    const field = xml.getElementsByTagName(fieldId)[0];
-    row[fieldId] = field ? field.textContent : '';
+  for (const object of fields) {
+    const field = xml.getElementsByTagName(object.fieldId)[0];
+    row[object.fieldId] = field ? field.textContent : '';
+    if (object.fieldType === 'node-selector') {
+      row[`${object.fieldId}_raw`] = field;
+    }
   };
 
   return row;
@@ -177,7 +180,7 @@ const isCellContainText = (text, params) => {
   return cellValue?.indexOf(text) >= 0;
 };
 
-const writeContent = async (path, editedObj, contentType) => {
+const writeTableContent = async (path, editedObj, contentType) => {
   const content = await StudioAPI.getContent(path);
   if (!content) {
     return;
@@ -185,11 +188,17 @@ const writeContent = async (path, editedObj, contentType) => {
 
   const xml = (new DOMParser()).parseFromString(content, 'text/xml');
 
-  const keys = Object.keys(editedObj);
+  const keys = Object.keys(editedObj).filter(key => !key.endsWith('_raw'));
   for (const key of keys) {
     const value = editedObj[key];
     const node = xml.getElementsByTagName(key)[0];
-    if (node) {
+    if (!node) {
+      continue;
+    }
+
+    if (editedObj[`${key}_raw`]) {
+      node.parentNode.replaceChild(editedObj[`${key}_raw`], node);
+    } else {
       node.textContent = value;
     }
   }
@@ -245,11 +254,15 @@ const DataSheet = React.forwardRef((props, ref) => {
       setIsProcessing(true);
       setBulkTotalCount(totalCount);
 
-      const fieldIds = columns.map((cl) => cl.field).filter((field) => field !== 'id' && field !== 'path' && field !== 'action');
+      const fields = columns.map((cl) => ({
+                                  fieldId: cl.field,
+                                  fieldType: cl.fieldType
+                              }))
+                              .filter((field) => field.fieldId !== 'id' && field.fieldId !== 'path' && field.fieldId !== 'action');
 
       for (let i = 0; i < totalCount; i++) {
         const path = keys[i];
-        const newContent = await writeContent(path, editedRows[path], contentType);
+        const newContent = await writeTableContent(path, editedRows[path], contentType);
         if (!newContent) {
           console.log(`Error while saving path ${path}`);
           failedRows.push(editedRows[path]);
@@ -259,7 +272,7 @@ const DataSheet = React.forwardRef((props, ref) => {
           const row = sessionRows.find((r) => r.path === path);
           if (row) {
             const rowIndex = row.id;
-            sessionRows[rowIndex] = rowFromApiContent(rowIndex, path, newContent, fieldIds);
+            sessionRows[rowIndex] = rowFromApiContent(rowIndex, path, newContent, fields);
           }
         }
       };
@@ -290,18 +303,31 @@ const DataSheet = React.forwardRef((props, ref) => {
 
   const replaceTextInRow = (text, replaceText, row, columns) => {
     const newRow = {};
-    const keys = Object.keys(row);
+    const keys = Object.keys(row)
+                        .filter(key => !key.endsWith('_raw'));
 
     for (const fieldName of keys) {
       const fieldValue = row[fieldName];
       let newFieldValue = fieldValue;
       const props = getColumnProperties(fieldName, columns);
-      if (props.editable && ContentTypeHelper.isRenderableFieldType(props.fieldType)) {
+      if (props?.editable && (
+        ContentTypeHelper.isRenderableFieldType(props?.fieldType) || props?.fieldType === 'node-selector'
+      )) {
         newFieldValue = fieldValue.replaceAll(text, replaceText);
       }
 
       if (newFieldValue !== fieldValue) {
         const model = { id: row.id, field: fieldName, value: newFieldValue };
+        if (props.fieldType === 'node-selector') {
+          const rawField = `${fieldName}_raw`;
+          const xmlDoc = row[rawField];
+          const serializer = new XMLSerializer();
+          const xmlStr = serializer.serializeToString(xmlDoc);
+          const updatedXmlStr = xmlStr.replaceAll(text, replaceText);
+          const parser = new DOMParser();
+          const updatedXmlDoc = parser.parseFromString(updatedXmlStr, 'text/xml');
+          model.rawValue = updatedXmlDoc.documentElement;
+        }
         saveEditState(model);
       }
 
@@ -364,9 +390,9 @@ const DataSheet = React.forwardRef((props, ref) => {
       }
 
       setLoading(true);
-      const config = await StudioAPI.getContentTypeConfig(contentType);
-      const displayFields = getDisplayFieldsFromConfig(config);
-      setColumns(buildColumnsFromDisplayFields(displayFields));
+      const config = await StudioAPI.getContentTypeDefinitionConfig(contentType);
+      const fields = getFieldsFromConfig(config);
+      setColumns(getColumnsFromFields(fields));
 
       const { items, total } = await StudioAPI.searchByContentType(contentType, keyword, filterEditDate, page * pageSize, pageSize);
       setTotalItems(total);
@@ -379,8 +405,7 @@ const DataSheet = React.forwardRef((props, ref) => {
 
         const content = await StudioAPI.getContent(path);
         const meta = await StudioAPI.getSandboxItemByPath(path);
-        const fieldIds = displayFields.map((elm) => elm.fieldId);
-        const row = rowFromApiContent(i, path, content, fieldIds, meta);
+        const row = rowFromApiContent(i, path, content, fields, meta);
         dtRows.push({ ...row });
         dtSessionRows.push({ ...row });
       }
@@ -424,6 +449,9 @@ const DataSheet = React.forwardRef((props, ref) => {
       currentEditedRows[key] = {};
     }
     currentEditedRows[key][model.field] = model.value;
+    if (model.rawValue) {
+      currentEditedRows[key][`${model.field}_raw`] = model.rawValue;
+    }
     setEditedRows(currentEditedRows);
   };
 
@@ -501,7 +529,7 @@ const DataSheet = React.forwardRef((props, ref) => {
 
   const handleRowMenuActionUnlock = async () => {
     const { row } = selectedRow;
-    if (!row || !row.path || !row.lockOwner) return;
+    if (!row?.path || !row?.lockOwner) return;
 
     const res = await StudioAPI.unlockContent(row.path);
     if (res) {
@@ -545,7 +573,7 @@ const DataSheet = React.forwardRef((props, ref) => {
 
   const handleRowMenuActionSave = async () => {
     const { row } = selectedRow;
-    if (!row || !row.path) {
+    if (!row?.path) {
       setRowActionMenuAnchor(null);
       return;
     }
@@ -556,10 +584,14 @@ const DataSheet = React.forwardRef((props, ref) => {
       return;
     }
 
-    const newContent = await writeContent(path, editedRows[path], contentType);
+    const newContent = await writeTableContent(path, editedRows[path], contentType);
     if (newContent) {
-      const fieldIds = columns.map((cl) => cl.field).filter((field) => field !== 'id' && field !== 'path' && field !== 'action');
-      sessionRows[row.id] = rowFromApiContent(row.id, path, newContent, fieldIds);
+      const fields = columns.map((cl) => ({
+                                  fieldId: cl.field,
+                                  fieldType: cl.fieldType
+                              }))
+                              .filter((field) => field.fieldId !== 'id' && field.fieldId !== 'path' && field.fieldId !== 'action');
+      sessionRows[row.id] = rowFromApiContent(row.id, path, newContent, fields);
       rows[row.id] = sessionRows[row.id]
       setSessionRows(sessionRows);
       setRows(rows);
@@ -570,7 +602,7 @@ const DataSheet = React.forwardRef((props, ref) => {
 
   const handleRowMenuActionClear = async () => {
     const { row } = selectedRow;
-    if (!row || !row.path) {
+    if (!row?.path) {
       setRowActionMenuAnchor(null);
       return;
     }
@@ -588,8 +620,12 @@ const DataSheet = React.forwardRef((props, ref) => {
       return;
     }
 
-    const fieldIds = columns.map((cl) => cl.field).filter((field) => field !== 'id' && field !== 'path' && field != 'action');
-    const rowFromApi = rowFromApiContent(row.id, path, content, fieldIds, meta);
+    const fields = columns.map((cl) => ({
+                            fieldId: cl.field,
+                            fieldType: cl.fieldType
+                          }))
+                          .filter((field) => field.fieldId !== 'id' && field.fieldId !== 'path' && field.fieldId != 'action');
+    const rowFromApi = rowFromApiContent(row.id, path, content, fields, meta);
     sessionRows[row.id] = rowFromApi;
     setSessionRows([...sessionRows]);
 

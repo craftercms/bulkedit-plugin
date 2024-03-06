@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2024 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -24,25 +24,23 @@ export default function PathCell(props) {
   const { value, row } = props;
 
   return (
-    <>
-      <Tooltip title={value} enterDelay={500}>
-        <Typography
-          variant="body2"
-          style={{
-            padding: 16,
-            display: 'flex',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis'
-          }}
-        >
-          {row.lockOwner && (
-            <LockOutlinedIcon style={{ color: 'rgb(255, 149, 0)' }} />
-          )}
-          {value}
-        </Typography>
-      </Tooltip>
-    </>
+    <Tooltip title={value} enterDelay={500}>
+      <Typography
+        variant="body2"
+        style={{
+          padding: 16,
+          display: 'flex',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis'
+        }}
+      >
+        {row.lockOwner && (
+          <LockOutlinedIcon style={{ color: 'rgb(255, 149, 0)' }} />
+        )}
+        {value}
+      </Typography>
+    </Tooltip>
   );
 };

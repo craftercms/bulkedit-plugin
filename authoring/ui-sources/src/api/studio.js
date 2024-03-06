@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2024 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -57,11 +57,16 @@ const StudioAPI = {
 
     return [];
   },
-  async getContentTypeConfig(contentType) {
+  /**
+   * Get string value of form-definition.xml
+   * @param contentType
+   * @returns Configuration in string
+   */
+  async getContentTypeDefinitionConfig(contentType) {
     const path = `/content-types${contentType}/form-definition.xml`;
     const url = `${StudioAPI.origin()}${API_GET_CONFIGURATION}?module=studio&path=${path}&siteId=${StudioAPI.siteId()}`;
     const res = await HttpHelper.get(url);
-    if (res.status === 200 && res.response && res.response.content) {
+    if (res.status === 200 && res.response?.content) {
       return res.response.content;
     }
 
