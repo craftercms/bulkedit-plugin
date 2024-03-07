@@ -44370,6 +44370,8 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
   React.useImperativeHandle(ref, function () {
     return {
       cancelAllChanges: function cancelAllChanges() {
+        setEditedRows({});
+        setSessionRows(_toConsumableArray$1(rows));
         setRefresh(1 - refresh);
       },
       saveAllChanges: function () {
@@ -44602,7 +44604,7 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
   }, [contentType]);
   React.useEffect(function () {
     _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee3() {
-      var config, fields, _yield$StudioAPI$sear, items, total, paths, dtRows, dtSessionRows, i, path, content, meta, row;
+      var config, fields, _yield$StudioAPI$sear, items, total, paths, dtRows, dtSessionRows, i, path, content, meta, row, editedValue, keys, _i, _keys, key;
 
       return regenerator.wrap(function _callee3$(_context4) {
         while (1) {
@@ -44641,7 +44643,7 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
 
             case 18:
               if (!(i < paths.length)) {
-                _context4.next = 32;
+                _context4.next = 34;
                 break;
               }
 
@@ -44657,20 +44659,32 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
             case 25:
               meta = _context4.sent;
               row = rowFromApiContent(i, path, content, fields, meta);
-              dtRows.push(_objectSpread$1({}, row));
-              dtSessionRows.push(_objectSpread$1({}, row));
+              editedValue = {};
 
-            case 29:
+              if (editedRows[row.path]) {
+                // row has some work in the current session
+                keys = Object.keys(editedRows[row.path]);
+
+                for (_i = 0, _keys = keys; _i < _keys.length; _i++) {
+                  key = _keys[_i];
+                  editedValue[key] = editedRows[row.path][key];
+                }
+              }
+
+              dtRows.push(_objectSpread$1({}, row));
+              dtSessionRows.push(_objectSpread$1(_objectSpread$1({}, row), editedValue));
+
+            case 31:
               i += 1;
               _context4.next = 18;
               break;
 
-            case 32:
+            case 34:
               setRows(dtRows);
               setSessionRows(dtSessionRows);
               setLoading(false);
 
-            case 35:
+            case 37:
             case "end":
               return _context4.stop();
           }
@@ -44700,8 +44714,8 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
 
     var fields = Object.keys(oldRow);
 
-    for (var _i = 0, _fields = fields; _i < _fields.length; _i++) {
-      var field = _fields[_i];
+    for (var _i2 = 0, _fields = fields; _i2 < _fields.length; _i2++) {
+      var field = _fields[_i2];
 
       if (oldRow[field] !== newRow[field]) {
         currentEditedRows[key][field] = newRow[field];

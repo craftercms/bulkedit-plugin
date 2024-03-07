@@ -238,6 +238,8 @@ const DataSheet = React.forwardRef((props, ref) => {
 
   React.useImperativeHandle(ref, () => ({
     cancelAllChanges: () => {
+      setEditedRows({});
+      setSessionRows([...rows]);
       setRefresh(1 - refresh);
     },
     saveAllChanges: async () => {
@@ -407,8 +409,19 @@ const DataSheet = React.forwardRef((props, ref) => {
         const content = await StudioAPI.getContent(path);
         const meta = await StudioAPI.getSandboxItemByPath(path);
         const row = rowFromApiContent(i, path, content, fields, meta);
+        const editedValue = {};
+        if (editedRows[row.path]) {
+          // row has some work in the current session
+          const keys = Object.keys(editedRows[row.path]);
+          for (let key of keys) {
+            editedValue[key] = editedRows[row.path][key];
+          }
+        }
         dtRows.push({ ...row });
-        dtSessionRows.push({ ...row });
+        dtSessionRows.push({
+          ...row,
+          ...editedValue
+        });
       }
 
       setRows(dtRows);
