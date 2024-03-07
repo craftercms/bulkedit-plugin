@@ -152,7 +152,7 @@ const rowFromApiContent = (index, path, content, fields, meta) => {
   for (const object of fields) {
     const field = xml.getElementsByTagName(object.fieldId)[0];
     row[object.fieldId] = field ? field.textContent : '';
-    if (object.fieldType === 'node-selector') {
+    if (object.fieldType === ContentTypeHelper.FIELD_TYPE_NODE_SELECTOR) {
       row[`${object.fieldId}_raw`] = field;
     }
   };
@@ -307,26 +307,27 @@ const DataSheet = React.forwardRef((props, ref) => {
                         .filter(key => !key.endsWith('_raw'));
 
     for (const fieldName of keys) {
-      const fieldValue = row[fieldName];
+      const fieldValue = editedRows?.[row.path]?.[fieldName] ? editedRows?.[row.path]?.[fieldName] : row[fieldName];
       let newFieldValue = fieldValue;
       const props = getColumnProperties(fieldName, columns);
       if (props?.editable && (
-        ContentTypeHelper.isRenderableFieldType(props?.fieldType) || props?.fieldType === 'node-selector'
+        ContentTypeHelper.isRenderableFieldType(props?.fieldType) || props?.fieldType === ContentTypeHelper.FIELD_TYPE_NODE_SELECTOR
       )) {
         newFieldValue = fieldValue.replaceAll(text, replaceText);
       }
 
       if (newFieldValue !== fieldValue) {
         const model = { id: row.id, field: fieldName, value: newFieldValue };
-        if (props.fieldType === 'node-selector') {
-          const rawField = `${fieldName}_raw`;
-          const xmlDoc = row[rawField];
+        if (props.fieldType === ContentTypeHelper.FIELD_TYPE_NODE_SELECTOR) {
+          const rawFieldName = `${fieldName}_raw`;
+          const xmlDoc = row[rawFieldName];
           const serializer = new XMLSerializer();
           const xmlStr = serializer.serializeToString(xmlDoc);
           const updatedXmlStr = xmlStr.replaceAll(text, replaceText);
           const parser = new DOMParser();
           const updatedXmlDoc = parser.parseFromString(updatedXmlStr, 'text/xml');
           model.rawValue = updatedXmlDoc.documentElement;
+          newRow[rawFieldName] = updatedXmlDoc;
         }
         saveEditState(model);
       }
@@ -420,6 +421,12 @@ const DataSheet = React.forwardRef((props, ref) => {
     setEditRowsModel(model);
   };
 
+  /**
+   * Callback called before updating a row with new values in the row and cell editing.
+   * @param {*} newRow
+   * @param {*} oldRow
+   * @returns
+   */
   const processRowUpdate = (newRow, oldRow) => {
     const currentEditedRows = editedRows;
 

@@ -38,8 +38,8 @@ import ClearIcon from '@mui/icons-material/Clear';
 import MenuIcon from '@mui/icons-material/Menu';
 
 import ContentTypeSelect from './ContentTypeSelect';
-import FindAndReplace from './FindAndReplace';
-import FilterDialog from './Filter';
+import FindAndReplaceDialog from './FindAndReplaceDialog';
+import FilterDialog from './FilterDialog';
 import DataSheet from './DataSheet';
 
 const DRAWER_WIDTH = 240;
@@ -85,6 +85,10 @@ export default function Editor() {
 
   const handleFindReplaceDialogClose = () => {
     setFindReplaceDialogOpen(false);
+  };
+
+  const handleOpenFilterDialog = () => {
+    setFilterDialogOpen(true);
   };
 
   const handleFilterDialogClose = () => {
@@ -136,7 +140,7 @@ export default function Editor() {
               <StyledIconButton
                 color="inherit"
                 aria-label={TEXT_FILTER}
-                onClick={() => setFilterDialogOpen(true)}
+                onClick={handleOpenFilterDialog}
                 edge="start"
                 sx={{ mr: 2 }}
               >
@@ -214,12 +218,12 @@ export default function Editor() {
       <Divider />
       <List>
         <ListItemButton key={TEXT_FIND_REPLACE} onClick={() => setFindReplaceDialogOpen(true)}>
-              <ListItemIcon>
-                <FindReplaceIcon />
-              </ListItemIcon>
-              <ListItemText primary={TEXT_FIND_REPLACE} />
+          <ListItemIcon>
+            <FindReplaceIcon />
+          </ListItemIcon>
+          <ListItemText primary={TEXT_FIND_REPLACE} />
         </ListItemButton>
-        <ListItemButton key={TEXT_FILTER} onClick={() => setFilterDialogOpen(true)}>
+        <ListItemButton key={TEXT_FILTER} onClick={handleOpenFilterDialog}>
           <ListItemIcon>
             <FilterListIcon />
           </ListItemIcon>
@@ -251,9 +255,6 @@ export default function Editor() {
       {appbar}
       <section
         id="drawer-container"
-        position="relative"
-        bgcolor="white"
-        component="div"
         style={{
           overflowY: "scroll",
           overflowX: "hidden",
@@ -268,7 +269,7 @@ export default function Editor() {
           <DataSheet ref={dataSheetRef} />
         </Main>
       </section>
-      <FindAndReplace isOpen={findReplaceDialogOpen} handleClose={handleFindReplaceDialogClose} />
+      <FindAndReplaceDialog isOpen={findReplaceDialogOpen} handleClose={handleFindReplaceDialogClose} />
       <FilterDialog isOpen={filterDialogOpen} handleClose={handleFilterDialogClose} />
     </Box>
   );

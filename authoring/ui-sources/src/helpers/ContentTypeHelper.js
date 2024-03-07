@@ -21,6 +21,7 @@ const ContentTypeHelper = {
   FIELD_TYPE_VIDEO_PICKER: 'video-picker',
   FIELD_TYPE_IMAGE_PICKER: 'image-picker',
   FIELD_TYPE_AUTO_FILENAME: 'auto-filename',
+  FIELD_TYPE_NODE_SELECTOR: 'node-selector',
   renderableFieldTypes() {
     return [
       ContentTypeHelper.FIELD_TYPE_INPUT,

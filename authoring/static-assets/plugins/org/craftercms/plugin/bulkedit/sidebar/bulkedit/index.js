@@ -43899,6 +43899,7 @@ var ContentTypeHelper = {
   FIELD_TYPE_VIDEO_PICKER: 'video-picker',
   FIELD_TYPE_IMAGE_PICKER: 'image-picker',
   FIELD_TYPE_AUTO_FILENAME: 'auto-filename',
+  FIELD_TYPE_NODE_SELECTOR: 'node-selector',
   renderableFieldTypes: function renderableFieldTypes() {
     return [ContentTypeHelper.FIELD_TYPE_INPUT, ContentTypeHelper.FIELD_TYPE_NUMERIC_INPUT, ContentTypeHelper.FIELD_TYPE_TEXTAREA, ContentTypeHelper.FIELD_TYPE_RTE, ContentTypeHelper.FIELD_TYPE_VIDEO_PICKER, ContentTypeHelper.FIELD_TYPE_IMAGE_PICKER];
   },
@@ -44125,7 +44126,7 @@ var rowFromApiContent = function rowFromApiContent(index, path, content, fields,
       var field = xml.getElementsByTagName(object.fieldId)[0];
       row[object.fieldId] = field ? field.textContent : '';
 
-      if (object.fieldType === 'node-selector') {
+      if (object.fieldType === ContentTypeHelper.FIELD_TYPE_NODE_SELECTOR) {
         row["".concat(object.fieldId, "_raw")] = field;
       }
     }
@@ -44516,13 +44517,15 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
 
     try {
       for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+        var _editedRows$row$path, _editedRows$row$path2;
+
         var fieldName = _step5.value;
-        var fieldValue = row[fieldName];
+        var fieldValue = editedRows !== null && editedRows !== void 0 && (_editedRows$row$path = editedRows[row.path]) !== null && _editedRows$row$path !== void 0 && _editedRows$row$path[fieldName] ? editedRows === null || editedRows === void 0 ? void 0 : (_editedRows$row$path2 = editedRows[row.path]) === null || _editedRows$row$path2 === void 0 ? void 0 : _editedRows$row$path2[fieldName] : row[fieldName];
         var newFieldValue = fieldValue;
 
         var _props = getColumnProperties(fieldName, columns);
 
-        if (_props !== null && _props !== void 0 && _props.editable && (ContentTypeHelper.isRenderableFieldType(_props === null || _props === void 0 ? void 0 : _props.fieldType) || (_props === null || _props === void 0 ? void 0 : _props.fieldType) === 'node-selector')) {
+        if (_props !== null && _props !== void 0 && _props.editable && (ContentTypeHelper.isRenderableFieldType(_props === null || _props === void 0 ? void 0 : _props.fieldType) || (_props === null || _props === void 0 ? void 0 : _props.fieldType) === ContentTypeHelper.FIELD_TYPE_NODE_SELECTOR)) {
           newFieldValue = fieldValue.replaceAll(text, replaceText);
         }
 
@@ -44533,15 +44536,16 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
             value: newFieldValue
           };
 
-          if (_props.fieldType === 'node-selector') {
-            var rawField = "".concat(fieldName, "_raw");
-            var xmlDoc = row[rawField];
+          if (_props.fieldType === ContentTypeHelper.FIELD_TYPE_NODE_SELECTOR) {
+            var rawFieldName = "".concat(fieldName, "_raw");
+            var xmlDoc = row[rawFieldName];
             var serializer = new XMLSerializer();
             var xmlStr = serializer.serializeToString(xmlDoc);
             var updatedXmlStr = xmlStr.replaceAll(text, replaceText);
             var parser = new DOMParser();
             var updatedXmlDoc = parser.parseFromString(updatedXmlStr, 'text/xml');
             model.rawValue = updatedXmlDoc.documentElement;
+            newRow[rawFieldName] = updatedXmlDoc;
           }
 
           saveEditState(model);
@@ -44678,6 +44682,13 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
   var handleEditRowsModelChange = function handleEditRowsModelChange(model) {
     setEditRowsModel(model);
   };
+  /**
+   * Callback called before updating a row with new values in the row and cell editing.
+   * @param {*} newRow
+   * @param {*} oldRow
+   * @returns
+   */
+
 
   var processRowUpdate = function processRowUpdate(newRow, oldRow) {
     var currentEditedRows = editedRows;
@@ -45194,6 +45205,10 @@ function Editor() {
     setFindReplaceDialogOpen(false);
   };
 
+  var handleOpenFilterDialog = function handleOpenFilterDialog() {
+    setFilterDialogOpen(true);
+  };
+
   var handleFilterDialogClose = function handleFilterDialogClose() {
     setFilterDialogOpen(false);
   };
@@ -45268,9 +45283,7 @@ function Editor() {
   }, /*#__PURE__*/React.createElement(StyledIconButton, {
     color: "inherit",
     "aria-label": TEXT_FILTER,
-    onClick: function onClick() {
-      return setFilterDialogOpen(true);
-    },
+    onClick: handleOpenFilterDialog,
     edge: "start",
     sx: {
       mr: 2
@@ -45344,9 +45357,7 @@ function Editor() {
     primary: TEXT_FIND_REPLACE
   })), /*#__PURE__*/React.createElement(ListItemButton, {
     key: TEXT_FILTER,
-    onClick: function onClick() {
-      return setFilterDialogOpen(true);
-    }
+    onClick: handleOpenFilterDialog
   }, /*#__PURE__*/React.createElement(ListItemIcon$2, null, /*#__PURE__*/React.createElement(FilterListIcon, null)), /*#__PURE__*/React.createElement(ListItemText$2, {
     primary: TEXT_FILTER
   }))), /*#__PURE__*/React.createElement(Divider$2, null), /*#__PURE__*/React.createElement(List$2, null, /*#__PURE__*/React.createElement(ListItemButton, {
@@ -45362,9 +45373,6 @@ function Editor() {
   }))), /*#__PURE__*/React.createElement(Divider$2, null));
   return /*#__PURE__*/React.createElement(Box$2, null, /*#__PURE__*/React.createElement(CssBaseline$1, null), appbar, /*#__PURE__*/React.createElement("section", {
     id: "drawer-container",
-    position: "relative",
-    bgcolor: "white",
-    component: "div",
     style: {
       overflowY: "scroll",
       overflowX: "hidden",
