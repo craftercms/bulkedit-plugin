@@ -283,8 +283,8 @@ const DataSheet = React.forwardRef((props, ref) => {
         setTimeout(() => {
           setIsProcessing(false);
         }, 4000);
-        setSessionRows(sessionRows);
-        setRows(sessionRows);
+        setSessionRows([...sessionRows]);
+        setRows([...sessionRows]);
         setEditedRows({});
         setRefresh(1 - refresh);
       } else {
@@ -317,12 +317,13 @@ const DataSheet = React.forwardRef((props, ref) => {
       )) {
         newFieldValue = fieldValue.replaceAll(text, replaceText);
       }
+      newRow[fieldName] = newFieldValue;
 
-      if (newFieldValue !== fieldValue) {
-        const model = { id: row.id, field: fieldName, value: newFieldValue };
-        if (props.fieldType === ContentTypeHelper.FIELD_TYPE_NODE_SELECTOR) {
-          const rawFieldName = `${fieldName}_raw`;
-          const xmlDoc = row[rawFieldName];
+      const model = { id: row.id, field: fieldName, value: newFieldValue };
+      if (props.fieldType === ContentTypeHelper.FIELD_TYPE_NODE_SELECTOR) {
+        const rawFieldName = `${fieldName}_raw`;
+        const xmlDoc = row[rawFieldName];
+        if (xmlDoc) {
           const serializer = new XMLSerializer();
           const xmlStr = serializer.serializeToString(xmlDoc);
           const updatedXmlStr = xmlStr.replaceAll(text, replaceText);
@@ -331,10 +332,11 @@ const DataSheet = React.forwardRef((props, ref) => {
           model.rawValue = updatedXmlDoc.documentElement;
           newRow[rawFieldName] = updatedXmlDoc;
         }
-        saveEditState(model);
       }
 
-      newRow[fieldName] = newFieldValue;
+      if (newFieldValue !== fieldValue) {
+        saveEditState(model);
+      }
     }
 
     return newRow;
@@ -461,18 +463,17 @@ const DataSheet = React.forwardRef((props, ref) => {
   };
 
   const saveEditState = (model) => {
-    const currentEditedRows = editedRows;
     if (!isCellEdited(model, rows)) return;
 
     const key = rows[model.id].path;
-    if (!currentEditedRows[key]) {
-      currentEditedRows[key] = {};
+    if (!editedRows[key]) {
+      editedRows[key] = {};
     }
-    currentEditedRows[key][model.field] = model.value;
+    editedRows[key][model.field] = model.value;
     if (model.rawValue) {
-      currentEditedRows[key][`${model.field}_raw`] = model.rawValue;
+      editedRows[key][`${model.field}_raw`] = model.rawValue;
     }
-    setEditedRows(currentEditedRows);
+    setEditedRows({...editedRows});
   };
 
   const handleOnCellClick = (model, event, detail) => {
@@ -534,10 +535,15 @@ const DataSheet = React.forwardRef((props, ref) => {
       if (field) {
         sessionRows[selectedRow.id][selectedRow.field] = field.textContent;
         rows[selectedRow.id][selectedRow.field] = field.textContent;
+
+        if (selectedRow.colDef.fieldType === ContentTypeHelper.FIELD_TYPE_NODE_SELECTOR) {
+          sessionRows[selectedRow.id][`${selectedRow.field}_raw`] = field;
+          rows[selectedRow.id][`${selectedRow.field}_raw`] = field;
+        }
       }
 
       setSessionRows([...sessionRows]);
-      setRows(rows);
+      setRows([...rows]);
     };
 
     const onEditedFailed = (error) => {
@@ -554,7 +560,7 @@ const DataSheet = React.forwardRef((props, ref) => {
     const res = await StudioAPI.unlockContent(row.path);
     if (res) {
       sessionRows[row.id].lockOwner = null;
-      setSessionRows(sessionRows);
+      setSessionRows([...sessionRows]);
     }
 
     setRowActionMenuAnchor(null);
@@ -579,8 +585,8 @@ const DataSheet = React.forwardRef((props, ref) => {
         sessionRows[model.id][field] = response.updatedModel[field];
         rows[model.id][field] = response.updatedModel[field];
       }
-      setSessionRows(sessionRows);
-      setRows(rows);
+      setSessionRows([...sessionRows]);
+      setRows([...rows]);
       setSelectedRow({});
     };
 
@@ -613,8 +619,8 @@ const DataSheet = React.forwardRef((props, ref) => {
                               .filter((field) => field.fieldId !== 'id' && field.fieldId !== 'path' && field.fieldId !== 'action');
       sessionRows[row.id] = rowFromApiContent(row.id, path, newContent, fields);
       rows[row.id] = sessionRows[row.id]
-      setSessionRows(sessionRows);
-      setRows(rows);
+      setSessionRows([...sessionRows]);
+      setRows([...rows]);
     }
 
     setRowActionMenuAnchor(null);
@@ -650,7 +656,7 @@ const DataSheet = React.forwardRef((props, ref) => {
     setSessionRows([...sessionRows]);
 
     delete editedRows[path];
-    setEditedRows(editedRows);
+    setEditedRows({...editedRows});
     setRowActionMenuAnchor(null);
   };
 

@@ -1,6 +1,6 @@
 {
   "name": "craftercms-plugin-bulk-edit-site",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "A Crafter CMS 4 plugin to execute bulk content edit",
   "author": "phuongnq",
   "license": "MIT",
