@@ -43950,7 +43950,9 @@ var DialogHelper = {
               type: 'success'
             }
           }, {
-            type: 'CLOSE_NEW_CONTENT_DIALOG'
+            type: 'SHOW_EDIT_ITEM_SUCCESS_NOTIFICATION'
+          }, {
+            type: 'CLOSE_EDIT_DIALOG'
           }]
         },
         onClose: {
@@ -43963,8 +43965,6 @@ var DialogHelper = {
               id: eventId,
               type: 'close'
             }
-          }, {
-            type: 'NEW_CONTENT_DIALOG_CLOSED'
           }]
         }
       })
@@ -44462,8 +44462,8 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
                     setTimeout(function () {
                       setIsProcessing(false);
                     }, 4000);
-                    setSessionRows(sessionRows);
-                    setRows(sessionRows);
+                    setSessionRows(_toConsumableArray$1(sessionRows));
+                    setRows(_toConsumableArray$1(sessionRows));
                     setEditedRows({});
                     setRefresh(1 - refresh);
                   } else {
@@ -44531,16 +44531,18 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
           newFieldValue = fieldValue.replaceAll(text, replaceText);
         }
 
-        if (newFieldValue !== fieldValue) {
-          var model = {
-            id: row.id,
-            field: fieldName,
-            value: newFieldValue
-          };
+        newRow[fieldName] = newFieldValue;
+        var model = {
+          id: row.id,
+          field: fieldName,
+          value: newFieldValue
+        };
 
-          if (_props.fieldType === ContentTypeHelper.FIELD_TYPE_NODE_SELECTOR) {
-            var rawFieldName = "".concat(fieldName, "_raw");
-            var xmlDoc = row[rawFieldName];
+        if (_props.fieldType === ContentTypeHelper.FIELD_TYPE_NODE_SELECTOR) {
+          var rawFieldName = "".concat(fieldName, "_raw");
+          var xmlDoc = row[rawFieldName];
+
+          if (xmlDoc) {
             var serializer = new XMLSerializer();
             var xmlStr = serializer.serializeToString(xmlDoc);
             var updatedXmlStr = xmlStr.replaceAll(text, replaceText);
@@ -44549,11 +44551,11 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
             model.rawValue = updatedXmlDoc.documentElement;
             newRow[rawFieldName] = updatedXmlDoc;
           }
-
-          saveEditState(model);
         }
 
-        newRow[fieldName] = newFieldValue;
+        if (newFieldValue !== fieldValue) {
+          saveEditState(model);
+        }
       }
     } catch (err) {
       _iterator5.e(err);
@@ -44727,21 +44729,20 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
   };
 
   var saveEditState = function saveEditState(model) {
-    var currentEditedRows = editedRows;
     if (!isCellEdited(model, rows)) return;
     var key = rows[model.id].path;
 
-    if (!currentEditedRows[key]) {
-      currentEditedRows[key] = {};
+    if (!editedRows[key]) {
+      editedRows[key] = {};
     }
 
-    currentEditedRows[key][model.field] = model.value;
+    editedRows[key][model.field] = model.value;
 
     if (model.rawValue) {
-      currentEditedRows[key]["".concat(model.field, "_raw")] = model.rawValue;
+      editedRows[key]["".concat(model.field, "_raw")] = model.rawValue;
     }
 
-    setEditedRows(currentEditedRows);
+    setEditedRows(_objectSpread$1({}, editedRows));
   };
 
   var handleOnCellClick = function handleOnCellClick(model, event, detail) {
@@ -44814,10 +44815,15 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
                 if (field) {
                   sessionRows[selectedRow.id][selectedRow.field] = field.textContent;
                   rows[selectedRow.id][selectedRow.field] = field.textContent;
+
+                  if (selectedRow.colDef.fieldType === ContentTypeHelper.FIELD_TYPE_NODE_SELECTOR) {
+                    sessionRows[selectedRow.id]["".concat(selectedRow.field, "_raw")] = field;
+                    rows[selectedRow.id]["".concat(selectedRow.field, "_raw")] = field;
+                  }
                 }
 
                 setSessionRows(_toConsumableArray$1(sessionRows));
-                setRows(rows);
+                setRows(_toConsumableArray$1(rows));
 
               case 10:
               case "end":
@@ -44864,7 +44870,7 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
 
               if (res) {
                 sessionRows[row.id].lockOwner = null;
-                setSessionRows(sessionRows);
+                setSessionRows(_toConsumableArray$1(sessionRows));
               }
 
               setRowActionMenuAnchor(null);
@@ -44923,8 +44929,8 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
                   _iterator6.f();
                 }
 
-                setSessionRows(sessionRows);
-                setRows(rows);
+                setSessionRows(_toConsumableArray$1(sessionRows));
+                setRows(_toConsumableArray$1(rows));
                 setSelectedRow({});
               };
 
@@ -44993,8 +44999,8 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
                 });
                 sessionRows[row.id] = rowFromApiContent(row.id, path, newContent, fields);
                 rows[row.id] = sessionRows[row.id];
-                setSessionRows(sessionRows);
-                setRows(rows);
+                setSessionRows(_toConsumableArray$1(sessionRows));
+                setRows(_toConsumableArray$1(rows));
               }
 
               setRowActionMenuAnchor(null);
@@ -45073,7 +45079,7 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
               sessionRows[row.id] = rowFromApi;
               setSessionRows(_toConsumableArray$1(sessionRows));
               delete editedRows[path];
-              setEditedRows(editedRows);
+              setEditedRows(_objectSpread$1({}, editedRows));
               setRowActionMenuAnchor(null);
 
             case 24:

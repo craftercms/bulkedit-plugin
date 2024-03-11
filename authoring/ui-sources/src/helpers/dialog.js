@@ -27,7 +27,12 @@ const DialogHelper = {
               type: 'DISPATCH_DOM_EVENT',
               payload: { id: eventId, type: 'success' }
             },
-            { type: 'CLOSE_NEW_CONTENT_DIALOG' }
+            {
+              type: 'SHOW_EDIT_ITEM_SUCCESS_NOTIFICATION',
+            },
+            {
+              type: 'CLOSE_EDIT_DIALOG'
+            }
           ]
         },
         onClose: {
@@ -37,8 +42,7 @@ const DialogHelper = {
             {
               type: 'DISPATCH_DOM_EVENT',
               payload: { id: eventId, type: 'close' }
-            },
-            { type: 'NEW_CONTENT_DIALOG_CLOSED' }
+            }
           ]
         }
       })
