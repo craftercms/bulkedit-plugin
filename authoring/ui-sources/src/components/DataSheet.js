@@ -519,7 +519,7 @@ const DataSheet = React.forwardRef((props, ref) => {
     const { row, field } = selectedRow;
     const payload = {
       path: row.path,
-      authoringBase: CrafterCMSNext.system.store.getState().env.authoringBase,
+      authoringBase: craftercms.getStore().getState().env.authoringBase,
       site: StudioAPI.siteId(),
       readonly: !isEdit,
       selectedFields: [field]
@@ -571,7 +571,7 @@ const DataSheet = React.forwardRef((props, ref) => {
     const { row } = selectedRow;
     const payload = {
       path: row.path,
-      authoringBase: CrafterCMSNext.system.store.getState().env.authoringBase,
+      authoringBase: craftercms.getStore().getState().env.authoringBase,
       site: StudioAPI.siteId(),
       readonly: false,
     };

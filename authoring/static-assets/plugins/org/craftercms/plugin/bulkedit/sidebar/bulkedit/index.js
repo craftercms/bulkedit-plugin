@@ -3,7 +3,7 @@ var React = craftercms.libs.React && Object.prototype.hasOwnProperty.call(crafte
 var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$2, styled: styled$5, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box: Box$2, DialogActions, Paper: Paper$1, Accordion, AccordionSummary, Typography: Typography$2, AccordionDetails, FormLabel: FormLabel$2, RadioGroup, FormControlLabel: FormControlLabel$2, Radio, Tooltip: Tooltip$1, IconButton: IconButton$1, Drawer, List: List$2, ListItem, Divider: Divider$2, ListItemButton, ListItemIcon: ListItemIcon$2, ListItemText: ListItemText$2, CssBaseline: CssBaseline$1, Toolbar: Toolbar$2, Stack } = craftercms.libs.MaterialUI;
 var { createSvgIcon: createSvgIcon$2 } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
-var { Subject } = CrafterCMSNext.rxjs;
+var { Subject } = craftercms.libs.rxjs;
 var ReactDOM = craftercms.libs.ReactDOM && Object.prototype.hasOwnProperty.call(craftercms.libs.ReactDOM, 'default') ? craftercms.libs.ReactDOM['default'] : craftercms.libs.ReactDOM;
 
 function getDefaultExportFromCjs (x) {
@@ -804,14 +804,14 @@ var CookieHelper = {
 var HttpHelper = {
   get: function get(url) {
     return new Promise(function (resolve, reject) {
-      CrafterCMSNext.util.ajax.get(url).subscribe(function (response) {
+      craftercms.utils.ajax.get(url).subscribe(function (response) {
         resolve(response);
       });
     });
   },
   post: function post(url, body, headers) {
     return new Promise(function (resolve, reject) {
-      CrafterCMSNext.util.ajax.post(url, body, headers).subscribe(function (response) {
+      craftercms.utils.ajax.post(url, body, headers).subscribe(function (response) {
         resolve(response);
       });
     });
@@ -43938,7 +43938,7 @@ var ContentTypeHelper = {
 var DialogHelper = {
   showEditDialog: function showEditDialog(payload, success, failed) {
     var eventId = 'bulkEditDialogCallback';
-    CrafterCMSNext.system.store.dispatch({
+    craftercms.getStore().dispatch({
       type: 'SHOW_EDIT_DIALOG',
       payload: Object.assign(payload, {
         onSaveSuccess: {
@@ -43969,7 +43969,7 @@ var DialogHelper = {
         }
       })
     });
-    CrafterCMSNext.createLegacyCallbackListener(eventId, function (response) {
+    craftercms.utils.dom.createCustomDocumentEventListener(eventId, function (response) {
       if (response.type === 'EMBEDDED_LEGACY_FORM_SUCCESS' || response.type === 'success') {
         success(response);
       } else {
@@ -44789,7 +44789,7 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
         field = selectedRow.field;
     var payload = {
       path: row.path,
-      authoringBase: CrafterCMSNext.system.store.getState().env.authoringBase,
+      authoringBase: craftercms.getStore().getState().env.authoringBase,
       site: StudioAPI.siteId(),
       readonly: !isEdit,
       selectedFields: [field]
@@ -44899,7 +44899,7 @@ var DataSheet = /*#__PURE__*/React.forwardRef(function (props, ref) {
               row = selectedRow.row;
               payload = {
                 path: row.path,
-                authoringBase: CrafterCMSNext.system.store.getState().env.authoringBase,
+                authoringBase: craftercms.getStore().getState().env.authoringBase,
                 site: StudioAPI.siteId(),
                 readonly: false
               };
