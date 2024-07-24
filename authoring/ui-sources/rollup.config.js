@@ -20,7 +20,7 @@ const globals = {
   '@mui/material': 'craftercms.libs.MaterialUI',
   '@craftercms/studio-ui': 'craftercms.libs.StudioUI',
   '@mui/material/utils': 'craftercms.libs.MaterialUI',
-  'rxjs': 'CrafterCMSNext.rxjs',
+  'rxjs': 'craftercms.libs.rxjs',
 }
 
 function cleanName(name) {

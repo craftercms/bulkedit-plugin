@@ -17,14 +17,14 @@
 const HttpHelper = {
   get(url) {
     return new Promise((resolve, reject) => {
-      CrafterCMSNext.util.ajax.get(url).subscribe((response) => {
+      craftercms.utils.ajax.get(url).subscribe((response) => {
         resolve(response);
       });
     });
   },
   post(url, body, headers) {
     return new Promise((resolve, reject) => {
-      CrafterCMSNext.util.ajax.post(url, body, headers).subscribe((response) => {
+      craftercms.utils.ajax.post(url, body, headers).subscribe((response) => {
         resolve(response);
       });
     });

@@ -17,7 +17,7 @@
 const DialogHelper = {
   showEditDialog: (payload, success, failed) => {
     const eventId = 'bulkEditDialogCallback';
-    CrafterCMSNext.system.store.dispatch({
+    craftercms.getStore().dispatch({
       type: 'SHOW_EDIT_DIALOG',
       payload: Object.assign(payload, {
         onSaveSuccess: {
@@ -47,7 +47,7 @@ const DialogHelper = {
         }
       })
     });
-    CrafterCMSNext.createLegacyCallbackListener(eventId, (response) => {
+    craftercms.utils.dom.createCustomDocumentEventListener(eventId, (response) => {
       if (response.type === 'EMBEDDED_LEGACY_FORM_SUCCESS' || response.type === 'success') {
         success(response);
       } else {
